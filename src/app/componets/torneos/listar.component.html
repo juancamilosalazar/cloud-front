@@ -1,0 +1,81 @@
+<div class="card background">
+  <div class="card-header">
+    <form class="form-inline">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <a class="btn btn-primary" [routerLink]="['/registro-persona']">Registrar torneos</a>
+        </div>
+        <input type="text" class="form-control" name="filterPost" placeholder="Search..." [(ngModel)]="filterPost">
+      </div>
+    </form>
+  </div>
+  <div class="card-body square">
+    <blockquote class="blockquote mb-0">
+
+      <div class="alert alert-warning" role="alert" *ngIf="torneos.length == 0">
+        no existe información relacionada
+      </div>
+
+
+      <div *ngIf="torneos.length > 0 ">
+        <p>Torneos</p>
+        <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Descripción</th>
+              <th scope="col">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <tr *ngFor="let torneo of torneos | filter:filterPost">
+              <th scope="row">{{torneo.codigo}}</th>
+              <td>{{torneo.nombre}}</td>
+              <td>{{torneo.descripcion}}</td>
+              <td><a href="/Fixture/{{torneo.codigo}}" class="btn btn-success btn-lg" style="margin-right: 1rem"><i
+                    class="fas fa-futbol"></i>Fixture</a>
+                    <a href="/tabla-posiciones/{{torneo.codigo}}" class="btn btn-success btn-lg" style="margin-right: 1rem"><i
+                      class="fas fa-futbol"></i>Tabla de posiciones</a>
+                <a href="/update-torneo/{{torneo.codigo}}" class="btn btn-primary btn-lg" style="margin-right: 1rem"><i class="fas fa-edit"></i></a>
+                <button (click)="showPopup(torneo)" type="button" class="btn btn-danger btn-lg" data-toggle="modal"
+                  data-target="#myModal"><i class="fas fa-trash-alt"></i></button>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+
+    </blockquote>
+  </div>
+</div>
+
+
+
+<!-- The Modal -->
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Eliminar</h4>
+        <button type="button" class="close" data-dismiss="modal">×</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        ¿Está seguro que desea eliminar la información?
+
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Aceptar</button>
+      </div>
+
+    </div>
+  </div>
+</div>

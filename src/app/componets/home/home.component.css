@@ -1,0 +1,19 @@
+.background{
+    background: linear-gradient(rgba(255,255,255,.7), rgba(255,255,255,.5)), url('../../../assets/images/Michael-Jordan.jpg');
+    height: 100vh;
+    padding-bottom: 12rem;
+    background-repeat: round;
+    
+}
+
+.title{
+    font-size: -webkit-xxx-large;
+}
+
+.table{
+    display: table-cell;
+}
+.pilae{
+    font-size: 4rem;
+    color: black
+}

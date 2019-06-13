@@ -1,0 +1,94 @@
+<div class="card background">
+  <div class="card-header" *ngIf="fixtures.length > 0">
+    <a (click)="crearFixture()" class="btn btn-primary" >RefrescarFixture</a>
+  </div>
+    <div class="card-body square">
+      <blockquote class="blockquote mb-0">
+          <div *ngIf="fixtures.length == 0">
+        <div class="alert alert-warning" role="alert" >
+          no existe información relacionada
+        </div>
+        <a (click)="crearFixture()" class="btn btn-success btn-lg" style="margin-right: 1rem" ><i class="fas fa-futbol"></i>crear fixture</a>
+      </div>
+  
+  
+        <div *ngIf="fixtures.length > 0 ">
+         <p>Partidos</p>
+          <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Codigo</th>
+                <th scope="col">Fecha del partido</th>
+                <th scope="col">Ida-vuelta</th>
+                <th scope="col">Ronda</th>
+                <th scope="col">Equipo local</th>
+                <th scope="col">Equipo visitante</th>
+                <th scope="col">Estado del partido</th>
+                <th scope="col">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let fixture of fixtures">
+                  <td>{{fixture.codigo}}</td>
+                <td>{{fixture.fechaDelpartido}}</td>
+                <td>{{fixture.idaVuelta}}</td>
+                <td>{{fixture.ronda}}</td>
+                <td>{{fixture.fkEquipoLocal.nombre}}</td>
+                <td>{{fixture.fkEquipoVisitante.nombre}}</td>
+                <td>{{fixture.estadoPartido}}</td>
+                <td>
+                  
+                    <div *ngIf="fixture.estadoPartido != 'jugado' ">
+                        <a href="marcador/{{fixture.codigo}}" class="btn btn-primary btn-lg" style="margin-right: 1rem"><i class="fas fa-edit"></i>Jugar partido</a>
+                    </div>
+                    <div *ngIf="fixture.estadoPartido == 'jugado' " >
+                        <a href="resultado/{{fixture.codigo}}" class="btn btn-danger btn-lg" style="margin-right: 1rem">Mostrar marcador</a>
+        
+                        
+                        
+    
+                    </div>
+                      
+                  
+                  
+                </td>
+              </tr>
+  
+            </tbody>
+          </table>
+        </div>
+  
+      </blockquote>
+    </div>
+  </div>
+  
+  <div ng-init="comparador == true">
+      <div class="modal fade" id="myModal" >
+      
+          <div class="modal-dialog">
+            <div class="modal-content">
+        
+              <!-- Modal Header -->
+              <div class="modal-header">
+                <h4 class="modal-title">marcador</h4>
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                
+              </div>
+        
+              <!-- Modal body -->
+              <div class="modal-body">
+                ¿Está seguro que desea eliminar la información?
+                
+              </div>
+        
+              <!-- Modal footer -->
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal"  >Aceptar</button>
+              </div>
+        
+            </div>
+          </div>
+        </div>
+  </div>
+ 
+ 
