@@ -7,7 +7,7 @@ app.use(express.static(__dirname + '/dist/crud'));
 
 // Send all requests to index.html
 app.get('/*', function(req, res) {
-  res.sendFile(path.join(__dirname + '/dist/MY_APP_NAME_HERE/index.html'));
+  res.sendFile(path.join(__dirname + '/dist/crud'));
 });
 
 // default Heroku PORT
