@@ -8,35 +8,33 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "postinstall" : "ng build -prod"
+    "postinstall": "ng build --aot --prod"
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "~7.2.0",
-    "@angular/common": "~7.2.0",
-    "@angular/cli": "^8.0.2",
-    "@angular/compiler-cli": "^7.2.15",
-    "@angular/compiler": "~7.2.0",
-    "@angular/core": "~7.2.0",
-    "@angular/forms": "~7.2.0",
-    "@angular/platform-browser": "~7.2.0",
-    "@angular/platform-browser-dynamic": "~7.2.0",
-    "@angular/router": "~7.2.0",
+    "@angular/animations": "^7.2.15",
+    "@angular/common": "^7.2.15",
+    "@angular/compiler": "^7.2.15",
+    "@angular/core": "^7.2.15",
+    "@angular/forms": "^7.2.15",
+    "@angular/platform-browser": "^7.2.15",
+    "@angular/platform-browser-dynamic": "^7.2.15",
+    "@angular/router": "^7.2.15",
     "bootstrap": "^4.3.1",
-    "core-js": "^2.5.4",
+    "core-js": "^2.6.9",
+    "express": "^4.17.1",
     "jquery": "^3.4.1",
-    "express": "^4.16.2",
+    "path": "^0.12.7",
     "popper.js": "^1.15.0",
     "rxjs": "~6.3.3",
-    "tslib": "^1.9.0",
-    "zone.js": "~0.8.26",
-    "typescript": "~3.2.2"
+    "tslib": "^1.10.0",
+    "zone.js": "~0.8.26"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.13.0",
-    "@angular/cli": "^8.0.2",
-    "@angular/compiler-cli": "^7.2.15",
-    "@angular/language-service": "~7.2.0",
+    "@angular-devkit/build-angular": "^0.13.9",
+    "@angular/cli": "~7.3.8",
+    "@angular/compiler-cli": "~7.2.0",
+    "@angular/language-service": "^7.2.15",
     "@types/jasmine": "~2.8.8",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
@@ -54,7 +52,7 @@
     "typescript": "~3.2.2"
   },
   "engines": {
-    "node": "10.15.3",
-    "npm": "6.4.1"
+    "node": "~10.15.3",
+    "npm": "~6.4.1"
   }
 }
