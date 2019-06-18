@@ -8,7 +8,7 @@ import { HttpClient,HttpHeaders } from '@angular/common/http';
 })
 export class TorneoService {
 
-  private endPoint:string  = "https://pilaezuul.herokuapp.com/pilae-service/pilae/listar/torneos";
+  private endPoint:string  = "https://pilaeaplication.herokuapp.com/pilae/listar/torneos";
   private id:String;
   private headerText = new HttpHeaders({'Content-type':'text/plain'})
   constructor(private http: HttpClient) { }
