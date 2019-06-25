@@ -9,21 +9,21 @@ import { Jugador } from '../model/Jugador';
   providedIn: 'root'
 })
 export class JugadorService {
-  private headerText = new HttpHeaders({'Content-type':'text/plain'})
+  private headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
   private endPoint:string  = "https://pilaezuul.herokuapp.com/pilae-service/pilae/jugador";
   constructor(private http: HttpClient) { }
 
   listJugador(id:number): Observable<Jugador []>{
-    return this.http.get<Jugador[]>(this.endPoint.concat(id.toString()));
+    return this.http.get<Jugador[]>(this.endPoint.concat("?id=").concat(id.toString()),{headers:this.headers});
   }
   updateJugador(id: number,object:Jugador): Observable<Jugador>{
-    return this.http.put<Jugador>(this.endPoint.concat(id.toString()),object);
+    return this.http.put<Jugador>(this.endPoint.concat("?id=").concat(id.toString()),object);
   }
   deleteJugador(id: number): Observable<Jugador>{
-    return this.http.delete<Jugador>(this.endPoint.concat(id.toString()),{headers:this.headerText});
+    return this.http.delete<Jugador>(this.endPoint.concat("?id=").concat(id.toString()),{headers:this.headers});
   }
   createJugador(id: number, jugador:Jugador):Observable<Jugador>{
-    return this.http.post<Jugador>(this.endPoint.concat(id.toString()),jugador)
+    return this.http.post<Jugador>(this.endPoint.concat("?equipoId=").concat(id.toString()),jugador)
   }
  
 
