@@ -7,21 +7,21 @@ import { Marcador } from '../model/marcador';
   providedIn: 'root'
 })
 export class FixtureService {
-  private endPoint:string  = "https://pilaezuul.herokuapp.com/pilae-service/pilae/fixture/";
-  private endPoint2:string ="https://pilaezuul.herokuapp.com/pilae-service/pilae/save/fixture/";
+  private endPoint:string  = "https://pilaezuul.herokuapp.com/pilae-service/pilae/fixture";
+  private endPoint2:string  = "https://pilaezuul.herokuapp.com/pilae-service/pilae/marcador";
   constructor(private http: HttpClient) { }
 
   listFixture(id:number) : Observable<Fixture []>{
       return this.http.get<Fixture[]>(this.endPoint.concat(id.toString()))
   }
   saveFixture(id:number) :Observable<Fixture []>{
-    return this.http.get<Fixture[]>(this.endPoint2.concat(id.toString()))
+    return this.http.post<Fixture[]>(this.endPoint.concat(id.toString()),null)
   }
   jugarPartido(id:number,object:Marcador) :Observable<Marcador>{
-    return this.http.post<Marcador>("https://pilaezuul.herokuapp.com/pilae-service/pilae/jugar/".concat(id.toString()),object)
+    return this.http.put<Marcador>(this.endPoint2.concat(id.toString()),object)
   }
   mostrarMarcador(id:Number) :Observable<Marcador>{
-    return this.http.get<Marcador>("https://pilaezuul.herokuapp.com/pilae-service/pilae/marcador/".concat(id.toString()))
+    return this.http.get<Marcador>(this.endPoint2.concat(id.toString()))
   }
   
 }

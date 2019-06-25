@@ -6,7 +6,7 @@ import { tablaPosiciones } from '../model/tablaPosiciones';
   providedIn: 'root'
 })
 export class TablaPosicionesService {
-  private endPoint:string  = "https://pilaezuul.herokuapp.com/pilae-service/pilae/listar/posiciones/";
+  private endPoint:string  = "https://pilaezuul.herokuapp.com/pilae-service/pilae/posicion";
   constructor(private http: HttpClient) { }
 
   listFixture(id:number) : Observable<tablaPosiciones []>{

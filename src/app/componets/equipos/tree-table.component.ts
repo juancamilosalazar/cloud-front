@@ -20,6 +20,7 @@ export class TreeTableComponent implements OnInit {
      this.equipoService.listAll().subscribe(
         (equipos) => {
             this.equipos = equipos
+            
         }
      )
       

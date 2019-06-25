@@ -9,7 +9,7 @@ import { Equipo } from '../model/Equipo';
 })
 export class EquipoService {
   private headerText = new HttpHeaders({'Content-type':'text/plain'})
-  private endPoint:string  = "https://pilaezuul.herokuapp.com/pilae-service/pilae/listar/equipos";
+  private endPoint:string = "https://pilaezuul.herokuapp.com/pilae-service/pilae/equipo";
   constructor(private http: HttpClient) { }
 
   listAll(): Observable<Equipo []>{
@@ -17,13 +17,13 @@ export class EquipoService {
   }
 
   createEquipo(object: Equipo,id:number): Observable<Equipo>{
-    return this.http.post<Equipo>('https://pilaezuul.herokuapp.com/pilae-service/pilae/insertar/equipo/'.concat(id.toString()),object);
+    return this.http.post<Equipo>(this.endPoint.concat(id.toString()),object);
   }
   deleteEquipo(id: number): Observable<Equipo>{
-    return this.http.delete<Equipo>('https://pilaezuul.herokuapp.com/pilae-service/pilae/delete/equipo/'.concat(id.toString()),{headers:this.headerText});
+    return this.http.delete<Equipo>(this.endPoint.concat(id.toString()),{headers:this.headerText});
   }
   updateEquipo(id: number,object:Equipo): Observable<Equipo>{
-    return this.http.put<Equipo>('https://pilaezuul.herokuapp.com/pilae-service/pilae/update/equipo/'.concat(id.toString()),object);
+    return this.http.put<Equipo>(this.endPoint.concat(id.toString()),object);
   }
  
 
