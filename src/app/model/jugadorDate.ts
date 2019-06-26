@@ -1,9 +1,9 @@
 import { Equipo } from './Equipo';
 
-export class Jugador {
+export class JugadorDate {
     id : number;
     nombre : string;
     identificacion : string;
-    fechaNacimiento : Number;
+    fechaNacimiento : Date;
     fkEquipo: Equipo;
 }

@@ -3,7 +3,7 @@ import { Torneo } from './Torneo';
 
 export class Fixture {
     codigo : number;
-    fechaDelpartido : string;
+    fechaDelPartido : Number;
     idaVuelta : string;
     ronda : string;
     estadoPartido: string;

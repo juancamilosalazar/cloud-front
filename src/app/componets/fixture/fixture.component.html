@@ -29,8 +29,8 @@
             </thead>
             <tbody>
               <tr *ngFor="let fixture of fixtures">
-                  <td>{{fixture.codigo}}</td>
-                <td>{{fixture.fechaDelpartido}}</td>
+                <td>{{fixture.codigo}}</td>
+                <td>{{fixture.fechaDelPartido | date:'dd-MM-yyyy ':'+0900'}}</td>
                 <td>{{fixture.idaVuelta}}</td>
                 <td>{{fixture.ronda}}</td>
                 <td>{{fixture.fkEquipoLocal.nombre}}</td>

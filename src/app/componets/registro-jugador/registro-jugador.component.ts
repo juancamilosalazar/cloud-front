@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Jugador } from 'src/app/model/Jugador';
 import { JugadorService } from 'src/app/services/jugador.service';
 import { ActivatedRoute } from '@angular/router';
+import { JugadorDate } from 'src/app/model/jugadorDate';
 
 @Component({
   selector: 'app-registro-jugador',
@@ -11,14 +12,17 @@ import { ActivatedRoute } from '@angular/router';
 export class RegistroJugadorComponent implements OnInit {
 
   jugador:Jugador;
+  jugadorDate:JugadorDate;
   idEquipo:number;
   constructor(private jugadorService:JugadorService,private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.jugador=new Jugador;
+    this.jugadorDate= new JugadorDate;
     
   }
   registrar(){
+    this.jugador.fechaNacimiento = new Date(this.jugadorDate.fechaNacimiento).getTime();
     this.route.params.subscribe(params=>{
 
       this.jugadorService.createJugador(this.idEquipo,this.jugador).subscribe(

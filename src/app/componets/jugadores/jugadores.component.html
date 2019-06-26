@@ -36,7 +36,7 @@
               <tr *ngFor="let jugador of jugadores| filter:filterPost">              
                 <td>{{jugador.nombre}}</td>
                 <td>{{jugador.identificacion}}</td>
-                <td>{{jugador.fechaNacimiento}}</td>
+                <td>{{jugador.fechaNacimiento | date:'dd-MM-yyyy ':'+0900'}}</td>
                 <td>{{jugador.fkEquipo.nombre}}</td>
                 
                 <td>

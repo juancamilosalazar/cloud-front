@@ -25,12 +25,13 @@ export class FixtureComponent implements OnInit {
 
  }
   ngOnInit() {
+    
     this.comparador= false;
     this.route.params.subscribe(params=>{
       this.fixtureService.listFixture(+params['id']).subscribe(
          (fixtures) => {
-             
           this.fixtures = fixtures
+          console.log(this.fixtures[1].fechaDelPartido)
          }
       )
     })
