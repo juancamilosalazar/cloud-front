@@ -22,7 +22,6 @@
         <table class="table">
           <thead class="thead-dark">
             <tr>
-              <th scope="col">#</th>
               <th scope="col">Nombre</th>
               <th scope="col">Descripción</th>
               <th scope="col">Acciones</th>
@@ -31,14 +30,14 @@
           <tbody>
 
             <tr *ngFor="let torneo of torneos | filter:filterPost">
-              <th scope="row">{{torneo.codigo}}</th>
               <td>{{torneo.nombre}}</td>
               <td>{{torneo.descripcion}}</td>
               <td><a href="/Fixture/{{torneo.codigo}}" class="btn btn-success btn-lg" style="margin-right: 1rem"><i
                     class="fas fa-futbol"></i>Fixture</a>
-                    <a href="/tabla-posiciones/{{torneo.codigo}}" class="btn btn-success btn-lg" style="margin-right: 1rem"><i
-                      class="fas fa-futbol"></i>Tabla de posiciones</a>
-                <a href="/update-torneo/{{torneo.codigo}}" class="btn btn-primary btn-lg" style="margin-right: 1rem"><i class="fas fa-edit"></i></a>
+                <a href="/tabla-posiciones/{{torneo.codigo}}" class="btn btn-success btn-lg"
+                  style="margin-right: 1rem"><i class="fas fa-futbol"></i>Tabla de posiciones</a>
+                <a href="/update-torneo/{{torneo.codigo}}" class="btn btn-primary btn-lg" style="margin-right: 1rem"><i
+                    class="fas fa-edit"></i></a>
                 <button (click)="showPopup(torneo)" type="button" class="btn btn-danger btn-lg" data-toggle="modal"
                   data-target="#myModal"><i class="fas fa-trash-alt"></i></button>
               </td>

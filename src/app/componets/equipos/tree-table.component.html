@@ -1,14 +1,14 @@
 <div class="card background ">
   <div class="card-header">
-   
+
     <form class="form-inline">
-        <div class="input-group">
-          <div class="input-group-prepend">
-              <a class="btn btn-primary" [routerLink]="['/registro-equipo']">Registrar equipos</a>
-          </div>
-          <input type="text" class="form-control" name="filterPost" placeholder="Search..." [(ngModel)]="filterPost">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <a class="btn btn-primary" [routerLink]="['/registro-equipo']">Registrar equipos</a>
         </div>
-      </form>
+        <input type="text" class="form-control" name="filterPost" placeholder="Search..." [(ngModel)]="filterPost">
+      </div>
+    </form>
   </div>
   <div class="card-body square">
     <blockquote class="blockquote mb-0">
@@ -19,11 +19,11 @@
 
 
       <div *ngIf="equipos.length > 0 ">
-       <p>Torneos</p>
+        <p>Torneos</p>
         <table class="table">
           <thead class="thead-dark">
             <tr>
-              
+
               <th scope="col">Nombre</th>
               <th scope="col">Locación</th>
               <th scope="col">Genero</th>
@@ -33,16 +33,19 @@
           </thead>
           <tbody>
             <tr *ngFor="let equipo of equipos | filter:filterPost">
-              
+
               <td>{{equipo.nombre}}</td>
               <td>{{equipo.locacion}}</td>
               <td>{{equipo.genero}}</td>
               <td>{{equipo.fkTorneo.nombre}}</td>
-              
+
               <td>
-                <a href="/Jugadores/{{equipo.codigo}}" class="btn btn-success btn-lg" style="margin-right: 1rem" ><i class="fas fa-futbol"></i>Jugadores</a>
-                <a href="update-equipo/{{equipo.codigo}}" class="btn btn-primary btn-lg" style="margin-right: 1rem"><i class="fas fa-edit"></i></a>
-                <button (click)="showPopup(equipo)" type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#myModal" ><i class="fas fa-trash-alt"></i></button>
+                <a href="/Jugadores/{{equipo.codigo}}" class="btn btn-success btn-lg" style="margin-right: 1rem"><i
+                    class="fas fa-futbol"></i>Jugadores</a>
+                <a href="update-equipo/{{equipo.codigo}}" class="btn btn-primary btn-lg" style="margin-right: 1rem"><i
+                    class="fas fa-edit"></i></a>
+                <button (click)="showPopup(equipo)" type="button" class="btn btn-danger btn-lg" data-toggle="modal"
+                  data-target="#myModal"><i class="fas fa-trash-alt"></i></button>
               </td>
             </tr>
 
@@ -70,12 +73,12 @@
       <!-- Modal body -->
       <div class="modal-body">
         ¿Está seguro que desea eliminar la información?
-      
+
       </div>
 
       <!-- Modal footer -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal"  >Aceptar</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Aceptar</button>
       </div>
 
     </div>

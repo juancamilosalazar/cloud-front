@@ -1,6 +1,6 @@
 <div class="card background">
   <div class="card-header">
-    
+
   </div>
   <div class="card-body square">
     <blockquote class="blockquote mb-0">
@@ -11,7 +11,7 @@
 
 
       <div *ngIf="tablaPosiciones.length > 0 ">
-       <p style="text-align: center">tabla de posiciones torneo {{tablaPosiciones[0].fkTorneo.nombre}}</p>
+        <p style="text-align: center">tabla de posiciones torneo {{tablaPosiciones[0].fkTorneo.nombre}}</p>
         <table class="table">
           <thead class="thead-dark">
             <tr>
@@ -27,10 +27,10 @@
             </tr>
           </thead>
           <tbody>
-          
-              
-            
-            <tr *ngFor="let tablaPosicion of tablaPosiciones| filter:filterPost">             
+
+
+
+            <tr *ngFor="let tablaPosicion of tablaPosiciones| filter:filterPost">
               <td>{{tablaPosicion.fkEquipo.nombre}}</td>
               <td>{{tablaPosicion.partidosJugados}}</td>
               <td>{{tablaPosicion.partidosGanados}}</td>
@@ -40,7 +40,7 @@
               <td>{{tablaPosicion.golesContra}}</td>
               <td>{{tablaPosicion.golesDiferencia}}</td>
               <td>+{{tablaPosicion.puntos}}</td>
-             
+
             </tr>
 
           </tbody>
@@ -67,12 +67,12 @@
       <!-- Modal body -->
       <div class="modal-body">
         ¿Está seguro que desea eliminar la información?
-      
+
       </div>
 
       <!-- Modal footer -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal"  >Aceptar</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Aceptar</button>
       </div>
 
     </div>

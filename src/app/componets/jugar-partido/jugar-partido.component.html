@@ -1,36 +1,47 @@
 <nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a  [routerLink]="['/Torneos']">Torneos</a></li>
-      <li class="breadcrumb-item active" aria-current="page">crear</li>
-  </ol>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a [routerLink]="['/Torneos']">Torneos</a></li>
+        <li class="breadcrumb-item active" aria-current="page">crear</li>
+    </ol>
 </nav>
 
 
 <div class="card">
-  <div class="card-header">
-      Registrar marcador
-  </div>
-  <div class="card-body">
-      <blockquote class="blockquote mb-0">
-          <p>Favor diligenciar el formulario</p>
-          <!-- <form> -->
-              <div class="form-row">
-                  <div class="form-group col-md-6">
-                      <label for="inputEmail4">Marcador equipo local</label>
-                      <input type="text" [(ngModel)] ="marcador.equipoLocalMrc" class="form-control" id="inputEmail4" placeholder="torneo.nombre">
-                  </div>
-                  <div class="form-group col-md-6">
-                      <label for="inputPassword4">Marcador equipo visitante </label>
-                      <input type="text"  [(ngModel)]="marcador.equipoVisitanteMrc" class="form-control" id="inputPassword4" placeholder="descripcion">
-                  </div>
-              </div>
-              
+    <div class="card-header">
+        Registrar marcador
+    </div>
+    <div class="card-body">
+        <blockquote class="blockquote mb-0">
+            <p>Favor diligenciar el formulario</p>
+            <!-- <form> -->
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Marcador equipo local</label>
+                    <input type="text" [(ngModel)]="marcador.equipoLocalMrc" class="form-control" id="local"
+                        name="local" #local="ngModel" placeholder="marcador" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Marcador equipo visitante </label>
+                    <input type="text" [(ngModel)]="marcador.equipoVisitanteMrc" class="form-control" id="visitante"
+                        name="visitante" #visitante="ngModel" placeholder="marcador" required>
+                </div>
 
-              <button (click)="jugar()" [routerLink]="['/Torneos']" type="button" class="btn btn-primary">Registrar marcador</button>
-                <button  [routerLink]="['/Torneos']" type="button" class="btn btn-primary" style="margin-left: 1rem">Cancelar</button>
-              
-          <!-- </form> -->
+            </div>
+            <div *ngIf="local.invalid || visitante.invalid" class="alert alert-danger">
+                <div>
+                    Todos Los campos son necesarios
+                </div>
+            </div>
 
-      </blockquote>
-  </div>
+            <div *ngIf="local.valid && visitante.valid">
+                <button (click)="update()" [routerLink]="['/Torneos']" type="button"
+                    class="btn btn-primary">Actualizar</button>
+                <button [routerLink]="['/Torneos']" type="button" class="btn btn-primary"
+                    style="margin-left: 1rem">Cancelar</button>
+            </div>
+
+            <!-- </form> -->
+
+        </blockquote>
+    </div>
 </div>
