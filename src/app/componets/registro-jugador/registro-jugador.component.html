@@ -17,26 +17,39 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="inputEmail4">Nombre del jugador</label>
-                        <input type="text" [(ngModel)] ="jugador.nombre" class="form-control" id="inputEmail4" placeholder="torneo.nombre">
+                        <input type="text" minlength="5" required [(ngModel)] ="jugador.nombre" class="form-control" id="name" name="name" #name="ngModel" placeholder="nombre">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="inputPassword4">identificacion</label>
-                        <input type="text"  [(ngModel)]="jugador.identificacion" class="form-control" id="inputPassword4" placeholder="identificación">
+                        <input type="number" minlength="5" required  [(ngModel)]="jugador.identificacion" class="form-control" id="cc" name="cc" #cc="ngModel" placeholder="identificación">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="inputPassword4">fecha de nacimiento</label>
-                        <input type="date"  [(ngModel)]="jugadorDate.fechaNacimiento" class="form-control" id="calendar" placeholder="fecha" >
+            
+                        <input type="date"   [(ngModel)]="jugadorDate.fechaNacimiento" class="form-control" id="calendar"  name="calendar" #calendar="ngModel" placeholder="fecha" required>
+                        
                     </div>
                     <div class="form-group col-md-6">
                         <label for="inputPassword4">equipo asociado</label>
-                        <input type="number"  [(ngModel)]="idEquipo" class="form-control" id="inputPassword4" placeholder="id equipo">
+                        <select class="form-control" [(ngModel)]="idEquipo" id="inputPassword4" placeholder="id equipo" required id="equipo" name="equipo" #equipo="ngModel">
+                                <option *ngFor="let equipo of equipos"value="{{equipo.codigo}}" selected >{{equipo.nombre}}</option>
+                        </select>
                     </div>
+                
                 </div>
-                
+                <div *ngIf="name.invalid || equipo.invalid || cc.invalid || calendar.invalid " 
+                        class="alert alert-danger">
+                        <div >
+                            Todos Los campos son necesarios 
+                        </div>
+                 </div>
+
+                 <div *ngIf="name.valid && equipo.valid  && cc.valid  && calendar.valid" >
+                        <button (click)="registrar()" [routerLink]="['/Torneos']" type="button" class="btn btn-primary">Registrar</button>
+                         <button  [routerLink]="['/Equipos']" type="button" class="btn btn-primary" style="margin-left: 1rem">Cancelar</button>
+                </div>
   
-                <button (click)="registrar()" [routerLink]="['/Torneos']" type="button" class="btn btn-primary">Registrar</button>
-                  <button  [routerLink]="['/Equipos']" type="button" class="btn btn-primary" style="margin-left: 1rem">Cancelar</button>
-                
+               
             <!-- </form> -->
   
         </blockquote>

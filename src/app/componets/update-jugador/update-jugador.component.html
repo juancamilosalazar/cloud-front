@@ -17,21 +17,29 @@
               <div class="form-row">
                   <div class="form-group col-md-6">
                       <label for="inputEmail4">Nombre del jugador</label>
-                      <input type="text" [(ngModel)] ="jugador.nombre" class="form-control" id="inputEmail4" placeholder="torneo.nombre">
+                      <input type="text" minlength="5" required [(ngModel)] ="jugador.nombre" class="form-control" id="name" name="name" #name="ngModel" placeholder="nombre">
                   </div>
                   <div class="form-group col-md-6">
                       <label for="inputPassword4">identificacion</label>
-                      <input type="text"  [(ngModel)]="jugador.identificacion" class="form-control" id="inputPassword4" placeholder="descripcion">
+                      <input type="number" minlength="5" required  [(ngModel)]="jugador.identificacion" class="form-control" id="cc" name="cc" #cc="ngModel" placeholder="descripcion">
                   </div>
                   <div class="form-group col-md-6">
                       <label for="inputPassword4">fecha de nacimiento</label>
-                      <input type="date"  [(ngModel)]="jugadorDate.fechaNacimiento" class="form-control" id="inputPassword4" placeholder="fecha">
-                  </div>
-              </div>
-              
+                      <input type="date"  [(ngModel)]="jugadorDate.fechaNacimiento" class="form-control" id="calendar"  name="calendar" #calendar="ngModel" placeholder="fecha" required>
+                    </div>
+                
+                </div>
+                <div *ngIf="name.invalid || cc.invalid || calendar.invalid " 
+                        class="alert alert-danger">
+                        <div >
+                            Todos Los campos son necesarios 
+                        </div>
+                 </div>
 
-              <button (click)="update()" [routerLink]="['/Equipos']" type="button" class="btn btn-primary">Actualizar</button>
-                <button  [routerLink]="['/Equipos']" type="button" class="btn btn-primary" style="margin-left: 1rem">Cancelar</button>
+                 <div *ngIf="name.valid   && cc.valid  && calendar.valid" >
+                        <button (click)="update()" [routerLink]="['/Equipos']" type="button" class="btn btn-primary">Actualizar</button>
+                        <button  [routerLink]="['/Equipos']" type="button" class="btn btn-primary" style="margin-left: 1rem">Cancelar</button>
+                </div>
               
           <!-- </form> -->
 

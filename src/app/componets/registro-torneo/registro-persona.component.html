@@ -17,17 +17,27 @@
               <div class="form-row">
                   <div class="form-group col-md-6">
                       <label for="inputEmail4">Nombre del torneo</label>
-                      <input type="text" [(ngModel)] ="torneo.nombre" class="form-control" id="inputEmail4" placeholder="torneo.nombre">
+                      <input type="text" minlength="3" required [(ngModel)] ="torneo.nombre" class="form-control" id="name" name="name" #name="ngModel" placeholder="nombre">
                   </div>
                   <div class="form-group col-md-6">
                       <label for="inputPassword4">descripción</label>
-                      <input type="text"  [(ngModel)]="torneo.descripcion" class="form-control" id="inputPassword4" placeholder="descripcion">
-                  </div>
-              </div>
+                      <input type="text"  minlength="5" required [(ngModel)]="torneo.descripcion" class="form-control" id="descripcion" name="descripcion" #descripcion="ngModel" placeholder="descripcion">
+                    </div>
+                
+                </div>
+                <div *ngIf="name.invalid || descripcion.invalid" 
+                        class="alert alert-danger">
+                        <div >
+                            Todos Los campos son necesarios 
+                        </div>
+                 </div>
+
+                 <div *ngIf="name.valid && descripcion.valid" >
+                        <button (click)="registrar()" [routerLink]="['/Torneos']" type="button" class="btn btn-primary">Registrar</button>
+                        <button  [routerLink]="['/Torneos']" type="button" class="btn btn-primary" style="margin-left: 1rem">Cancelar</button>
+                </div>
               
 
-              <button (click)="registrar()" [routerLink]="['/Torneos']" type="button" class="btn btn-primary">Registrar</button>
-                <button  [routerLink]="['/Torneos']" type="button" class="btn btn-primary" style="margin-left: 1rem">Cancelar</button>
               
           <!-- </form> -->
 

@@ -13,10 +13,16 @@ export class RegistroEquipoComponent implements OnInit {
 
   equipo: Equipo;
   idTorneo: number;
-  constructor(private equipoService:EquipoService) { }
+  torneos: Torneo[];
+  constructor(private equipoService:EquipoService, private  personaService:TorneoService) { }
 
   ngOnInit() {
     this.equipo = new Equipo()
+    this.personaService.listAll().subscribe(
+      (torneos) => {
+          this.torneos = torneos
+      }
+   )    
     
   }
   registrar(){
