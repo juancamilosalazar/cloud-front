@@ -18,7 +18,9 @@
 
 
       <div *ngIf="torneos.length > 0 ">
-        <p>Torneos</p>
+        <div style="text-align: center;font-size: xx-large">
+          <b>TORNEOS</b>
+        </div>
         <table class="table">
           <thead class="thead-dark">
             <tr>
@@ -30,13 +32,15 @@
           <tbody>
 
             <tr *ngFor="let torneo of torneos | filter:filterPost">
-              <td>{{torneo.nombre}}</td>
+              <th>{{torneo.nombre}}</th>
               <td>{{torneo.descripcion}}</td>
+
               <td><a href="/Fixture/{{torneo.codigo}}" class="btn btn-success btn-lg" style="margin-right: 1rem"><i
                     class="fas fa-futbol"></i>Fixture</a>
                 <a href="/tabla-posiciones/{{torneo.codigo}}" class="btn btn-success btn-lg"
                   style="margin-right: 1rem"><i class="fas fa-futbol"></i>Tabla de posiciones</a>
-                <a href="/update-torneo/{{torneo.codigo}}" class="btn btn-primary btn-lg" style="margin-right: 1rem"><i
+                <a (click)="showPopupUpdate(torneo)" class="btn btn-primary btn-lg"
+                  style="margin-right: 1rem ; color: cornsilk" data-toggle="modal" data-target="#myModalUpdate"><i
                     class="fas fa-edit"></i></a>
                 <button (click)="showPopup(torneo)" type="button" class="btn btn-danger btn-lg" data-toggle="modal"
                   data-target="#myModal"><i class="fas fa-trash-alt"></i></button>
@@ -72,7 +76,48 @@
 
       <!-- Modal footer -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Aceptar</button>
+        <button (click)="delete()" type="button" class="btn btn-danger" data-dismiss="modal">Aceptar</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- The Modal update -->
+<div class="modal fade" id="myModalUpdate">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header update -->
+      <div class="modal-header">
+        <h4 class="modal-title">update</h4>
+        <button type="button" class="close" data-dismiss="modal">×</button>
+      </div>
+
+      <!-- Modal body update-->
+      <div class="modal-body">
+        <div class="form-group col-md-6">
+          <label for="inputEmail4">Nombre del torneo</label>
+          <input type="text" minlength="3" required [(ngModel)]="torneo.nombre" class="form-control" id="name"
+            name="name" #name="ngModel" placeholder="nombre">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="inputPassword4">descripción</label>
+          <input type="text" minlength="5" required [(ngModel)]="torneo.descripcion" class="form-control"
+            id="descripcion" name="descripcion" #descripcion="ngModel" placeholder="descripcion">
+        </div>
+
+      </div>
+      <div *ngIf="name.invalid || descripcion.invalid" class="alert alert-danger">
+        <div>
+          Todos Los campos son necesarios
+        </div>
+      </div>
+
+      <div *ngIf="name.valid && descripcion.valid">
+        <div class="modal-footer">
+          <button (click)="update()" type="button" class="btn btn-primary" data-dismiss="modal">Atualizar</button>
+        </div>
       </div>
 
     </div>

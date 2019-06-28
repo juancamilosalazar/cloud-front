@@ -11,24 +11,25 @@ import { JugadorDate } from 'src/app/model/jugadorDate';
 })
 export class UpdateJugadorComponent implements OnInit {
 
-  jugador:Jugador;
-  jugadorDate:JugadorDate;
+  jugador: Jugador;
+  jugadorDate: JugadorDate;
 
-  constructor(private jugadorService:JugadorService,private route: ActivatedRoute) {}
+  constructor(private jugadorService: JugadorService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.jugadorDate=new JugadorDate;
-    this.jugador=new Jugador;
+    this.jugadorDate = new JugadorDate;
+    this.jugador = new Jugador;
   }
-  
-  update(){
+
+  update() {
     this.jugador.fechaNacimiento = new Date(this.jugadorDate.fechaNacimiento).getTime();
-    this.route.params.subscribe(params=>{
-      this.jugadorService.updateJugador(+params['id'],this.jugador).subscribe(
-        (jugador)=>{
-          this.jugador= jugador;
+    this.route.params.subscribe(params => {
+      this.jugadorService.updateJugador(+params['id'], this.jugador).subscribe(
+        (jugador) => {
+          this.jugador = jugador;
         }
-      )})
+      )
+    })
   }
 }
 

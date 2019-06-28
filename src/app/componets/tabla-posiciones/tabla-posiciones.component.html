@@ -8,10 +8,16 @@
       <div class="alert alert-warning" role="alert" *ngIf="tablaPosiciones.length == 0">
         no existe información relacionada
       </div>
-
-
       <div *ngIf="tablaPosiciones.length > 0 ">
-        <p style="text-align: center">tabla de posiciones torneo {{tablaPosiciones[0].fkTorneo.nombre}}</p>
+        <div style="text-align: center;font-size: x-large">
+          tabla de posiciones torneo:
+          <div style="font-size: xx-large">
+            <b>
+              {{tablaPosiciones[0].fkTorneo.nombre}}
+            </b>
+          </div>
+        </div>
+        <p style="text-align: center"></p>
         <table class="table">
           <thead class="thead-dark">
             <tr>
@@ -31,7 +37,7 @@
 
 
             <tr *ngFor="let tablaPosicion of tablaPosiciones| filter:filterPost">
-              <td>{{tablaPosicion.fkEquipo.nombre}}</td>
+              <th>{{tablaPosicion.fkEquipo.nombre}}</th>
               <td>{{tablaPosicion.partidosJugados}}</td>
               <td>{{tablaPosicion.partidosGanados}}</td>
               <td>{{tablaPosicion.partidosPerdidos}}</td>
@@ -39,7 +45,7 @@
               <td>{{tablaPosicion.golesFavor}}</td>
               <td>{{tablaPosicion.golesContra}}</td>
               <td>{{tablaPosicion.golesDiferencia}}</td>
-              <td>+{{tablaPosicion.puntos}}</td>
+              <td><span style="background-color: rgb(203, 246, 84);">+{{tablaPosicion.puntos}}</span></td>
 
             </tr>
 

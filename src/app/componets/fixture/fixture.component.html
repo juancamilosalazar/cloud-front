@@ -1,6 +1,6 @@
 <div class="card background">
   <div class="card-header" *ngIf="fixtures.length > 0">
-    <a (click)="crearFixture()" class="btn btn-primary">RefrescarFixture</a>
+    <a (click)="crearFixture()" [routerLink]="['/Torneos']" class="btn btn-primary">RefrescarFixture</a>
   </div>
   <div class="card-body square">
     <blockquote class="blockquote mb-0">
@@ -8,17 +8,19 @@
         <div class="alert alert-warning" role="alert">
           no existe información relacionada
         </div>
-        <a (click)="crearFixture()" class="btn btn-success btn-lg" style="margin-right: 1rem"><i
-            class="fas fa-futbol"></i>crear fixture</a>
+        <a (click)="crearFixture()" [routerLink]="['/Torneos']" class="btn btn-success btn-lg"
+          style="margin-right: 1rem"><i class="fas fa-futbol"></i>crear fixture</a>
       </div>
 
 
       <div *ngIf="fixtures.length > 0 ">
-        <p>Partidos</p>
+        <div style="text-align: center;font-size: xx-large">
+          <b>PARTIDOS</b>
+        </div>
+
         <table class="table">
           <thead class="thead-dark">
             <tr>
-              <th scope="col">Codigo</th>
               <th scope="col">Fecha del partido</th>
               <th scope="col">Ida-vuelta</th>
               <th scope="col">Ronda</th>
@@ -30,28 +32,27 @@
           </thead>
           <tbody>
             <tr *ngFor="let fixture of fixtures">
-              <td>{{fixture.codigo}}</td>
               <td>{{fixture.fechaDelPartido | date:'dd-MM-yyyy ':'+0900'}}</td>
               <td>{{fixture.idaVuelta}}</td>
               <td>{{fixture.ronda}}</td>
-              <td>{{fixture.fkEquipoLocal.nombre}}</td>
-              <td>{{fixture.fkEquipoVisitante.nombre}}</td>
-              <td>{{fixture.estadoPartido}}</td>
+              <th>{{fixture.fkEquipoLocal.nombre}}</th>
+              <th>{{fixture.fkEquipoVisitante.nombre}}</th>
+              <td *ngIf="fixture.estadoPartido == 'jugado'"><span
+                  style="background-color: rgb(203, 246, 84);">{{fixture.estadoPartido}}</span></td>
+              <td *ngIf="fixture.estadoPartido == 'sin jugar'"><span
+                  style="background-color: pink;">{{fixture.estadoPartido}}</span></td>
               <td>
 
                 <div *ngIf="fixture.estadoPartido != 'jugado' ">
-                  <a href="marcador/{{fixture.codigo}}" class="btn btn-primary btn-lg" style="margin-right: 1rem"><i
-                      class="fas fa-edit"></i>Jugar partido</a>
+                  <a (click)="showPopup(fixture)" data-toggle="modal" data-target="#myModal"
+                    class="btn btn-primary btn-lg" style="color: cornsilk"><i class="fas fa-play"></i> Jugar
+                    partido</a>
                 </div>
                 <div *ngIf="fixture.estadoPartido == 'jugado' ">
-                  <a href="resultado/{{fixture.codigo}}" class="btn btn-danger btn-lg"
-                    style="margin-right: 1rem">Mostrar marcador</a>
-
-
-
-
+                  <a (click)="showPopuppartido(fixture)" data-toggle="modal" data-target="#myModalMarcador"
+                    class="btn btn-success btn-lg" style="color: cornsilk"><i class="far fa-calendar-alt"></i> Mostrar
+                    marcador</a>
                 </div>
-
 
 
               </td>
@@ -65,31 +66,92 @@
   </div>
 </div>
 
-<div ng-init="comparador == true">
-  <div class="modal fade" id="myModal">
 
-    <div class="modal-dialog">
-      <div class="modal-content">
+<div class="modal fade" id="myModal">
 
-        <!-- Modal Header -->
-        <div class="modal-header">
-          <h4 class="modal-title">marcador</h4>
-          <button type="button" class="close" data-dismiss="modal">×</button>
+  <div class="modal-dialog">
+    <div class="modal-content">
 
-        </div>
-
-        <!-- Modal body -->
-        <div class="modal-body">
-          ¿Está seguro que desea eliminar la información?
-
-        </div>
-
-        <!-- Modal footer -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Aceptar</button>
-        </div>
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Registrar marcador</h4>
+        <button type="button" class="close" data-dismiss="modal">×</button>
 
       </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <label for="inputEmail4">Marcador de {{fixtureSeleccionado.fkEquipoLocal.nombre}}</label>
+        <input type="number" min="0" [(ngModel)]="marcador.equipoLocalMrc" class="form-control" id="local" name="local"
+          #local="ngModel" placeholder="marcador" required>
+        <label for="inputPassword4">Marcador de {{fixtureSeleccionado.fkEquipoVisitante.nombre}} </label>
+        <input type="number" min="0" [(ngModel)]="marcador.equipoVisitanteMrc" class="form-control" id="visitante"
+          name="visitante" #visitante="ngModel" placeholder="marcador" required>
+      </div>
+
+      <div *ngIf="local.invalid || visitante.invalid || local.value < 0 || visitante.value < 0 "
+        class="alert alert-danger">
+        <div *ngIf="local.invalid || visitante.invalid">
+          Todos Los campos son necesarios
+        </div>
+        <div *ngIf="local.value < 0 || visitante.value < 0">
+          Los campos no pueden ser negativos
+        </div>
+      </div>
+
+      <div *ngIf="local.valid && local.value >= 0 && visitante.valid && visitante.value >= 0">
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button [routerLink]="['/Torneos']" (click)="jugar()" type="button" class="btn btn-danger"
+            data-dismiss="modal">Registrar marcador</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="myModalMarcador" style="text-align: -webkit-center">
+
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <div>
+
+          <h4 class="modal-title" style="padding-left: 11rem"><span
+              style="background-color: rgb(203, 246, 84);">MARCADOR</span></h4>
+        </div>
+        <button type="button" class="close" data-dismiss="modal">×</button>
+
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body" style="font-size:xx-large">
+        <thead class="thead-dark">
+          <div class="marcador">
+
+            <table class="table">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">{{marcadores.fkPartido.fkEquipoLocal.nombre}}</th>
+                  <th style="padding-left: 5rem" scope="col">{{marcadores.fkPartido.fkEquipoVisitante.nombre}}</th>
+                </tr>
+              </thead>
+              <tbody style="text-align: center">
+                <td scope="col">{{marcadores.equipoLocalMrc}}</td>
+                <td style="padding-left: 5rem" scope="col">{{marcadores.equipoVisitanteMrc}}</td>
+              </tbody>
+            </table>
+
+
+          </div>
+        </thead>
+
+
+      </div>
+
     </div>
   </div>
 </div>

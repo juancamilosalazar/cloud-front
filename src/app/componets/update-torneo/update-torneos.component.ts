@@ -11,22 +11,22 @@ import { ActivatedRoute } from '@angular/router';
 export class UpdateTorneosComponent implements OnInit {
 
   torneo: Torneo;
-  constructor(private personaService:TorneoService, private route:ActivatedRoute) { }
+  constructor(private personaService: TorneoService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.torneo = new Torneo()   
+    this.torneo = new Torneo()
     console.log(this.torneo);
   }
 
-    update() {
-      this.route.params.subscribe(params=>{
+  update() {
+    this.route.params.subscribe(params => {
 
-        this.personaService.updateTorneo(+params['id'],this.torneo).subscribe(
-           (torneo) => {
-               this.torneo = torneo
-           }
-        )
-      })  
- }
+      this.personaService.updateTorneo(+params['id'], this.torneo).subscribe(
+        (torneo) => {
+          this.torneo = torneo
+        }
+      )
+    })
+  }
 
 }

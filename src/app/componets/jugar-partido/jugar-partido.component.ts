@@ -14,20 +14,21 @@ import { Fixture } from 'src/app/model/fixture';
 export class JugarPartidoComponent implements OnInit {
 
   marcador: Marcador;
-  fixture :Fixture;
-  constructor(private fixtureService:FixtureService, private route: ActivatedRoute) { }
+  fixture: Fixture;
+  constructor(private fixtureService: FixtureService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.marcador = new Marcador()  
+    this.marcador = new Marcador()
   }
 
-  jugar(){
-    this.route.params.subscribe(params=>{
-      this.fixtureService.jugarPartido(+params['id'],this.marcador).subscribe(
-         (marcador) => {
-             this.marcador = marcador
-         }
+  jugar() {
+    this.route.params.subscribe(params => {
+      this.fixtureService.jugarPartido(+params['id'], this.marcador).subscribe(
+        (marcador) => {
+          this.marcador = marcador
+        }
       )
-  })}
+    })
+  }
 
 }

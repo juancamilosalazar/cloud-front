@@ -13,22 +13,22 @@ import { EquipoService } from 'src/app/services/equipo.service';
 export class UpdateEquiposComponent implements OnInit {
 
   equipo: Equipo;
-  constructor(private equipoService:EquipoService, private route:ActivatedRoute) { }
+  constructor(private equipoService: EquipoService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.equipo = new Equipo();
   }
 
-    update() {
-      this.route.params.subscribe(params=>{
+  update() {
+    this.route.params.subscribe(params => {
 
-        this.equipoService.updateEquipo(+params['id'],this.equipo).subscribe(
-           (equipo) => {
-               this.equipo = equipo
-           }
-        )
-      })  
- }
+      this.equipoService.updateEquipo(+params['id'], this.equipo).subscribe(
+        (equipo) => {
+          this.equipo = equipo
+        }
+      )
+    })
+  }
 
 }
 

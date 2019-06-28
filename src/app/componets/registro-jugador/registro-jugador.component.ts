@@ -13,35 +13,35 @@ import { Equipo } from 'src/app/model/Equipo';
 })
 export class RegistroJugadorComponent implements OnInit {
 
-  jugador:Jugador;
-  jugadorDate:JugadorDate;
-  idEquipo:number;
+  jugador: Jugador;
+  jugadorDate: JugadorDate;
+  idEquipo: number;
   equipos: Equipo[];
 
-  constructor(private jugadorService:JugadorService,private route: ActivatedRoute,
+  constructor(private jugadorService: JugadorService, private route: ActivatedRoute,
     private equipoService: EquipoService) { }
 
   ngOnInit() {
-    this.jugador=new Jugador;
-    this.jugadorDate= new JugadorDate;
+    this.jugador = new Jugador;
+    this.jugadorDate = new JugadorDate;
     this.equipoService.listAll().subscribe(
       (equipos) => {
-          this.equipos = equipos
-          
+        this.equipos = equipos
+
       })
   }
-  registrar(){
+  registrar() {
     this.jugador.fechaNacimiento = new Date(this.jugadorDate.fechaNacimiento).getTime();
-    this.route.params.subscribe(params=>{
+    this.route.params.subscribe(params => {
 
-      this.jugadorService.createJugador(this.idEquipo,this.jugador).subscribe(
-         (jugador) => {
-             this.jugador = jugador
-             
-         }
-)
-  }
+      this.jugadorService.createJugador(this.idEquipo, this.jugador).subscribe(
+        (jugador) => {
+          this.jugador = jugador
+
+        }
+      )
+    }
     )
-  
-}
+
+  }
 }

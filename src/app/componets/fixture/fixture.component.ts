@@ -11,53 +11,70 @@ import { Marcador } from 'src/app/model/marcador';
   styleUrls: ['./fixture.component.css']
 })
 export class FixtureComponent implements OnInit {
-  numero:Number;
-  marcadores:Marcador;
-  fixtures:Fixture[];
-  fixtureSeleccionado:Fixture;
-  comparador:boolean;
-  
-  constructor(private fixtureService:FixtureService, private route: ActivatedRoute) { }
+  numero: Number;
+  marcadores: Marcador;
+  fixtures: Fixture[];
+  fixtureSeleccionado: Fixture;
+  comparador: boolean;
+  marcador: Marcador;
 
-  showPopup(fixture:Fixture) {
-    this.fixtureSeleccionado=fixture; 
-    this.mostrarPartido(fixture.codigo);
+  constructor(private fixtureService: FixtureService, private route: ActivatedRoute) { }
 
- }
-  ngOnInit() {
-    
-    this.comparador= false;
-    this.route.params.subscribe(params=>{
-      this.fixtureService.listFixture(+params['id']).subscribe(
-         (fixtures) => {
-          this.fixtures = fixtures
-          console.log(this.fixtures[1].fechaDelPartido)
-         }
+  showPopup(fixture: Fixture) {
+    this.fixtureSeleccionado = fixture;
+    console.log(this.fixtureSeleccionado)
+    this.marcador = new Marcador;
+    console.log(this.fixtureSeleccionado.codigo)
+  }
+  showPopuppartido(fixture: Fixture) {
+    this.fixtureSeleccionado = fixture;
+    this.mostrarPartido()
+    console.log(this.fixtureSeleccionado)
+    console.log(this.fixtureSeleccionado.codigo)
+  }
+  jugar() {
+    this.route.params.subscribe(params => {
+      this.fixtureService.jugarPartido(this.fixtureSeleccionado.codigo, this.marcador).subscribe(
+        (marcador) => {
+          this.marcador = marcador
+        }
       )
     })
-    
+  }
 
-    }
-    mostrarPartido(numero:Number){
-      
-      this.route.params.subscribe(params=>{
-        this.fixtureService.mostrarMarcador(numero).subscribe(
-           (marcador) => {
-            this.marcadores = marcador
-            
-            console.log(marcador.equipoLocalMrc)
-           }
-        )
-      })
-      }
-    crearFixture(){
-      this.route.params.subscribe(params=>{
-        this.fixtureService.saveFixture(+params['id']).subscribe(
-          (fixtures)=>{
-            this.fixtures=fixtures 
-          }
-        )
-      })
-      
+  ngOnInit() {
+    this.marcadores = new Marcador
+    this.marcador = new Marcador;
+    this.comparador = false;
+    this.route.params.subscribe(params => {
+      this.fixtureService.listFixture(+params['id']).subscribe(
+        (fixtures) => {
+          this.fixtures = fixtures
+          console.log(this.fixtures[1].fechaDelPartido)
+        }
+      )
+    })
+
+
+  }
+  mostrarPartido() {
+    this.route.params.subscribe(params => {
+      this.fixtureService.mostrarMarcador(this.fixtureSeleccionado.codigo).subscribe(
+        (marcadores) => {
+          this.marcadores = marcadores
+          console.log(marcadores.equipoLocalMrc)
+        }
+      )
+    })
+  }
+  crearFixture() {
+    this.route.params.subscribe(params => {
+      this.fixtureService.saveFixture(+params['id']).subscribe(
+        (fixtures) => {
+          this.fixtures = fixtures
+        }
+      )
+    })
+
   }
 }
