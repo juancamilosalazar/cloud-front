@@ -4,6 +4,7 @@ import { Torneo } from '../../model/Torneo';
 import { EquipoService } from 'src/app/services/equipo.service';
 import { Equipo } from 'src/app/model/Equipo';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { TorneoService } from 'src/app/services/torneo.service';
 
 @Component({
    selector: 'app-tree-table',
@@ -15,10 +16,19 @@ export class TreeTableComponent implements OnInit {
    equipos: Equipo[] = [];
    filterPost = '';
    equipo: Equipo;
-   constructor(private equipoService: EquipoService) { }
+   idTorneo: number;
+   torneos: Torneo[];
+   equipoCreate: Equipo;
+   constructor(private equipoService: EquipoService,private personaService: TorneoService) { }
 
    ngOnInit() {
       this.equipo = new Equipo;
+      this.equipoCreate = new Equipo;
+      this.personaService.listAll().subscribe(
+         (torneos) => {
+            this.torneos = torneos
+         }
+      )
       this.equipoService.listAll().subscribe(
          (equipos) => {
             this.equipos = equipos
@@ -45,7 +55,10 @@ export class TreeTableComponent implements OnInit {
          }
       )
    }
-
+   registrar() {
+      this.equipoService.createEquipo(this.equipoCreate, this.idTorneo)
+         .subscribe(torneos => console.log(torneos));
+   }
 
    delete() {
       this.equipoService.deleteEquipo(this.equipoSelecionado.codigo).subscribe(_ => { this.equipos = this.equipos.filter(per => per != this.equipoSelecionado) });

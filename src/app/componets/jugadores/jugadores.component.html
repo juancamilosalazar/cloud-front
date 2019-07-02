@@ -3,7 +3,7 @@
     <form class="form-inline">
       <div class="input-group">
         <div class="input-group-prepend">
-          <a class="btn btn-primary" [routerLink]="['/registro-jugador/']">Registrar jugador</a>
+          <a class="btn btn-primary" data-toggle="modal" data-target="#myModalCreate" style="color: cornsilk">Registrar jugador</a>
         </div>
         <input type="text" class="form-control" name="filterPost" placeholder="Search..." [(ngModel)]="filterPost">
       </div>
@@ -17,7 +17,9 @@
       </div>
       <div *ngIf="jugadores.length > 0 ">
         <div style="text-align: center;font-size: xx-large">
-          <b>JUGADORES</b>
+          <b>JUGADORES <span style="background-color: rgb(203, 246, 84);text-transform: uppercase">{{jugadores[0].fkEquipo.nombre}}</span>
+            
+          </b>
         </div>
         <table class="table">
           <thead class="thead-dark">
@@ -92,7 +94,7 @@
 
       <!-- Modal Header update -->
       <div class="modal-header">
-        <h4 class="modal-title">update</h4>
+        <h4 class="modal-title">Actualizar datos</h4>
         <button type="button" class="close" data-dismiss="modal">×</button>
       </div>
 
@@ -129,6 +131,78 @@
         <div class="modal-footer">
           <button (click)="update()" [routerLink]="['/Equipos']" type="button" class="btn btn-primary"
             data-dismiss="modal">Atualizar</button>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- The Modal create -->
+<div class="modal fade" id="myModalCreate">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header create -->
+      <div class="modal-header">
+        <h4 class="modal-title">Registrar jugador</h4>
+        <button type="button" class="close" data-dismiss="modal">×</button>
+      </div>
+
+      <!-- Modal body create-->
+      <div class="modal-body">
+
+        <div class="card">
+          <div class="card-body">
+            <blockquote class="blockquote mb-0">
+              <p>Favor diligenciar el formulario</p>
+              <!-- <form> -->
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="inputEmail4">Nombre del jugador</label>
+                  <input type="text" minlength="3" required [(ngModel)]="jugadorCreate.nombre" class="form-control"
+                    id="nameCreate" name="nameCreate" #nameCreate="ngModel" placeholder="nombre">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="inputPassword4">identificacion</label>
+                  <input type="number" minlength="5" required [(ngModel)]="jugadorCreate.identificacion"
+                    class="form-control" id="ccCreate" name="ccCreate" #ccCreate="ngModel" placeholder="identificación">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="inputPassword4">fecha de nacimiento</label>
+
+                  <input type="date" [(ngModel)]="jugadorDateCreate.fechaNacimiento" class="form-control"
+                    id="calendarCreate" name="calendarCreate" #calendarCreate="ngModel" placeholder="fecha" required>
+
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="inputPassword4">equipo asociado</label>
+                  <select class="form-control" [(ngModel)]="idEquipo" id="inputPassword4" placeholder="id equipo"
+                    required id="equipo" name="equipo" #equipo="ngModel">
+                    <option *ngFor="let equipo of equipos" value="{{equipo.codigo}}" selected>{{equipo.nombre}}
+                    </option>
+                  </select>
+                </div>
+
+              </div>
+              <div *ngIf="nameCreate.invalid || equipo.invalid || ccCreate.invalid || calendarCreate.invalid "
+                class="alert alert-danger">
+                <div>
+                  Todos Los campos son necesarios
+                </div>
+              </div>
+
+              <div *ngIf="nameCreate.valid && equipo.valid  && ccCreate.valid  && calendarCreate.valid">
+                <button (click)="registrar()" type="button" class="btn btn-primary"
+                  data-dismiss="modal">Registrar</button>
+              </div>
+
+
+              <!-- </form> -->
+
+            </blockquote>
+          </div>
         </div>
 
       </div>

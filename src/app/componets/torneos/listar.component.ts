@@ -13,10 +13,13 @@ export class ListarComponent implements OnInit {
    torneoSelecionado: Torneo;
    filterPost = '';
    torneo: Torneo;
+   torneoCreate:Torneo;
+   
    constructor(private personaService: TorneoService) { }
 
 
    ngOnInit() {
+      this.torneoCreate= new Torneo;
       this.torneo = new Torneo;
       this.personaService.listAll().subscribe(
          (personas) => {
@@ -35,6 +38,11 @@ export class ListarComponent implements OnInit {
       console.log(this.torneoSelecionado)
 
    }
+
+   registrar(){
+      this.personaService.createTorneo(this.torneoCreate)
+      .subscribe(torneos => console.log(torneos));
+    }
 
    delete() {
       this.personaService.deleteTorneo(this.torneoSelecionado.codigo).subscribe(_ => { this.torneos = this.torneos.filter(per => per != this.torneoSelecionado) });

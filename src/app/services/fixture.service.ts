@@ -25,5 +25,8 @@ export class FixtureService {
   mostrarMarcador(id: Number): Observable<Marcador> {
     return this.http.get<Marcador>(this.endPoint2.concat("?id=").concat(id.toString()), { headers: this.headers })
   }
+  mostrarMarcadoresTorneo(id: Number): Observable<Marcador[]> {
+    return this.http.get<Marcador[]>(this.endPoint2.concat("?idTorneo=").concat(id.toString()), { headers: this.headers })
+  }
 
 }

@@ -2,3 +2,12 @@
     text-align: center;
     font-size: xx-large;
 }
+.background{
+    background: linear-gradient(rgba(255,255,255,.7), rgba(255,255,255,.5)), url('../../../assets/images/fondo.JPG');
+    padding-bottom: 20rem;
+}
+
+.square{
+    background-color: white;
+    margin: auto;
+}

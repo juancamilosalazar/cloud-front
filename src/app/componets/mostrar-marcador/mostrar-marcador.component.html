@@ -1,30 +1,48 @@
 <div class="card background">
   <div class="card-header">
-    <form class="form-inline">
-      <div class="input-group">
-      </div>
-    </form>
+
   </div>
+
   <div class="card-body square">
     <blockquote class="blockquote mb-0">
-
-      <div class="marcador">
-        <p>MARCADOR</p>
+      <div class="alert alert-warning" role="alert" *ngIf="marcadores.length == 0">
+        no existe información relacionada
+      </div>
+      <div *ngIf="marcadores.length > 0 ">
+        <div style="text-align: center;font-size: x-large">
+          Marcadores Torneo:
+          <div style="font-size: xx-large">
+            <b>
+              {{marcadores[0].fkPartido.fkTorneo.nombre}}
+            </b>
+          </div>
+        </div>
+        <p style="text-align: center"></p>
         <table class="table">
           <thead class="thead-dark">
             <tr>
-              <th scope="col">{{marcador.fkPartido.fkEquipoLocal.nombre}}</th>
-              <th scope="col">{{marcador.fkPartido.fkEquipoVisitante.nombre}}</th>
+              <th scope="col">Equipo local</th>
+              <th scope="col">Marcador</th>
+              <th scope="col">Equipo visitante</th>
 
             </tr>
-            <th scope="col">{{marcador.equipoLocalMrc}}</th>
-            <th scope="col">{{marcador.equipoVisitanteMrc}}</th>
           </thead>
+          <tbody>
+            <tr style="text-align: center" *ngFor="let marcador of marcadores">
+              <th scope="col">{{marcador.fkPartido.fkEquipoLocal.nombre}}</th>
+              <td style="font-size: x-large"><span
+                  style="background-color: rgb(203, 246, 84);">{{marcador.equipoLocalMrc}}</span>-<span
+                  style="background-color: rgb(203, 246, 84);">{{marcador.equipoVisitanteMrc}}</span>
+              </td>
+              <th scope="col">{{marcador.fkPartido.fkEquipoVisitante.nombre}}</th>
 
+
+
+            </tr>
+
+          </tbody>
         </table>
-
       </div>
-
     </blockquote>
   </div>
 </div>

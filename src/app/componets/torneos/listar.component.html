@@ -3,7 +3,7 @@
     <form class="form-inline">
       <div class="input-group">
         <div class="input-group-prepend">
-          <a class="btn btn-primary" [routerLink]="['/registro-persona']">Registrar torneos</a>
+          <a class="btn btn-primary" data-toggle="modal" data-target="#myModalCreate" style="color: cornsilk">Registrar torneos</a>
         </div>
         <input type="text" class="form-control" name="filterPost" placeholder="Search..." [(ngModel)]="filterPost">
       </div>
@@ -26,7 +26,7 @@
             <tr>
               <th scope="col">Nombre</th>
               <th scope="col">Descripción</th>
-              <th scope="col">Acciones</th>
+              <th style="text-align: center" scope="col">Acciones</th>
             </tr>
           </thead>
           <tbody>
@@ -39,11 +39,14 @@
                     class="fas fa-futbol"></i>Fixture</a>
                 <a href="/tabla-posiciones/{{torneo.codigo}}" class="btn btn-success btn-lg"
                   style="margin-right: 1rem"><i class="fas fa-futbol"></i>Tabla de posiciones</a>
+                
                 <a (click)="showPopupUpdate(torneo)" class="btn btn-primary btn-lg"
                   style="margin-right: 1rem ; color: cornsilk" data-toggle="modal" data-target="#myModalUpdate"><i
                     class="fas fa-edit"></i></a>
-                <button (click)="showPopup(torneo)" type="button" class="btn btn-danger btn-lg" data-toggle="modal"
+                <button (click)="showPopup(torneo)" type="button" style="margin-right: 1rem" class="btn btn-danger btn-lg" data-toggle="modal"
                   data-target="#myModal"><i class="fas fa-trash-alt"></i></button>
+                  <a href="/resultado/{{torneo.codigo}}" class="btn btn-warning btn-lg"
+                  style="margin-right: 1rem"><i class="far fa-calendar-alt"></i> Resultados</a>
               </td>
             </tr>
 
@@ -90,7 +93,7 @@
 
       <!-- Modal Header update -->
       <div class="modal-header">
-        <h4 class="modal-title">update</h4>
+        <h4 class="modal-title">Actualizar datos</h4>
         <button type="button" class="close" data-dismiss="modal">×</button>
       </div>
 
@@ -117,6 +120,59 @@
       <div *ngIf="name.valid && descripcion.valid">
         <div class="modal-footer">
           <button (click)="update()" type="button" class="btn btn-primary" data-dismiss="modal">Atualizar</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- The Modal update -->
+<div class="modal fade" id="myModalCreate">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header update -->
+      <div class="modal-header">
+        <h4 class="modal-title">Registrar torneo</h4>
+        <button type="button" class="close" data-dismiss="modal">×</button>
+      </div>
+
+      <!-- Modal body update-->
+      <div class="card">
+        <div class="card-body">
+          <blockquote class="blockquote mb-0">
+            <p>Favor diligenciar el formulario</p>
+            <!-- <form> -->
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="inputEmail4">Nombre del torneo</label>
+                <input type="text" minlength="3" required [(ngModel)]="torneoCreate.nombre" class="form-control"
+                  id="nameCreate" name="nameCreate" #nameCreate="ngModel" placeholder="nombre">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="inputPassword4">descripción</label>
+                <input type="text" minlength="5" required [(ngModel)]="torneoCreate.descripcion" class="form-control"
+                  id="descripcioncreate" name="descripcioncreate" #descripcioncreate="ngModel"
+                  placeholder="descripción">
+              </div>
+
+            </div>
+            <div *ngIf="nameCreate.invalid || descripcioncreate.invalid" class="alert alert-danger">
+              <div>
+                Todos Los campos son necesarios
+              </div>
+            </div>
+
+            <div *ngIf="nameCreate.valid && descripcioncreate.valid">
+              <button (click)="registrar()" type="button" class="btn btn-primary"
+                data-dismiss="modal">Registrar</button>
+            </div>
+
+            <!-- </form> -->
+
+          </blockquote>
         </div>
       </div>
 

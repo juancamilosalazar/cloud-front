@@ -19,7 +19,11 @@ export class JugadoresComponent implements OnInit {
   codigo: number;
   jugador: Jugador;
   jugadorDate: JugadorDate;
-  constructor(private jugadorService: JugadorService, private route: ActivatedRoute) { }
+  jugadorCreate: Jugador;
+  jugadorDateCreate: JugadorDate;
+  idEquipo: number;
+  equipos: Equipo[];
+  constructor(private jugadorService: JugadorService, private route: ActivatedRoute, private equipoService: EquipoService) { }
 
   showPopup(jugador: Jugador) {
     this.jugadorSeleccionado = jugador;
@@ -44,7 +48,17 @@ export class JugadoresComponent implements OnInit {
       }
     )
   }
+  registrar() {
+    this.jugadorCreate.fechaNacimiento = new Date(this.jugadorDateCreate.fechaNacimiento).getTime();
+    this.jugadorService.createJugador(this.idEquipo, this.jugadorCreate).subscribe()
+  }
   ngOnInit() {
+    this.jugadorCreate = new Jugador;
+    this.jugadorDateCreate = new JugadorDate;
+    this.equipoService.listAll().subscribe(
+      (equipos) => {
+        this.equipos = equipos
+      })
     this.jugadorDate = new JugadorDate;
     this.jugador = new Jugador;
     this.route.params.subscribe(params => {

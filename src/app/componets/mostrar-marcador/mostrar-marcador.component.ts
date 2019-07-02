@@ -12,16 +12,15 @@ import { Marcador } from 'src/app/model/marcador';
 })
 export class MostrarMarcadorComponent implements OnInit {
 
-  marcador: Marcador;
+  marcadores: Marcador[];
 
   constructor(private fixtureService: FixtureService, private route: ActivatedRoute) { }
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.fixtureService.mostrarMarcador(+params['id']).subscribe(
+      this.fixtureService.mostrarMarcadoresTorneo(+params['id']).subscribe(
         (marcador) => {
-
-          this.marcador = marcador
-          console.log(marcador)
+          this.marcadores = marcador
+          console.log(this.marcadores)
         }
       )
     })

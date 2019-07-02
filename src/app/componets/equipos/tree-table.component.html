@@ -4,7 +4,7 @@
     <form class="form-inline">
       <div class="input-group">
         <div class="input-group-prepend">
-          <a class="btn btn-primary" [routerLink]="['/registro-equipo']">Registrar equipos</a>
+          <a class="btn btn-primary" data-toggle="modal" data-target="#myModalCreate" style="color: cornsilk">Registrar equipos</a>
         </div>
         <input type="text" class="form-control" name="filterPost" placeholder="Search..." [(ngModel)]="filterPost">
       </div>
@@ -95,7 +95,7 @@
 
       <!-- Modal Header update -->
       <div class="modal-header">
-        <h4 class="modal-title">update</h4>
+        <h4 class="modal-title">Actualizar datos</h4>
         <button type="button" class="close" data-dismiss="modal">×</button>
       </div>
 
@@ -132,6 +132,82 @@
         <div class="modal-footer">
           <button (click)="update()" type="button" class="btn btn-primary" data-dismiss="modal">Atualizar</button>
         </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- The Modal create -->
+<div class="modal fade" id="myModalCreate">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header create -->
+      <div class="modal-header">
+        <h4 class="modal-title">Registrar equipo</h4>
+        <button type="button" class="close" data-dismiss="modal">×</button>
+      </div>
+
+      <!-- Modal body create-->
+      <div class="modal-body">
+        <div class="card">
+          <div class="card-body">
+            <blockquote class="blockquote mb-0">
+
+              <p>Favor diligenciar el formulario</p>
+
+              <!-- <form> -->
+
+              <div class="form-row validate">
+
+                <div class="form-group col-md-6">
+                  <label for="inputEmail4">Nombre del equipo</label>
+                  <input type="text" required [(ngModel)]="equipoCreate.nombre" class="form-control " placeholder="nombre"
+                    id="nameCreate" name="nameCreate" #nameCreate="ngModel">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="inputPassword4">locación del equipo</label>
+                  <input type="text" required [(ngModel)]="equipoCreate.locacion" class="form-control" id="locationCreate"
+                    name="locationCreate" placeholder="locación" #locationCreate="ngModel">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="inputPassword4">genero</label>
+                  <select class="form-control" [(ngModel)]="equipoCreate.genero" placeholder="genero" required id="generoCreate"
+                    name="generoCreate" #generoCreate="ngModel">
+                    <option value="masculino" selected>masculino</option>
+                    <option value="femenino" selected>femenino</option>
+                  </select>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="inputPassword4">torneo asociado</label>
+                  <select class="form-control" [(ngModel)]="idTorneo" placeholder="id torneo" required id="torneo"
+                    name="torneo" #torneo="ngModel">
+                    <option *ngFor="let torneo of torneos" value="{{torneo.codigo}}" selected>{{torneo.nombre}}
+                    </option>
+                  </select>
+                </div>
+
+              </div>
+              <div *ngIf="nameCreate.invalid || locationCreate.invalid || torneo.invalid || generoCreate.invalid "
+                class="alert alert-danger">
+
+                <div>
+                  Todos Los campos son necesarios
+                </div>
+              </div>
+
+              <div *ngIf="nameCreate.valid && locationCreate.valid  && generoCreate.valid  && torneo.valid">
+                  <button (click)="registrar()" type="button" class="btn btn-primary" data-dismiss="modal">Registrar</button>
+              </div>
+
+              <!-- </form> -->
+
+            </blockquote>
+          </div>
+        </div>
+
 
       </div>
 
