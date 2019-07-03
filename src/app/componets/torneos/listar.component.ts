@@ -14,9 +14,15 @@ export class ListarComponent implements OnInit {
    filterPost = '';
    torneo: Torneo;
    torneoCreate:Torneo;
-   
+   screen:boolean=false;
    constructor(private personaService: TorneoService) { }
    ngOnInit() {
+      var width = window.innerWidth;
+      if (width <= 768) {
+         this.screen=true;
+      }else {
+        this.screen=false
+      }
       this.torneoCreate= new Torneo;
       this.torneo = new Torneo;
       this.personaService.listAll().subscribe(

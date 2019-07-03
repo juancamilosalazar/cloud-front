@@ -23,6 +23,7 @@ export class JugadoresComponent implements OnInit {
   jugadorDateCreate: JugadorDate;
   idEquipo: number;
   equipos: Equipo[];
+  screen:boolean=false;
   constructor(private jugadorService: JugadorService, private route: ActivatedRoute, private equipoService: EquipoService) { }
 
   showPopup(jugador: Jugador) {
@@ -53,6 +54,13 @@ export class JugadoresComponent implements OnInit {
     this.jugadorService.createJugador(this.idEquipo, this.jugadorCreate).subscribe()
   }
   ngOnInit() {
+    var width = window.innerWidth;
+    if (width <= 768) {
+      this.screen = true;
+    } else {
+      this.screen = false
+    }
+
     this.jugadorCreate = new Jugador;
     this.jugadorDateCreate = new JugadorDate;
     this.equipoService.listAll().subscribe(

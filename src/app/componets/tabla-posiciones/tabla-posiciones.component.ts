@@ -16,17 +16,21 @@ import { TablaPosicionesService } from 'src/app/services/tablaPosiciones.service
 export class TablaPosicionesComponent implements OnInit {
   filterPost = '';
   tablaPosiciones: tablaPosiciones[] = [];
-  codigo:number;
-  constructor(private tablaPosicionesService:TablaPosicionesService, private route: ActivatedRoute) { }
- ngOnInit() {
-    this.route.params.subscribe(params=>{
-      
+  codigo: number;
+  screen:boolean=false;
+  constructor(private tablaPosicionesService: TablaPosicionesService, private route: ActivatedRoute) { }
+  ngOnInit() {
+    var width = window.innerWidth;
+    if (width <= 768) {
+      this.screen = true;
+    } else {
+      this.screen = false
+    }
+    this.route.params.subscribe(params => {
       this.tablaPosicionesService.listFixture(+params['id']).subscribe(
-         (tablaPosiciones) => {
-        
-             this.tablaPosiciones = tablaPosiciones
-         }
-      )
-    })    
+        (tablaPosiciones) => {
+          this.tablaPosiciones = tablaPosiciones
+        })
+    })
   }
 }

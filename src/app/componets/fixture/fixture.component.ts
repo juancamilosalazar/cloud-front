@@ -20,6 +20,7 @@ export class FixtureComponent implements OnInit {
   comparador: boolean;
   marcador: Marcador;
   equipos:Equipo[];
+  screen:boolean=false;
   constructor(private fixtureService: FixtureService, private route: ActivatedRoute,private equipoService: EquipoService) { }
 
   showPopup(fixture: Fixture) {
@@ -45,6 +46,13 @@ export class FixtureComponent implements OnInit {
   }
 
   ngOnInit() {
+    var width = window.innerWidth;
+    if (width <= 768) {
+       this.screen=true;
+    }else {
+      this.screen=false
+    }
+
     this.marcadores = new Marcador
     this.marcador = new Marcador;
     this.comparador = false;

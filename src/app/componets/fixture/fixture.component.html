@@ -1,22 +1,22 @@
-<div class="card background">
+<div *ngIf="screen==false" class="card background">
   <div class="card-header" *ngIf="fixtures.length > 0">
     <a (click)="crearFixture()" [routerLink]="['/Torneos']" class="btn btn-primary">RefrescarFixture</a>
   </div>
   <div class="card-body square">
     <blockquote class="blockquote mb-0">
-      <div >
-        <div *ngIf="fixtures.length == 0 && equipos.length>1"  class="alert alert-warning" role="alert">
-            todavía no existe un fixture
-            <div style="text-align: center;margin: 2rem">
-              <a (click)="crearFixture()" [routerLink]="['/Torneos']" class="btn btn-success btn-lg"
+      <div>
+        <div *ngIf="fixtures.length == 0 && equipos.length>1" class="alert alert-warning" role="alert">
+          todavía no existe un fixture
+          <div style="text-align: center;margin: 2rem">
+            <a (click)="crearFixture()" [routerLink]="['/Torneos']" class="btn btn-success btn-lg"
               style="margin-right: 1rem"><i class="fas fa-futbol"></i>crear fixture</a>
-            
-            </div>
+
           </div>
+        </div>
         <div *ngIf="equipos.length<2" class="alert alert-warning" role="alert">
           deben existir almenos dos equipos relacionados con el torneo
         </div>
-        
+
       </div>
 
 
@@ -162,3 +162,50 @@
     </div>
   </div>
 </div>
+
+
+<!-- responsive para celulares -->
+<div style="justify-content: center" *ngIf="screen==true">
+  <div class="card background ">
+    <div class="card-header">
+
+    </div>
+    <div *ngIf="fixtures.length == 0 && equipos.length>1" class="alert alert-warning" role="alert">
+      todavía no existe un fixture
+      <div style="text-align: center;margin: 2rem">
+        <a (click)="crearFixture()" [routerLink]="['/Torneos']" class="btn btn-success btn-lg"
+          style="margin-right: 1rem"><i class="fas fa-futbol"></i>crear fixture</a>
+
+      </div>
+    </div>
+    <div *ngIf="equipos.length<2" class="alert alert-warning" role="alert">
+      deben existir almenos dos equipos relacionados con el torneo
+    </div>
+    <div *ngIf="fixtures.length > 0">
+      <div *ngFor="let fixture of fixtures" class="card" style="width: auto;margin: 2rem">
+        <div class="card-body">
+          <p><b>Fecha del partido: </b> {{fixture.fechaDelPartido | date:'dd-MM-yyyy ':'+0900'}}</p>
+          <p><b>Ronda: </b> {{fixture.idaVuelta}}</p>
+          <p> <b>Equipo Local:</b> <span style="background-color: rgb(152, 159, 246); text-transform: uppercase">
+              {{fixture.fkEquipoLocal.nombre}} </span></p>
+          <p> <b>Equipo visitante:</b> <span style="background-color: rgb(152, 159, 246); text-transform: uppercase">
+              {{fixture.fkEquipoVisitante.nombre}} </span></p>
+          <p style="text-align: center" *ngIf="fixture.estadoPartido == 'jugado'"><span
+              style="background-color: rgb(203, 246, 84);">{{fixture.estadoPartido}}</span></p>
+          <p style="text-align: center" *ngIf="fixture.estadoPartido == 'sin jugar'"><span
+              style="background-color: pink;">{{fixture.estadoPartido}}</span></p>
+
+          <div style="text-align: center" *ngIf="fixture.estadoPartido != 'jugado' ">
+            <a (click)="showPopup(fixture)" data-toggle="modal" data-target="#myModal" class="btn btn-primary btn-lg"
+              style="color: cornsilk"><i class="fas fa-play"></i> Jugar
+              partido</a>
+          </div>
+          <div style="text-align: center" *ngIf="fixture.estadoPartido == 'jugado' ">
+            <a (click)="showPopuppartido(fixture)" data-toggle="modal" data-target="#myModalMarcador"
+              class="btn btn-success btn-lg" style="color: cornsilk"><i class="far fa-calendar-alt"></i>
+              Marcador</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

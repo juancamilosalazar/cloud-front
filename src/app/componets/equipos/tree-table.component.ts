@@ -26,10 +26,8 @@ export class TreeTableComponent implements OnInit {
       var width = window.innerWidth;
       if (width <= 768) {
          this.screen=true;
-      } else if (width > 768 && width <= 992) {
-         console.log('tablet detected')
-      } else {
-         console.log('desktop detected')
+      }else {
+        this.screen=false
       }
       this.equipo = new Equipo;
       this.equipoCreate = new Equipo;

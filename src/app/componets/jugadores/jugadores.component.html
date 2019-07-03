@@ -1,9 +1,10 @@
-<div class="card background">
+<div *ngIf="screen==false" class="card background">
   <div class="card-header">
     <form class="form-inline">
       <div class="input-group">
         <div class="input-group-prepend">
-          <a class="btn btn-primary" data-toggle="modal" data-target="#myModalCreate" style="color: cornsilk">Registrar jugador</a>
+          <a class="btn btn-primary" data-toggle="modal" data-target="#myModalCreate" style="color: cornsilk">Registrar
+            jugador</a>
         </div>
         <input type="text" class="form-control" name="filterPost" placeholder="Search..." [(ngModel)]="filterPost">
       </div>
@@ -17,8 +18,8 @@
       </div>
       <div *ngIf="jugadores.length > 0 ">
         <div style="text-align: center;font-size: xx-large">
-          <b>JUGADORES <span style="background-color: rgb(203, 246, 84);text-transform: uppercase">{{jugadores[0].fkEquipo.nombre}}</span>
-            
+          <b>JUGADORES <span
+              style="background-color: rgb(203, 246, 84);text-transform: uppercase">{{jugadores[0].fkEquipo.nombre}}</span>
           </b>
         </div>
         <table class="table">
@@ -210,3 +211,41 @@
     </div>
   </div>
 </div>
+
+<!-- responsive para celulares -->
+<div style="justify-content: center" *ngIf="screen==true">
+  <div class="card background ">
+    <div class="card-header">
+      <form class="form-inline">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <a class="btn btn-primary" data-toggle="modal" data-target="#myModalCreate"
+              style="color: cornsilk">Registrar jugador</a>
+          </div>
+          <input type="text" class="form-control" name="filterPost" placeholder="Search..." [(ngModel)]="filterPost">
+        </div>
+      </form>
+    </div>
+    <div style="text-align: center" class="alert alert-warning" role="alert" *ngIf="jugadores.length == 0">
+      no existe información relacionada
+    </div>
+    <div style="text-align: center" *ngIf="jugadores.length > 0">
+      <b>JUGADORES <span
+          style="background-color: rgb(203, 246, 84);text-transform: uppercase">{{jugadores[0].fkEquipo.nombre}}</span>
+      </b>
+      <div *ngFor="let jugador of jugadores | filter:filterPost" class="card"
+        style="width: auto; text-align: center;margin: 2rem">
+        <div class="card-body">
+          <p><b>Nombre:</b> <span
+            style="background-color: rgb(203, 246, 84);text-transform: capitalize">{{jugador.nombre}}</span></p>
+          <p><b>Identificacion:</b> {{jugador.identificacion}}</p>
+          <p><b>Fecha nacimiento:</b> {{jugador.fechaNacimiento | date:'dd-MM-yyyy ':'+0900'}}</p>
+          <a (click)="showPopupUpdate(jugador)" class="btn btn-primary btn-lg"
+            style="margin-right: 1rem; color: cornsilk" data-toggle="modal" data-target="#myModalUpdate"><i
+              class="fas fa-edit"></i></a>
+          <button (click)="showPopup(jugador)" type="button" class="btn btn-danger btn-lg" data-toggle="modal"
+            data-target="#myModal"><i class="fas fa-trash-alt"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
