@@ -1,216 +1,254 @@
-<div class="card background ">
-  <div class="card-header">
+<div *ngIf="screen == false" class="contenedor">
+  <div class="card background ">
+    <div class="card-header">
 
-    <form class="form-inline">
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <a class="btn btn-primary" data-toggle="modal" data-target="#myModalCreate" style="color: cornsilk">Registrar equipos</a>
+      <form class="form-inline">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <a class="btn btn-primary" data-toggle="modal" data-target="#myModalCreate"
+              style="color: cornsilk">Registrar equipos</a>
+          </div>
+          <input type="text" class="form-control" name="filterPost" placeholder="Search..." [(ngModel)]="filterPost">
         </div>
-        <input type="text" class="form-control" name="filterPost" placeholder="Search..." [(ngModel)]="filterPost">
-      </div>
-    </form>
-  </div>
-  <div class="card-body square">
-    <blockquote class="blockquote mb-0">
+      </form>
+    </div>
+    <div class="card-body square">
+      <blockquote class="blockquote mb-0">
 
-      <div class="alert alert-warning" role="alert" *ngIf="equipos.length == 0">
-        no existe información relacionada
-      </div>
-
-
-      <div *ngIf="equipos.length > 0 ">
-        <div style="text-align: center;font-size: xx-large">
-          <b>EQUIPOS</b>
+        <div class="alert alert-warning" role="alert" *ngIf="equipos.length == 0">
+          no existe información relacionada
         </div>
-        <table class="table">
-          <thead class="thead-dark">
-            <tr>
-
-              <th scope="col">Nombre</th>
-              <th scope="col">Locación</th>
-              <th scope="col">Genero</th>
-              <th scope="col">Torneo</th>
-              <th scope="col">Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let equipo of equipos | filter:filterPost">
-
-              <th>{{equipo.nombre}}</th>
-              <td>{{equipo.locacion}}</td>
-              <td>{{equipo.genero}}</td>
-              <td><span style="background-color: rgb(203, 246, 84);">{{equipo.fkTorneo.nombre}}</span></td>
-
-              <td>
-                <a href="/Jugadores/{{equipo.codigo}}" class="btn btn-success btn-lg" style="margin-right: 1rem"><i
-                    class="fas fa-futbol"></i>Jugadores</a>
-                <a (click)="showPopupUpdate(equipo)" data-toggle="modal" data-target="#myModalUpdate"
-                  class="btn btn-primary btn-lg" style="margin-right: 1rem; color: cornsilk"><i
-                    class="fas fa-edit"></i></a>
-                <button (click)="showPopup(equipo)" type="button" class="btn btn-danger btn-lg" data-toggle="modal"
-                  data-target="#myModal"><i class="fas fa-trash-alt"></i></button>
-
-              </td>
-            </tr>
-
-          </tbody>
-        </table>
-      </div>
-
-    </blockquote>
-  </div>
-</div>
 
 
-<!-- The Modal -->
-<div class="modal fade" id="myModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
+        <div *ngIf="equipos.length > 0 ">
+          <div style="text-align: center;font-size: xx-large">
+            <b>EQUIPOS</b>
+          </div>
+          <table class="table">
+            <thead class="thead-dark">
+              <tr>
 
-      <!-- Modal Header -->
-      <div class="modal-header">
-        <h4 class="modal-title">Eliminar</h4>
-        <button type="button" class="close" data-dismiss="modal">×</button>
-      </div>
+                <th scope="col">Nombre</th>
+                <th scope="col">Locación</th>
+                <th scope="col">Genero</th>
+                <th scope="col">Torneo</th>
+                <th scope="col">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let equipo of equipos | filter:filterPost">
 
-      <!-- Modal body -->
-      <div class="modal-body">
-        ¿Está seguro que desea eliminar la información?
+                <th>{{equipo.nombre}}</th>
+                <td>{{equipo.locacion}}</td>
+                <td>{{equipo.genero}}</td>
+                <td><span style="background-color: rgb(203, 246, 84);">{{equipo.fkTorneo.nombre}}</span></td>
 
-      </div>
+                <td>
+                  <a href="/Jugadores/{{equipo.codigo}}" class="btn btn-success btn-lg" style="margin-right: 1rem"><i
+                      class="fas fa-futbol"></i>Jugadores</a>
+                  <a (click)="showPopupUpdate(equipo)" data-toggle="modal" data-target="#myModalUpdate"
+                    class="btn btn-primary btn-lg" style="margin-right: 1rem; color: cornsilk"><i
+                      class="fas fa-edit"></i></a>
+                  <button (click)="showPopup(equipo)" type="button" class="btn btn-danger btn-lg" data-toggle="modal"
+                    data-target="#myModal"><i class="fas fa-trash-alt"></i></button>
 
-      <!-- Modal footer -->
-      <div class="modal-footer">
-        <button (click)="delete()" type="button" class="btn btn-danger" data-dismiss="modal">Aceptar</button>
-      </div>
+                </td>
+              </tr>
 
+            </tbody>
+          </table>
+        </div>
+
+      </blockquote>
     </div>
   </div>
 </div>
 
-<!-- The Modal update -->
-<div class="modal fade" id="myModalUpdate">
-  <div class="modal-dialog">
-    <div class="modal-content">
+<!-- responsive para celulares -->
+<div style="justify-content: center" *ngIf="screen==true">
+  <div class="card background ">
+    <div class="card-header">
 
-      <!-- Modal Header update -->
-      <div class="modal-header">
-        <h4 class="modal-title">Actualizar datos</h4>
-        <button type="button" class="close" data-dismiss="modal">×</button>
+      <form class="form-inline">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <a class="btn btn-primary" data-toggle="modal" data-target="#myModalCreate"
+              style="color: cornsilk">Registrar equipos</a>
+          </div>
+          <input type="text" class="form-control" name="filterPost" placeholder="Search..." [(ngModel)]="filterPost">
+        </div>
+      </form>
+    </div>
+    <div *ngFor="let equipo of equipos | filter:filterPost" class="card"
+      style="width: auto; text-align: center;margin: 2rem">
+      <div class="card-body">
+        <h5 style="text-transform: uppercase;font-size: xx-large" class="card-title">{{equipo.nombre}}</h5>
+        <p><b>Locacion:</b> {{equipo.locacion}}</p>
+        <p><b>Genero:</b> {{equipo.genero}}</p>
+        <p> <b>Torneo:</b> <span style="background-color: rgb(203, 246, 84); text-transform: uppercase"> {{equipo.fkTorneo.nombre}} </span></p>
+        <a href="/Jugadores/{{equipo.codigo}}" class="btn btn-success btn-lg" style="margin-right: 1rem"><i
+            class="fas fa-futbol"></i></a>
+        <a (click)="showPopupUpdate(equipo)" data-toggle="modal" data-target="#myModalUpdate"
+          class="btn btn-primary btn-lg" style="margin-right: 1rem; color: cornsilk"><i class="fas fa-edit"></i></a>
+        <button (click)="showPopup(equipo)" type="button" class="btn btn-danger btn-lg" data-toggle="modal"
+          data-target="#myModal"><i class="fas fa-trash-alt"></i></button>
       </div>
+    </div>
+  </div>
 
-      <!-- Modal body update-->
-      <div class="modal-body">
-        <div class="form-group col-md-6">
-          <label for="inputEmail4">Nombre del equipo</label>
-          <input type="text" minlength="3" required [(ngModel)]="equipo.nombre" class="form-control" id="name"
-            name="name" #name="ngModel" placeholder="nombre">
-        </div>
-        <div class="form-group col-md-6">
-          <label for="inputPassword4">locación del equipo</label>
-          <input type="text" minlength="5" required [(ngModel)]="equipo.locacion" class="form-control" id="location"
-            name="location" placeholder="locacion" #location="ngModel">
-        </div>
-        <div class="form-group col-md-6">
-          <label for="inputPassword4">genero</label>
-          <select class="form-control" [(ngModel)]="equipo.genero" id="genero" name="genero" #genero="ngModel"
-            placeholder="genero" required>
-            <option value="masculino" selected>masculino</option>
-            <option value="femenino" selected>femenino</option>
-          </select>
+
+
+
+  <!-- The Modal -->
+  <div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Eliminar</h4>
+          <button type="button" class="close" data-dismiss="modal">×</button>
         </div>
 
-      </div>
-      <div *ngIf="name.invalid || location.invalid || genero.invalid " class="alert alert-danger">
+        <!-- Modal body -->
+        <div class="modal-body">
+          ¿Está seguro que desea eliminar la información?
 
-        <div>
-          Todos Los campos son necesarios
         </div>
-      </div>
 
-      <div *ngIf="name.valid && location.valid  && genero.valid">
+        <!-- Modal footer -->
         <div class="modal-footer">
-          <button (click)="update()" type="button" class="btn btn-primary" data-dismiss="modal">Atualizar</button>
+          <button (click)="delete()" type="button" class="btn btn-danger" data-dismiss="modal">Aceptar</button>
         </div>
 
       </div>
-
     </div>
   </div>
-</div>
 
-<!-- The Modal create -->
-<div class="modal fade" id="myModalCreate">
-  <div class="modal-dialog">
-    <div class="modal-content">
+  <!-- The Modal update -->
+  <div class="modal fade" id="myModalUpdate">
+    <div class="modal-dialog">
+      <div class="modal-content">
 
-      <!-- Modal Header create -->
-      <div class="modal-header">
-        <h4 class="modal-title">Registrar equipo</h4>
-        <button type="button" class="close" data-dismiss="modal">×</button>
-      </div>
+        <!-- Modal Header update -->
+        <div class="modal-header">
+          <h4 class="modal-title">Actualizar datos</h4>
+          <button type="button" class="close" data-dismiss="modal">×</button>
+        </div>
 
-      <!-- Modal body create-->
-      <div class="modal-body">
-        <div class="card">
-          <div class="card-body">
-            <blockquote class="blockquote mb-0">
+        <!-- Modal body update-->
+        <div class="modal-body">
+          <div class="form-group col-md-6">
+            <label for="inputEmail4">Nombre del equipo</label>
+            <input type="text" minlength="3" required [(ngModel)]="equipo.nombre" class="form-control" id="name"
+              name="name" #name="ngModel" placeholder="nombre">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="inputPassword4">locación del equipo</label>
+            <input type="text" minlength="5" required [(ngModel)]="equipo.locacion" class="form-control" id="location"
+              name="location" placeholder="locacion" #location="ngModel">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="inputPassword4">genero</label>
+            <select class="form-control" [(ngModel)]="equipo.genero" id="genero" name="genero" #genero="ngModel"
+              placeholder="genero" required>
+              <option value="masculino" selected>masculino</option>
+              <option value="femenino" selected>femenino</option>
+            </select>
+          </div>
 
-              <p>Favor diligenciar el formulario</p>
+        </div>
+        <div *ngIf="name.invalid || location.invalid || genero.invalid " class="alert alert-danger">
 
-              <!-- <form> -->
-
-              <div class="form-row validate">
-
-                <div class="form-group col-md-6">
-                  <label for="inputEmail4">Nombre del equipo</label>
-                  <input type="text" required [(ngModel)]="equipoCreate.nombre" class="form-control " placeholder="nombre"
-                    id="nameCreate" name="nameCreate" #nameCreate="ngModel">
-                </div>
-                <div class="form-group col-md-6">
-                  <label for="inputPassword4">locación del equipo</label>
-                  <input type="text" required [(ngModel)]="equipoCreate.locacion" class="form-control" id="locationCreate"
-                    name="locationCreate" placeholder="locación" #locationCreate="ngModel">
-                </div>
-                <div class="form-group col-md-6">
-                  <label for="inputPassword4">genero</label>
-                  <select class="form-control" [(ngModel)]="equipoCreate.genero" placeholder="genero" required id="generoCreate"
-                    name="generoCreate" #generoCreate="ngModel">
-                    <option value="masculino" selected>masculino</option>
-                    <option value="femenino" selected>femenino</option>
-                  </select>
-                </div>
-                <div class="form-group col-md-6">
-                  <label for="inputPassword4">torneo asociado</label>
-                  <select class="form-control" [(ngModel)]="idTorneo" placeholder="id torneo" required id="torneo"
-                    name="torneo" #torneo="ngModel">
-                    <option *ngFor="let torneo of torneos" value="{{torneo.codigo}}" selected>{{torneo.nombre}}
-                    </option>
-                  </select>
-                </div>
-
-              </div>
-              <div *ngIf="nameCreate.invalid || locationCreate.invalid || torneo.invalid || generoCreate.invalid "
-                class="alert alert-danger">
-
-                <div>
-                  Todos Los campos son necesarios
-                </div>
-              </div>
-
-              <div *ngIf="nameCreate.valid && locationCreate.valid  && generoCreate.valid  && torneo.valid">
-                  <button (click)="registrar()" type="button" class="btn btn-primary" data-dismiss="modal">Registrar</button>
-              </div>
-
-              <!-- </form> -->
-
-            </blockquote>
+          <div>
+            Todos Los campos son necesarios
           </div>
         </div>
 
+        <div *ngIf="name.valid && location.valid  && genero.valid">
+          <div class="modal-footer">
+            <button (click)="update()" type="button" class="btn btn-primary" data-dismiss="modal">Atualizar</button>
+          </div>
+
+        </div>
 
       </div>
-
     </div>
   </div>
-</div>
+
+  <!-- The Modal create -->
+  <div class="modal fade" id="myModalCreate">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <!-- Modal Header create -->
+        <div class="modal-header">
+          <h4 class="modal-title">Registrar equipo</h4>
+          <button type="button" class="close" data-dismiss="modal">×</button>
+        </div>
+
+        <!-- Modal body create-->
+        <div class="modal-body">
+          <div class="card">
+            <div class="card-body">
+              <blockquote class="blockquote mb-0">
+
+                <p>Favor diligenciar el formulario</p>
+
+                <!-- <form> -->
+
+                <div class="form-row validate">
+
+                  <div class="form-group col-md-6">
+                    <label for="inputEmail4">Nombre del equipo</label>
+                    <input type="text" required [(ngModel)]="equipoCreate.nombre" class="form-control "
+                      placeholder="nombre" id="nameCreate" name="nameCreate" #nameCreate="ngModel">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="inputPassword4">locación del equipo</label>
+                    <input type="text" required [(ngModel)]="equipoCreate.locacion" class="form-control"
+                      id="locationCreate" name="locationCreate" placeholder="locación" #locationCreate="ngModel">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="inputPassword4">genero</label>
+                    <select class="form-control" [(ngModel)]="equipoCreate.genero" placeholder="genero" required
+                      id="generoCreate" name="generoCreate" #generoCreate="ngModel">
+                      <option value="masculino" selected>masculino</option>
+                      <option value="femenino" selected>femenino</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="inputPassword4">torneo asociado</label>
+                    <select class="form-control" [(ngModel)]="idTorneo" placeholder="id torneo" required id="torneo"
+                      name="torneo" #torneo="ngModel">
+                      <option *ngFor="let torneo of torneos" value="{{torneo.codigo}}" selected>{{torneo.nombre}}
+                      </option>
+                    </select>
+                  </div>
+
+                </div>
+                <div *ngIf="nameCreate.invalid || locationCreate.invalid || torneo.invalid || generoCreate.invalid "
+                  class="alert alert-danger">
+
+                  <div>
+                    Todos Los campos son necesarios
+                  </div>
+                </div>
+
+                <div *ngIf="nameCreate.valid && locationCreate.valid  && generoCreate.valid  && torneo.valid">
+                  <button (click)="registrar()" type="button" class="btn btn-primary"
+                    data-dismiss="modal">Registrar</button>
+                </div>
+
+                <!-- </form> -->
+
+              </blockquote>
+            </div>
+          </div>
+
+
+        </div>
+
+      </div>
+    </div>
+  </div>

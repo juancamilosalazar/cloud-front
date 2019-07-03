@@ -16,8 +16,6 @@ export class ListarComponent implements OnInit {
    torneoCreate:Torneo;
    
    constructor(private personaService: TorneoService) { }
-
-
    ngOnInit() {
       this.torneoCreate= new Torneo;
       this.torneo = new Torneo;

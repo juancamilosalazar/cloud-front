@@ -4,6 +4,8 @@ import { Fixture } from 'src/app/model/fixture';
 import { ActivatedRoute } from '@angular/router';
 import { FixtureService } from 'src/app/services/fixture.service';
 import { Marcador } from 'src/app/model/marcador';
+import { EquipoService } from 'src/app/services/equipo.service';
+import { Equipo } from 'src/app/model/Equipo';
 
 @Component({
   selector: 'app-fixture',
@@ -17,8 +19,8 @@ export class FixtureComponent implements OnInit {
   fixtureSeleccionado: Fixture;
   comparador: boolean;
   marcador: Marcador;
-
-  constructor(private fixtureService: FixtureService, private route: ActivatedRoute) { }
+  equipos:Equipo[];
+  constructor(private fixtureService: FixtureService, private route: ActivatedRoute,private equipoService: EquipoService) { }
 
   showPopup(fixture: Fixture) {
     this.fixtureSeleccionado = fixture;
@@ -46,6 +48,14 @@ export class FixtureComponent implements OnInit {
     this.marcadores = new Marcador
     this.marcador = new Marcador;
     this.comparador = false;
+    this.route.params.subscribe(params => {
+      this.equipoService.listAllByTorneo(+params['id']).subscribe(
+        (equipos) => {
+          this.equipos = equipos
+          console.log(equipos)
+        }
+      )
+    })
     this.route.params.subscribe(params => {
       this.fixtureService.listFixture(+params['id']).subscribe(
         (fixtures) => {

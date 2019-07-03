@@ -19,9 +19,18 @@ export class TreeTableComponent implements OnInit {
    idTorneo: number;
    torneos: Torneo[];
    equipoCreate: Equipo;
-   constructor(private equipoService: EquipoService,private personaService: TorneoService) { }
+   screen:boolean = false;
+   constructor(private equipoService: EquipoService, private personaService: TorneoService) { }
 
    ngOnInit() {
+      var width = window.innerWidth;
+      if (width <= 768) {
+         this.screen=true;
+      } else if (width > 768 && width <= 992) {
+         console.log('tablet detected')
+      } else {
+         console.log('desktop detected')
+      }
       this.equipo = new Equipo;
       this.equipoCreate = new Equipo;
       this.personaService.listAll().subscribe(

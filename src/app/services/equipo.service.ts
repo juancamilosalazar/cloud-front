@@ -25,6 +25,9 @@ export class EquipoService {
   updateEquipo(id: number,object:Equipo): Observable<Equipo>{
     return this.http.put<Equipo>(this.endPoint.concat("?id=").concat(id.toString()),object);
   }
+  listAllByTorneo(id:number): Observable<Equipo[]>{
+    return this.http.get<Equipo[]>(this.endPoint.concat("?idTorneo=").concat(id.toString()),{headers:this.headers});
+  }
  
 
 }

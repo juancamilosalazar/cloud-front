@@ -4,12 +4,19 @@
   </div>
   <div class="card-body square">
     <blockquote class="blockquote mb-0">
-      <div *ngIf="fixtures.length == 0">
-        <div class="alert alert-warning" role="alert">
-          no existe información relacionada
+      <div >
+        <div *ngIf="fixtures.length == 0 && equipos.length>1"  class="alert alert-warning" role="alert">
+            todavía no existe un fixture
+            <div style="text-align: center;margin: 2rem">
+              <a (click)="crearFixture()" [routerLink]="['/Torneos']" class="btn btn-success btn-lg"
+              style="margin-right: 1rem"><i class="fas fa-futbol"></i>crear fixture</a>
+            
+            </div>
+          </div>
+        <div *ngIf="equipos.length<2" class="alert alert-warning" role="alert">
+          deben existir almenos dos equipos relacionados con el torneo
         </div>
-        <a (click)="crearFixture()" [routerLink]="['/Torneos']" class="btn btn-success btn-lg"
-          style="margin-right: 1rem"><i class="fas fa-futbol"></i>crear fixture</a>
+        
       </div>
 
 
