@@ -9,7 +9,7 @@ import { HttpClient,HttpHeaders } from '@angular/common/http';
 export class TorneoService {
 
   private endPoint:string  = "https://pilaeaplication.herokuapp.com/pilae/torneo";
-  private endPoint2:string = 'https://pilaezuul.herokuapp.com/pilae-service/pilae/torneo';
+  private endPoint2:string = 'https://pilaeaplication.herokuapp.com/pilae/torneo';
   private id:String;
   private headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
   constructor(private http: HttpClient) { }
@@ -18,8 +18,8 @@ export class TorneoService {
   
     return this.http.get<Torneo []>(this.endPoint,{headers:this.headers});
   }
-  createTorneo(object: Torneo): Observable<Torneo>{
-    return this.http.post<Torneo>(this.endPoint2,object);
+  createTorneo(object: Torneo,idDeporte:number): Observable<Torneo>{
+    return this.http.post<Torneo>(this.endPoint2.concat("?idDeporte=").concat(idDeporte.toString()),object);
   }
   deleteTorneo(id: number): Observable<Torneo>{
     return this.http.delete<Torneo>(this.endPoint2.concat("?id=").concat(id.toString()));

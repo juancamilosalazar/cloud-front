@@ -8,7 +8,7 @@ import { Equipo } from '../model/Equipo';
   providedIn: 'root'
 })
 export class EquipoService {
-  private endPoint:string = "https://pilaezuul.herokuapp.com/pilae-service/pilae/equipo";
+  private endPoint:string = "https://pilaeaplication.herokuapp.com/pilae/equipo";
   private headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
   constructor(private http: HttpClient) { }
 

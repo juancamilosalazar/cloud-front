@@ -56,7 +56,7 @@
                     partido</a>
                 </div>
                 <div *ngIf="fixture.estadoPartido == 'jugado' ">
-                  <a (click)="showPopuppartido(fixture)" data-toggle="modal" data-target="#myModalMarcador"
+                  <a (click)="showPopuppartido(fixture)" data-toggle="modal" data-target="#myModalMarcadorResponsive"
                     class="btn btn-success btn-lg" style="color: cornsilk"><i class="far fa-calendar-alt"></i> Mostrar
                     marcador</a>
                 </div>
@@ -121,6 +121,51 @@
 <div class="modal fade" id="myModalMarcador" style="text-align: -webkit-center">
 
   <div class="modal-dialog">
+    <div style="text-align: center" class="modal-content">
+
+      <!-- Modal mostrar marcador -->
+      <div  class="modal-header">
+        <div>
+
+          <h4 class="modal-title" style="padding-left: 5.5rem"><span
+              style="background-color: rgb(203, 246, 84);">MARCADOR</span></h4>
+        </div>
+        <button type="button" class="close" data-dismiss="modal">×</button>
+
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body" style="font-size:x-large;text-align: -webkit-center;">
+        <thead class="thead-dark">
+          <div class="marcador">
+
+            <table  class="table table-sm">
+              <thead style="text-align: center" class="thead-dark">
+                <tr>
+                  <th scope="col">{{marcadores.fkPartido.fkEquipoLocal.nombre}}</th>
+                  <th scope="col">{{marcadores.fkPartido.fkEquipoVisitante.nombre}}</th>
+                </tr>
+              </thead>
+              <tbody style="text-align: center">
+                <td scope="col">{{marcadores.equipoLocalMrc}}</td>
+                <td  scope="col">{{marcadores.equipoVisitanteMrc}}</td>
+              </tbody>
+            </table>
+
+
+          </div>
+        </thead>
+
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="myModalMarcadorResponsive" style="text-align: -webkit-center">
+
+  <div class="modal-dialog">
     <div class="modal-content">
 
       <!-- Modal mostrar marcador -->
@@ -162,6 +207,7 @@
     </div>
   </div>
 </div>
+
 
 
 <!-- responsive para celulares -->

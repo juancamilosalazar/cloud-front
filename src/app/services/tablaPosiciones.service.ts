@@ -6,7 +6,7 @@ import { tablaPosiciones } from '../model/tablaPosiciones';
   providedIn: 'root'
 })
 export class TablaPosicionesService {
-  private endPoint:string  = "https://pilaezuul.herokuapp.com/pilae-service/pilae/posicion";
+  private endPoint:string  = "https://pilaeaplication.herokuapp.com/pilae/posicion";
   private headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
   constructor(private http: HttpClient) { }
 

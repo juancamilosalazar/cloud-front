@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Torneo } from '../../model/Torneo';
 import { TorneoService } from '../../services/torneo.service';
+import { DeporteService } from 'src/app/services/deporte.service';
+import { Deporte } from 'src/app/model/deporte';
 
 @Component({
    selector: 'app-listar',
@@ -15,7 +17,9 @@ export class ListarComponent implements OnInit {
    torneo: Torneo;
    torneoCreate:Torneo;
    screen:boolean=false;
-   constructor(private personaService: TorneoService) { }
+   idDeporte:number;
+   deportes:Deporte[];
+   constructor(private personaService: TorneoService,private deporteService:DeporteService) { }
    ngOnInit() {
       var width = window.innerWidth;
       if (width <= 768) {
@@ -28,6 +32,11 @@ export class ListarComponent implements OnInit {
       this.personaService.listAll().subscribe(
          (personas) => {
             this.torneos = personas
+         }
+      )
+      this.deporteService.listAll().subscribe(
+         (deportes) =>{
+            this.deportes=deportes
          }
       )
    }
@@ -44,7 +53,7 @@ export class ListarComponent implements OnInit {
    }
 
    registrar(){
-      this.personaService.createTorneo(this.torneoCreate)
+      this.personaService.createTorneo(this.torneoCreate,this.idDeporte)
       .subscribe(torneos => console.log(torneos));
     }
 

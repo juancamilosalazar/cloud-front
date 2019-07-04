@@ -10,7 +10,7 @@ import { Jugador } from '../model/Jugador';
 })
 export class JugadorService {
   private headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
-  private endPoint:string  = "https://pilaezuul.herokuapp.com/pilae-service/pilae/jugador";
+  private endPoint:string  = "https://pilaeaplication.herokuapp.com/pilae/jugador";
   constructor(private http: HttpClient) { }
 
   listJugador(id:number): Observable<Jugador []>{

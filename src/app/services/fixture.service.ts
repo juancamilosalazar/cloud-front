@@ -7,8 +7,8 @@ import { Marcador } from '../model/marcador';
   providedIn: 'root'
 })
 export class FixtureService {
-  private endPoint: string = "https://pilaezuul.herokuapp.com/pilae-service/pilae/fixture";
-  private endPoint2: string = "https://pilaezuul.herokuapp.com/pilae-service/pilae/marcador";
+  private endPoint: string = "https://pilaeaplication.herokuapp.com/pilae/fixture";
+  private endPoint2: string = "https://pilaeaplication.herokuapp.com/pilae/marcador";
   private headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
 
   constructor(private http: HttpClient) { }

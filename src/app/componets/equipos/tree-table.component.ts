@@ -24,7 +24,8 @@ export class TreeTableComponent implements OnInit {
 
    ngOnInit() {
       var width = window.innerWidth;
-      if (width <= 768) {
+      var height= window.innerHeight;
+      if (width <= 768 ) {
          this.screen=true;
       }else {
         this.screen=false

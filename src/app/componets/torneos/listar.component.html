@@ -130,18 +130,18 @@
 </div>
 
 
-<!-- The Modal update -->
+<!-- The Modal create -->
 <div class="modal fade" id="myModalCreate">
   <div class="modal-dialog">
     <div class="modal-content">
 
-      <!-- Modal Header update -->
+      <!-- Modal Header create -->
       <div class="modal-header">
         <h4 class="modal-title">Registrar torneo</h4>
         <button type="button" class="close" data-dismiss="modal">×</button>
       </div>
 
-      <!-- Modal body update-->
+      <!-- Modal body create-->
       <div class="card">
         <div class="card-body">
           <blockquote class="blockquote mb-0">
@@ -158,6 +158,14 @@
                 <input type="text" minlength="5" required [(ngModel)]="torneoCreate.descripcion" class="form-control"
                   id="descripcioncreate" name="descripcioncreate" #descripcioncreate="ngModel"
                   placeholder="descripción">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="inputPassword4">Deporte asociado</label>
+                <select class="form-control" [(ngModel)]="idDeporte" placeholder="id Deporte" required id="deporte"
+                  name="deporte" #deporte="ngModel">
+                  <option *ngFor="let deporte of deportes" value="{{deporte.codigo}}" selected>{{deporte.nombre}}
+                  </option>
+                </select>
               </div>
 
             </div>
