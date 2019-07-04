@@ -19,6 +19,9 @@ export class FixtureService {
   saveFixture(id: number): Observable<Fixture[]> {
     return this.http.get<Fixture[]>(this.endPoint.concat("?idTorneo=").concat(id.toString()))
   }
+  saveFixtureNotReturn(id: number): Observable<Fixture[]> {
+    return this.http.get<Fixture[]>(this.endPoint.concat("?idNotReturn=").concat(id.toString()))
+  }
   jugarPartido(id: number, object: Marcador): Observable<Marcador> {
     return this.http.put<Marcador>(this.endPoint2.concat("?id=").concat(id.toString()), object)
   }

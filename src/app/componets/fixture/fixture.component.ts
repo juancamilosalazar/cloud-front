@@ -95,4 +95,14 @@ export class FixtureComponent implements OnInit {
     })
 
   }
+  crearFixtureNotReturn() {
+    this.route.params.subscribe(params => {
+      this.fixtureService.saveFixtureNotReturn(+params['id']).subscribe(
+        (fixtures) => {
+          this.fixtures = fixtures
+        }
+      )
+    })
+
+  }
 }

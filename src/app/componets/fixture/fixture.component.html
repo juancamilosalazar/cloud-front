@@ -5,11 +5,13 @@
   <div class="card-body square">
     <blockquote class="blockquote mb-0">
       <div>
-        <div *ngIf="fixtures.length == 0 && equipos.length>1" class="alert alert-warning" role="alert">
+        <div style="text-align: center" *ngIf="fixtures.length == 0 && equipos.length>1" class="alert alert-warning" role="alert">
           todavía no existe un fixture
           <div style="text-align: center;margin: 2rem">
             <a (click)="crearFixture()" [routerLink]="['/Torneos']" class="btn btn-success btn-lg"
-              style="margin-right: 1rem"><i class="fas fa-futbol"></i>crear fixture</a>
+              style="margin-right: 1rem"><i class="fas fa-futbol"></i>crear fixture de ida y vuelta</a>
+            <a (click)="crearFixtureNotReturn()" [routerLink]="['/Torneos']" class="btn btn-success btn-lg"
+              style="margin-right: 1rem"><i class="fas fa-futbol"></i>crear fixture solo ida</a>
 
           </div>
         </div>
@@ -124,7 +126,7 @@
     <div style="text-align: center" class="modal-content">
 
       <!-- Modal mostrar marcador -->
-      <div  class="modal-header">
+      <div class="modal-header">
         <div>
 
           <h4 class="modal-title" style="padding-left: 5.5rem"><span
@@ -139,7 +141,7 @@
         <thead class="thead-dark">
           <div class="marcador">
 
-            <table  class="table table-sm">
+            <table class="table table-sm">
               <thead style="text-align: center" class="thead-dark">
                 <tr>
                   <th scope="col">{{marcadores.fkPartido.fkEquipoLocal.nombre}}</th>
@@ -148,7 +150,7 @@
               </thead>
               <tbody style="text-align: center">
                 <td scope="col">{{marcadores.equipoLocalMrc}}</td>
-                <td  scope="col">{{marcadores.equipoVisitanteMrc}}</td>
+                <td scope="col">{{marcadores.equipoVisitanteMrc}}</td>
               </tbody>
             </table>
 
