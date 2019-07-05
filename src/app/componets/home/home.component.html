@@ -1,6 +1,9 @@
 <div class="jumbotron background">
   <div class="transparency">
-    <h3 class="title">BIENVENIDO a <i class="icon-Pilae pilae"></i> <div style="font-size: small"> Pilae es una plataforma de deportes que te  <br>permite gestionar eventos y torneos deportivos <br>creado por: Juan Camilo Salazar</div>  </h3>
+    <h3 class="title">BIENVENIDO a <i class="icon-Pilae pilae"></i>
+      <div style="font-size: small"> Pilae es una plataforma de deportes que te <br>permite gestionar eventos y torneos
+        deportivos <br>creado por: Juan Camilo Salazar</div>
+    </h3>
 
     <hr class="my-4">
     <!------ Include the above in your HEAD tag ---------->
@@ -209,7 +212,8 @@
 
         <!-- Modal Header marcador -->
         <div class="modal-header" style="text-align: center">
-          <h4 class="col-12 modal-title text-center"> {{torneoSelecionado.nombre}}
+          <h4 class="col-12 modal-title text-center" style="text-transform: uppercase;font-size: xx-large"><span
+              style="background-color: rgb(203, 246, 84);">{{torneoSelecionado.nombre}}</span> 
             <div>
               <a href="/Fixture/{{torneoSelecionado.codigo}}" class="btn btn-secondary" style="margin-right: 1rem"><i
                   class="far fa-calendar-alt"></i>Programación</a>
@@ -234,7 +238,7 @@
                   Aún no se ha jugado ningun partido de este torneo
                 </div>
               </div>
-              <div style="text-align: center;justify-content: center" >
+              <div style="text-align: center;justify-content: center" *ngIf="marcadorValidate==true">
                 <table class="table" style="padding-left: 1rem;">
                   <thead class="thead-dark">
                     <tr>
