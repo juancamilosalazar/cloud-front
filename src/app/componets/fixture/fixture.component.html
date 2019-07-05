@@ -1,18 +1,21 @@
 <div *ngIf="screen==false" class="card background">
   <div class="card-header" *ngIf="fixtures.length > 0">
-    <a (click)="crearFixture()" [routerLink]="['/Torneos']" class="btn btn-primary">RefrescarFixture</a>
+    <a class="btn btn-primary" data-toggle="modal" data-target="#myModalCreate" style="color: cornsilk">Registrar
+      partido manualmente</a>
   </div>
   <div class="card-body square">
     <blockquote class="blockquote mb-0">
       <div>
-        <div style="text-align: center" *ngIf="fixtures.length == 0 && equipos.length>1" class="alert alert-warning" role="alert">
+        <div style="text-align: center" *ngIf="fixtures.length == 0 && equipos.length>1" class="alert alert-warning"
+          role="alert">
           todavía no existe un fixture
           <div style="text-align: center;margin: 2rem">
-            <a (click)="crearFixture()" [routerLink]="['/Torneos']" class="btn btn-success btn-lg"
-              style="margin-right: 1rem"><i class="fas fa-futbol"></i>crear fixture de ida y vuelta</a>
-            <a (click)="crearFixtureNotReturn()" [routerLink]="['/Torneos']" class="btn btn-success btn-lg"
-              style="margin-right: 1rem"><i class="fas fa-futbol"></i>crear fixture solo ida</a>
-
+            <a (click)="crearFixture();refresh()" class="btn btn-success btn-lg"
+              style="margin-right: 1rem;color: cornsilk">crear fixture de ida y vuelta</a>
+            <a (click)="crearFixtureNotReturn();refresh()" class="btn btn-success btn-lg"
+              style="margin-right: 1rem;color: cornsilk">crear fixture solo ida</a>
+            <a class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModalCreate"
+              style="color: cornsilk">Registrar partido manualmente</a>
           </div>
         </div>
         <div *ngIf="equipos.length<2" class="alert alert-warning" role="alert">
@@ -111,8 +114,9 @@
       <div *ngIf="local.valid && local.value >= 0 && visitante.valid && visitante.value >= 0">
         <!-- Modal footer -->
         <div class="modal-footer">
-          <button [routerLink]="['/Torneos']" (click)="jugar()" type="button" class="btn btn-danger"
-            data-dismiss="modal">Registrar marcador</button>
+          <button (click)="jugar()" [routerLink]="['/Torneos']" type="button" class="btn btn-danger"
+            data-dismiss="modal">Registrar
+            marcador</button>
         </div>
       </div>
     </div>
@@ -211,19 +215,98 @@
 </div>
 
 
+<!-- The Modal create -->
+<div class="modal fade" id="myModalCreate">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header create -->
+      <div class="modal-header">
+        <h4 class="modal-title">Crear nuevo partido manualmente</h4>
+        <button type="button" class="close" data-dismiss="modal">×</button>
+      </div>
+
+      <!-- Modal body create-->
+      <div class="modal-body">
+        <div class="card">
+          <div class="card-body">
+            <blockquote class="blockquote mb-0">
+              <p>Favor diligenciar el formulario</p>
+              <!-- <form> -->
+              <div class="form-row validate">
+                <div class="form-group col-md-6">
+                  <label for="inputPassword4">equipo local</label>
+                  <select class="form-control" [(ngModel)]="idLocal" placeholder="id torneo" required id="idEquipoLocal"
+                    name="idEquipoLocal" #idEquipoLocal="ngModel">
+                    <option *ngFor="let equipo of equipos" value="{{equipo.codigo}}" selected>{{equipo.nombre}}
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="inputPassword4">equipo visitante</label>
+                  <select class="form-control" [(ngModel)]="idVisitante" placeholder="id torneo" required
+                    id="idEquipoVisitante" name="idEquipoVisitante" #idEquipoVisitante="ngModel">
+                    <option *ngFor="let equipo of equipos" value="{{equipo.codigo}}" selected>{{equipo.nombre}}
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="inputPassword4">ida o vuelta</label>
+                  <select class="form-control" [(ngModel)]="fixtureCreate.idaVuelta" placeholder="genero" required
+                    id="idaVuelta" name="idaVuelta" #idaVuelta="ngModel">
+                    <option value="ida" selected>ida</option>
+                    <option value="vuelta" selected>vuelta</option>
+                  </select>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="inputPassword4">Ronda</label>
+                  <input type="text" value="Ronda" required [(ngModel)]="fixtureCreate.ronda" class="form-control"
+                    id="ronda" name="ronda" placeholder="locación" #ronda="ngModel">
+                </div>
+
+              </div>
+              <div *ngIf="ronda.invalid || idaVuelta.invalid || idEquipoVisitante.invalid || idEquipoLocal.invalid "
+                class="alert alert-danger">
+
+                <div>
+                  Todos Los campos son necesarios
+                </div>
+              </div>
+              <div *ngIf="ronda.valid && idaVuelta.valid  && idEquipoVisitante.valid  && idEquipoLocal.valid">
+                <button (click)="registrar();refresh()" type="button" class="btn btn-primary"
+                  data-dismiss="modal">Registrar</button>
+              </div>
+
+              <!-- </form> -->
+            </blockquote>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
 <!-- responsive para celulares -->
 <div style="justify-content: center" *ngIf="screen==true">
   <div class="card background ">
+    <div class="card-header" *ngIf="fixtures.length > 0">
+      <a class="btn btn-primary" data-toggle="modal" data-target="#myModalCreate" style="color: cornsilk">Registrar
+        partido manualmente</a>
+    </div>
     <div class="card-header">
 
     </div>
     <div *ngIf="fixtures.length == 0 && equipos.length>1" class="alert alert-warning" role="alert">
       todavía no existe un fixture
       <div style="text-align: center;margin: 2rem">
-        <a (click)="crearFixture()" [routerLink]="['/Torneos']" class="btn btn-success btn-lg"
-          style="margin-right: 1rem"><i class="fas fa-futbol"></i>crear fixture</a>
-
+        <a (click)="crearFixture();refresh()" [routerLink]="['/Torneos']" class="btn btn-success btn-lg"
+          style="margin-right: 1rem;width: 16rem">crear fixture de ida y vuelta</a>
+        <a (click)="crearFixtureNotReturn();refresh()" [routerLink]="['/Torneos']" class="btn btn-success btn-lg"
+          style="margin-top: 1rem;width: 16rem">crear fixture solo ida </a>
+        <a class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModalCreate"
+          style="color: cornsilk;width: 16rem;margin-top: 1rem">Registrar partido manualmente</a>
       </div>
     </div>
     <div *ngIf="equipos.length<2" class="alert alert-warning" role="alert">

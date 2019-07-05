@@ -19,8 +19,10 @@ export class ListarComponent implements OnInit {
    screen:boolean=false;
    idDeporte:number;
    deportes:Deporte[];
+
    constructor(private personaService: TorneoService,private deporteService:DeporteService) { }
    ngOnInit() {
+      
       var width = window.innerWidth;
       if (width <= 768) {
          this.screen=true;
@@ -40,6 +42,9 @@ export class ListarComponent implements OnInit {
          }
       )
    }
+   refresh(): void {
+      window.location.reload();
+  }
    showPopup(torneo: Torneo) {
       this.torneoSelecionado = torneo;
       console.log(this.torneoSelecionado)
@@ -55,6 +60,7 @@ export class ListarComponent implements OnInit {
    registrar(){
       this.personaService.createTorneo(this.torneoCreate,this.idDeporte)
       .subscribe(torneos => console.log(torneos));
+      
     }
 
    delete() {

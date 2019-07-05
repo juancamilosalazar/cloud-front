@@ -31,5 +31,8 @@ export class FixtureService {
   mostrarMarcadoresTorneo(id: Number): Observable<Marcador[]> {
     return this.http.get<Marcador[]>(this.endPoint2.concat("?idTorneo=").concat(id.toString()), { headers: this.headers })
   }
+  createPartido(object: Fixture,id: Number,idLocal:Number,idVisitante:Number): Observable<Fixture>{
+    return this.http.post<Fixture>(this.endPoint.concat("?id=").concat(id.toString()).concat("&idLocal=").concat(idLocal.toString()).concat("&idVisitante=").concat(idVisitante.toString()),object,{ headers: this.headers });
+  }
 
 }

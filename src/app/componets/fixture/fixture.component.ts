@@ -19,9 +19,12 @@ export class FixtureComponent implements OnInit {
   fixtureSeleccionado: Fixture;
   comparador: boolean;
   marcador: Marcador;
-  equipos:Equipo[];
-  screen:boolean=false;
-  constructor(private fixtureService: FixtureService, private route: ActivatedRoute,private equipoService: EquipoService) { }
+  equipos: Equipo[];
+  screen: boolean = false;
+  fixtureCreate: Fixture;
+  idLocal:number;
+  idVisitante:number;
+  constructor(private fixtureService: FixtureService, private route: ActivatedRoute, private equipoService: EquipoService) { }
 
   showPopup(fixture: Fixture) {
     this.fixtureSeleccionado = fixture;
@@ -35,74 +38,87 @@ export class FixtureComponent implements OnInit {
     console.log(this.fixtureSeleccionado)
     console.log(this.fixtureSeleccionado.codigo)
   }
-  jugar() {
+  registrar() {
     this.route.params.subscribe(params => {
-      this.fixtureService.jugarPartido(this.fixtureSeleccionado.codigo, this.marcador).subscribe(
-        (marcador) => {
-          this.marcador = marcador
+      this.fixtureService.createPartido(this.fixtureCreate,+params['id'],this.idLocal,this.idVisitante).subscribe(
+        (fixture) => {
+          this.fixtureCreate = fixture
         }
       )
     })
   }
 
-  ngOnInit() {
-    var width = window.innerWidth;
-    if (width <= 768) {
-       this.screen=true;
-    }else {
-      this.screen=false
-    }
+jugar() {
+    this.fixtureService.jugarPartido(this.fixtureSeleccionado.codigo, this.marcador).subscribe(
+      (marcador) => {
+        this.marcador = marcador
+      }
+    )
+  
+}
 
-    this.marcadores = new Marcador
-    this.marcador = new Marcador;
-    this.comparador = false;
-    this.route.params.subscribe(params => {
-      this.equipoService.listAllByTorneo(+params['id']).subscribe(
-        (equipos) => {
-          this.equipos = equipos
-          console.log(equipos)
-        }
-      )
-    })
-    this.route.params.subscribe(params => {
-      this.fixtureService.listFixture(+params['id']).subscribe(
-        (fixtures) => {
-          this.fixtures = fixtures
-          console.log(this.fixtures[1].fechaDelPartido)
-        }
-      )
-    })
-
-
+ngOnInit() {
+  this.fixtureCreate = new Fixture;
+  var width = window.innerWidth;
+  if (width <= 768) {
+    this.screen = true;
+  } else {
+    this.screen = false
   }
-  mostrarPartido() {
-    this.route.params.subscribe(params => {
-      this.fixtureService.mostrarMarcador(this.fixtureSeleccionado.codigo).subscribe(
-        (marcadores) => {
-          this.marcadores = marcadores
-          console.log(marcadores.equipoLocalMrc)
-        }
-      )
-    })
-  }
-  crearFixture() {
-    this.route.params.subscribe(params => {
-      this.fixtureService.saveFixture(+params['id']).subscribe(
-        (fixtures) => {
-          this.fixtures = fixtures
-        }
-      )
-    })
 
-  }
-  crearFixtureNotReturn() {
-    this.route.params.subscribe(params => {
-      this.fixtureService.saveFixtureNotReturn(+params['id']).subscribe(
-        (fixtures) => {
-          this.fixtures = fixtures
-        }
-      )
-    })
+  this.marcadores = new Marcador
+  this.marcador = new Marcador;
+  this.comparador = false;
+  this.route.params.subscribe(params => {
+    this.equipoService.listAllByTorneo(+params['id']).subscribe(
+      (equipos) => {
+        this.equipos = equipos
+        console.log(equipos)
+      }
+    )
+  })
+  this.route.params.subscribe(params => {
+    this.fixtureService.listFixture(+params['id']).subscribe(
+      (fixtures) => {
+        this.fixtures = fixtures
+        console.log(this.fixtures[1].fechaDelPartido)
+      }
+    )
+  })
 
-  }
+
+}
+mostrarPartido() {
+  this.route.params.subscribe(params => {
+    this.fixtureService.mostrarMarcador(this.fixtureSeleccionado.codigo).subscribe(
+      (marcadores) => {
+        this.marcadores = marcadores
+        console.log(marcadores.equipoLocalMrc)
+      }
+    )
+  })
+}
+crearFixture() {
+  this.route.params.subscribe(params => {
+    this.fixtureService.saveFixture(+params['id']).subscribe(
+      (fixtures) => {
+        this.fixtures = fixtures
+      }
+    )
+  })
+
+}
+refresh(): void {
+  window.location.reload();
+}
+crearFixtureNotReturn() {
+  this.route.params.subscribe(params => {
+    this.fixtureService.saveFixtureNotReturn(+params['id']).subscribe(
+      (fixtures) => {
+        this.fixtures = fixtures
+      }
+    )
+  })
+
+}
 }
