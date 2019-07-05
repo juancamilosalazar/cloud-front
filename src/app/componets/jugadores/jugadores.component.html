@@ -14,7 +14,7 @@
     <blockquote class="blockquote mb-0">
 
       <div class="alert alert-warning" role="alert" *ngIf="jugadores.length == 0">
-        no existe información relacionada
+          Aún no existen jugadores creados
       </div>
       <div *ngIf="jugadores.length > 0 ">
         <div style="text-align: center;font-size: xx-large">
@@ -130,7 +130,7 @@
 
       <div *ngIf="name.valid   && cc.valid  && calendar.valid && cc.value >= 0">
         <div class="modal-footer">
-          <button (click)="update()" [routerLink]="['/Equipos']" type="button" class="btn btn-primary"
+          <button (click)="update();refresh()" [routerLink]="['/Equipos']" type="button" class="btn btn-primary"
             data-dismiss="modal">Atualizar</button>
         </div>
 
@@ -227,7 +227,7 @@
       </form>
     </div>
     <div style="text-align: center" class="alert alert-warning" role="alert" *ngIf="jugadores.length == 0">
-      no existe información relacionada
+        Aún no existen jugadores creados
     </div>
     <div style="text-align: center" *ngIf="jugadores.length > 0">
       <b>JUGADORES <span

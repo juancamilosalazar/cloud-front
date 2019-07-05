@@ -14,7 +14,7 @@
     <blockquote class="blockquote mb-0">
 
       <div class="alert alert-warning" role="alert" *ngIf="torneos.length == 0">
-        no existe información relacionada
+          Aún no existen torneos creados
       </div>
 
 
@@ -27,6 +27,7 @@
             <tr>
               <th scope="col">Nombre</th>
               <th scope="col">Descripción</th>
+              <th scope="col">Deporte</th>
               <th style="text-align: center" scope="col">Acciones</th>
             </tr>
           </thead>
@@ -35,6 +36,7 @@
             <tr *ngFor="let torneo of torneos | filter:filterPost">
               <th>{{torneo.nombre}}</th>
               <td>{{torneo.descripcion}}</td>
+              <td><span style="background-color: rgb(203, 246, 84);">{{torneo.fkDeporte.nombre}}</span></td>
 
               <td><a href="/Fixture/{{torneo.codigo}}" class="btn btn-success btn-lg" style="margin-right: 1rem"><i
                     class="fas fa-futbol"></i>Fixture</a>
@@ -121,7 +123,7 @@
 
       <div *ngIf="name.valid && descripcion.valid">
         <div class="modal-footer">
-          <button (click)="update()" type="button" class="btn btn-primary" data-dismiss="modal">Atualizar</button>
+          <button (click)="update();refresh()" type="button" class="btn btn-primary" data-dismiss="modal">Atualizar</button>
         </div>
       </div>
 
@@ -175,7 +177,7 @@
               </div>
             </div>
 
-            <div *ngIf="nameCreate.valid && descripcioncreate.valid">
+            <div *ngIf="nameCreate.valid && descripcioncreate.valid && deporte.valid">
               <button (click)="registrar();refresh()" type="button" class="btn btn-primary"
                 data-dismiss="modal">Registrar</button>
             </div>
@@ -205,7 +207,7 @@
       </form>
     </div>
     <div style="text-align: center" class="alert alert-warning" role="alert" *ngIf="torneos.length == 0">
-      no existe información relacionada
+        Aún no existen torneos creados
     </div>
     <div *ngIf="torneos.length > 0">
       <div *ngFor="let torneo of torneos | filter:filterPost" class="card"

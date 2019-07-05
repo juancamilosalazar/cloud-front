@@ -26,8 +26,13 @@
 
 
       <div *ngIf="fixtures.length > 0 ">
-        <div style="text-align: center;font-size: xx-large">
-          <b>PARTIDOS</b>
+        <div style="text-align: center;font-size: x-large">
+          partidos torneo:
+          <div style="font-size: xx-large">
+              <b>
+                {{fixtures[0].fkTorneo.nombre}}
+              </b>
+            </div>
         </div>
 
         <table class="table">
@@ -313,6 +318,7 @@
       deben existir almenos dos equipos relacionados con el torneo
     </div>
     <div *ngIf="fixtures.length > 0">
+      
       <div *ngFor="let fixture of fixtures" class="card" style="width: auto;margin: 2rem">
         <div class="card-body">
           <p><b>Fecha del partido: </b> {{fixture.fechaDelPartido | date:'dd-MM-yyyy ':'+0900'}}</p>

@@ -15,21 +15,21 @@ export class ListarComponent implements OnInit {
    torneoSelecionado: Torneo;
    filterPost = '';
    torneo: Torneo;
-   torneoCreate:Torneo;
-   screen:boolean=false;
-   idDeporte:number;
-   deportes:Deporte[];
+   torneoCreate: Torneo;
+   screen: boolean = false;
+   idDeporte: number;
+   deportes: Deporte[];
 
-   constructor(private personaService: TorneoService,private deporteService:DeporteService) { }
+   constructor(private personaService: TorneoService, private deporteService: DeporteService) { }
    ngOnInit() {
-      
+
       var width = window.innerWidth;
       if (width <= 768) {
-         this.screen=true;
-      }else {
-        this.screen=false
+         this.screen = true;
+      } else {
+         this.screen = false
       }
-      this.torneoCreate= new Torneo;
+      this.torneoCreate = new Torneo;
       this.torneo = new Torneo;
       this.personaService.listAll().subscribe(
          (personas) => {
@@ -37,18 +37,17 @@ export class ListarComponent implements OnInit {
          }
       )
       this.deporteService.listAll().subscribe(
-         (deportes) =>{
-            this.deportes=deportes
+         (deportes) => {
+            this.deportes = deportes
          }
       )
    }
    refresh(): void {
       window.location.reload();
-  }
+   }
    showPopup(torneo: Torneo) {
       this.torneoSelecionado = torneo;
       console.log(this.torneoSelecionado)
-
    }
    showPopupUpdate(torneo: Torneo) {
       this.torneo = new Torneo;
@@ -57,11 +56,11 @@ export class ListarComponent implements OnInit {
 
    }
 
-   registrar(){
-      this.personaService.createTorneo(this.torneoCreate,this.idDeporte)
-      .subscribe(torneos => console.log(torneos));
-      
-    }
+   registrar() {
+      this.personaService.createTorneo(this.torneoCreate, this.idDeporte)
+         .subscribe(torneos => console.log(torneos));
+
+   }
 
    delete() {
       this.personaService.deleteTorneo(this.torneoSelecionado.codigo).subscribe(_ => { this.torneos = this.torneos.filter(per => per != this.torneoSelecionado) });

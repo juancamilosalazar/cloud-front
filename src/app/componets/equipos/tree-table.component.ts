@@ -19,16 +19,16 @@ export class TreeTableComponent implements OnInit {
    idTorneo: number;
    torneos: Torneo[];
    equipoCreate: Equipo;
-   screen:boolean = false;
+   screen: boolean = false;
    constructor(private equipoService: EquipoService, private personaService: TorneoService) { }
 
    ngOnInit() {
       var width = window.innerWidth;
-      var height= window.innerHeight;
-      if (width <= 768 ) {
-         this.screen=true;
-      }else {
-        this.screen=false
+      var height = window.innerHeight;
+      if (width <= 768) {
+         this.screen = true;
+      } else {
+         this.screen = false
       }
       this.equipo = new Equipo;
       this.equipoCreate = new Equipo;
@@ -44,6 +44,9 @@ export class TreeTableComponent implements OnInit {
          }
       )
 
+   }
+   refresh(): void {
+      window.location.reload();
    }
    showPopup(equipo: Equipo) {
       this.equipoSelecionado = equipo;

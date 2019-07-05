@@ -15,8 +15,16 @@ export class TorneoService {
   constructor(private http: HttpClient) { }
 
   listAll(): Observable<Torneo []>{
-  
     return this.http.get<Torneo []>(this.endPoint,{headers:this.headers});
+  }
+  listAllByDeportefutbol(idDeporte:number): Observable<Torneo []>{
+    return this.http.get<Torneo []>(this.endPoint.concat("?idDeporte=").concat(idDeporte.toString()),{headers:this.headers});
+  }
+  listAllByDeportebasquet(idDeporte:number): Observable<Torneo []>{
+    return this.http.get<Torneo []>(this.endPoint.concat("?idDeporte=").concat(idDeporte.toString()),{headers:this.headers});
+  }
+  listAllByDeportevolei(idDeporte:number): Observable<Torneo []>{
+    return this.http.get<Torneo []>(this.endPoint.concat("?idDeporte=").concat(idDeporte.toString()),{headers:this.headers});
   }
   createTorneo(object: Torneo,idDeporte:number): Observable<Torneo>{
     return this.http.post<Torneo>(this.endPoint2.concat("?idDeporte=").concat(idDeporte.toString()),object);

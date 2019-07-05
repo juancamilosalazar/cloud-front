@@ -53,6 +53,9 @@ export class JugadoresComponent implements OnInit {
     this.jugadorCreate.fechaNacimiento = new Date(this.jugadorDateCreate.fechaNacimiento).getTime();
     this.jugadorService.createJugador(this.idEquipo, this.jugadorCreate).subscribe()
   }
+  refresh(): void {
+    window.location.reload();
+ }
   ngOnInit() {
     var width = window.innerWidth;
     if (width <= 768) {

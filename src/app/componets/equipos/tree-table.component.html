@@ -16,7 +16,7 @@
       <blockquote class="blockquote mb-0">
 
         <div class="alert alert-warning" role="alert" *ngIf="equipos.length == 0">
-          no existe información relacionada
+          Aún no existen equipos creados
         </div>
 
 
@@ -133,7 +133,7 @@
 
       <div *ngIf="name.valid && location.valid  && genero.valid">
         <div class="modal-footer">
-          <button (click)="update()" type="button" class="btn btn-primary" data-dismiss="modal">Atualizar</button>
+          <button (click)="update();refresh()" type="button" class="btn btn-primary" data-dismiss="modal">Atualizar</button>
         </div>
 
       </div>
@@ -235,7 +235,7 @@
       </form>
     </div>
     <div style="text-align: center" class="alert alert-warning" role="alert" *ngIf="equipos.length == 0">
-      no existe información relacionada
+        Aún no existen equipos creados
     </div>
     <div *ngIf="equipos.length > 0">
       <div *ngFor="let equipo of equipos | filter:filterPost" class="card"
