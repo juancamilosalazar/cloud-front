@@ -19,7 +19,7 @@ export class ListarComponent implements OnInit {
    screen: boolean = false;
    idDeporte: number;
    deportes: Deporte[];
-
+   hi:string="hola"
    constructor(private personaService: TorneoService, private deporteService: DeporteService) { }
    ngOnInit() {
 

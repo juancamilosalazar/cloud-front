@@ -38,8 +38,8 @@
             <tbody>
               <tr *ngFor="let equipo of equipos | filter:filterPost">
 
-                <th>{{equipo.nombre}}</th>
-                <td>{{equipo.locacion}}</td>
+                <th style="width: 17%">{{equipo.nombre}}</th>
+                <td style="width: 17%">{{equipo.locacion}}</td>
                 <td>{{equipo.genero}}</td>
                 <td><span style="background-color: rgb(203, 246, 84);">{{equipo.fkTorneo.nombre}}</span></td>
 
@@ -241,7 +241,7 @@
       <div *ngFor="let equipo of equipos | filter:filterPost" class="card"
         style="width: auto; text-align: center;margin: 2rem">
         <div class="card-body">
-          <h5 style="text-transform: uppercase;font-size: xx-large" class="card-title">{{equipo.nombre}}</h5>
+          <h5 style="text-transform: uppercase;font-size: xx-large" class="card-title"><b>{{equipo.nombre}}</b></h5>
           <p><b>Locacion:</b> {{equipo.locacion}}</p>
           <p><b>Genero:</b> {{equipo.genero}}</p>
           <p> <b>Torneo:</b> <span style="background-color: rgb(203, 246, 84); text-transform: uppercase">

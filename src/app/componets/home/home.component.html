@@ -4,8 +4,7 @@
       <div style="font-size: small"> Pilae es una plataforma de deportes que te <br>permite gestionar eventos y torneos
         deportivos <br>creado por: Juan Camilo Salazar</div>
     </h3>
-
-    <hr class="my-4">
+    
     <!------ Include the above in your HEAD tag ---------->
     <!-- Team -->
     <section *ngIf="screen==false">
@@ -22,12 +21,11 @@
                       <h4 class="card-title">Fútbol</h4>
                       <p style="padding-top: 2rem"><img class=" img-fluid" src="../../../assets/images/futbol.jpg"
                           alt="card image"></p>
-
-
                     </div>
                   </div>
                 </div>
                 <div class="backside">
+                  
                   <div class="card">
                     <div class="card-body text-center mt-4">
                       <h4 class="card-title">Torneos destacados de <div>Fútbol</div>
@@ -39,33 +37,29 @@
                         style="width: auto; text-align: center;margin: 2rem;background: transparent">
                         <div class="card-body">
                           <button (click)="showPopup(torneosFutbol[0])" type="button"
-                            style="margin-right: 1rem;font-size: medium" class="btn btn-warning btn-lg"
+                             class="btn btn-warning btn-lg boton"
                             data-toggle="modal" data-target="#myModalCreate">
                             <div style="text-transform: uppercase;color: black  " class="card-body">
                               <b>{{torneosFutbol[0].nombre}}</b>
                             </div>
                             <p><b>Descripción:</b> {{torneosFutbol[0].descripcion}}</p>
                           </button>
-
                         </div>
                       </div>
                       <div *ngIf="torneosFutbol.length > 1" class="card;row"
                         style="width: auto; text-align: center;margin: 2rem;background: transparent">
                         <div class="card-body">
                           <button (click)="showPopup(torneosFutbol[1])" type="button"
-                            style="margin-right: 1rem;font-size: medium" class="btn btn-warning btn-lg"
+                             class="btn btn-warning btn-lg boton"
                             data-toggle="modal" data-target="#myModalCreate">
                             <div style="text-transform: uppercase;color: black  " class="card-body">
                               <b>{{torneosFutbol[1].nombre}}</b>
                             </div>
                             <p><b>Descripción:</b> {{torneosFutbol[1].descripcion}}</p>
                           </button>
-
                         </div>
                       </div>
-
                       <ul class="list-inline">
-
                       </ul>
                     </div>
                   </div>
@@ -85,8 +79,6 @@
                       <h4 class="card-title">Vóleibol</h4>
                       <p style="padding-top: 2rem"><img class=" img-fluid" src="../../../assets/images/voleibol.jpg"
                           alt="card image"></p>
-
-
                     </div>
                   </div>
                 </div>
@@ -105,7 +97,7 @@
                         <div class="card-body">
                           <div>
                             <button (click)="showPopup(torneosVolei[0])" type="button"
-                              style="margin-right: 1rem;font-size: medium" class="btn btn-warning btn-lg"
+                               class="btn btn-warning btn-lg boton"
                               data-toggle="modal" data-target="#myModalCreate">
                               <div style="text-transform: uppercase;color: black  " class="card-body">
                                 <b>{{torneosVolei[0].nombre}}</b>
@@ -119,19 +111,16 @@
                         style="width: auto; text-align: center;margin: 2rem;background: transparent">
                         <div class="card-body">
                           <button (click)="showPopup(torneosVolei[1])" type="button"
-                            style="margin-right: 1rem;font-size: medium" class="btn btn-warning btn-lg"
+                             class="btn btn-warning btn-lg boton"
                             data-toggle="modal" data-target="#myModalCreate">
                             <div style="text-transform: uppercase;color: black  " class="card-body">
                               <b>{{torneosVolei[1].nombre}}</b>
                             </div>
                             <p><b>Descripción:</b> {{torneosVolei[1].descripcion}}</p>
                           </button>
-
                         </div>
                       </div>
-
                       <ul class="list-inline">
-
                       </ul>
                     </div>
                   </div>
@@ -163,10 +152,9 @@
                       </div>
                       <div *ngIf="torneosBasquet.length > 0" class="card;row"
                         style="width: auto; text-align: center;margin: 2rem;background: transparent">
-
                         <div class="card-body">
                           <button (click)="showPopup(torneosBasquet[0])" type="button"
-                            style="margin-right: 1rem;font-size: medium" class="btn btn-warning btn-lg"
+                             class="btn btn-warning btn-lg boton"
                             data-toggle="modal" data-target="#myModalCreate">
                             <div style="text-transform: uppercase;color: black  " class="card-body">
                               <b>{{torneosBasquet[0].nombre}}</b>
@@ -178,9 +166,8 @@
                       <div *ngIf="torneosBasquet.length > 1" class="card;row"
                         style="width: auto; text-align: center;margin: 2rem;background: transparent">
                         <div class="card-body">
-
                           <button (click)="showPopup(torneosBasquet[1])" type="button"
-                            style="margin-right: 1rem;font-size: medium" class="btn btn-warning btn-lg"
+                            class="btn btn-warning btn-lg boton"
                             data-toggle="modal" data-target="#myModalCreate">
                             <div style="text-transform: uppercase;color: black  " class="card-body">
                               <b>{{torneosBasquet[1].nombre}}</b>
@@ -188,9 +175,7 @@
                             <p><b>Descripción:</b> {{torneosBasquet[1].descripcion}}</p>
                           </button>
                         </div>
-
                         <ul class="list-inline">
-
                         </ul>
                       </div>
                     </div>
@@ -204,16 +189,14 @@
     </section>
     <!-- Team -->
   </div>
-
   <!-- The Modal marcador -->
   <div class="modal fade" id="myModalCreate">
     <div class="modal-dialog">
       <div class="modal-content" style="text-align: center">
-
         <!-- Modal Header marcador -->
         <div class="modal-header" style="text-align: center">
           <h4 class="col-12 modal-title text-center" style="text-transform: uppercase;font-size: xx-large"><span
-              style="background-color: rgb(203, 246, 84);">{{torneoSelecionado.nombre}}</span> 
+              style="background-color: rgb(203, 246, 84);">{{torneoSelecionado.nombre}}</span>
             <div>
               <a href="/Fixture/{{torneoSelecionado.codigo}}" class="btn btn-secondary" style="margin-right: 1rem"><i
                   class="far fa-calendar-alt"></i>Programación</a>
@@ -221,17 +204,12 @@
                 style="margin-right: 1rem"><i class="fas fa-network-wired"></i>Tabla Posiciones</a>
             </div>
           </h4>
-
           <button type="button" class="close" style="margin-left: -2rem;" data-dismiss="modal">×</button>
-
-
         </div>
-
         <!-- Modal body marcador-->
         <div class="card">
           <div class="card-body" style="text-align: center">
             <blockquote class="blockquote mb-0">
-
               <div style="font-size: x-large">MARCADORES</div>
               <div *ngIf="marcadorValidate==false">
                 <div class="alert alert-warning" role="alert">
@@ -239,18 +217,16 @@
                 </div>
               </div>
               <div style="text-align: center;justify-content: center" *ngIf="marcadorValidate==true">
-                <table class="table" style="padding-left: 1rem;">
+                <table *ngIf="screen==false" class="table" style="padding-left: 1rem;">
                   <thead class="thead-dark">
                     <tr>
                       <th scope="col">Equipo local</th>
                       <th scope="col">Marcador</th>
                       <th scope="col">Equipo visitante</th>
-
                     </tr>
                   </thead>
                   <tbody>
                     <tr style="text-align: center" *ngFor="let marcador of marcadores">
-
                       <th scope="col">{{marcador.fkPartido.fkEquipoLocal.nombre}}</th>
                       <td style="font-size: x-large"><span
                           style="background-color: rgb(203, 246, 84);">{{marcador.equipoLocalMrc}}</span>-<span
@@ -260,16 +236,79 @@
                     </tr>
                   </tbody>
                 </table>
-
-
-
+                <table *ngIf="screen==true" class="table" >
+                  <thead class="thead-dark">
+                    <tr>
+                      <th scope="col">Equipo local</th>
+                      <th scope="col">Marcador</th>
+                      <th scope="col">Equipo visitante</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr style="text-align: center" *ngFor="let marcador of marcadores">
+                      <th scope="col">{{marcador.fkPartido.fkEquipoLocal.nombre}}</th>
+                      <td style="font-size: x-large"><span
+                          style="background-color: rgb(203, 246, 84);">{{marcador.equipoLocalMrc}}</span>-<span
+                          style="background-color: rgb(203, 246, 84);">{{marcador.equipoVisitanteMrc}}</span>
+                      </td>
+                      <th scope="col">{{marcador.fkPartido.fkEquipoVisitante.nombre}}</th>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
-
             </blockquote>
           </div>
-
         </div>
-
       </div>
     </div>
   </div>
+
+  <!-- responsive para celulares -->
+<div style="justify-content: center" *ngIf="screen==true">
+   <!-- Team member -->
+   <div class="col-xs-12 col-sm-6 col-md-4">
+    <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+      <div class="mainflip">
+        <div class="frontside">
+          <div class="card" style="background: transparent;border: transparent;">
+            <div class="card-body text-center">
+              <h4>Revisa nuestros torneos de</h4>
+              <h4 class="card-title">Fútbol</h4>
+              <p style="padding-top: 2rem"><img class=" img-fluid" src="../../../assets/images/futbol.jpg"
+                  alt="card image"></p>
+            </div>
+          </div>
+        </div>
+        <div class="backside image-flip" >
+          
+          <div class="card" >
+            <div class="card-body text-center mt-4">
+              <h4 class="card-title">Torneos destacados de <div>Fútbol</div>
+              </h4>
+              <div class="alert alert-warning" role="alert" *ngIf="torneosFutbol.length == 0">
+                Aún no existen torneos de este deporte
+              </div>
+              <div *ngIf="torneosFutbol.length > 0 " class="card;row"
+                style="width: auto; text-align: center;margin: 2rem;background: transparent">
+                <div class="card-body">
+                  <button (click)="showPopup(torneosFutbol[0])" type="button"
+                     class="btn btn-warning btn-lg boton"
+                    data-toggle="modal" data-target="#myModalCreate">
+                    <div style="text-transform: uppercase;color: black  " class="card-body">
+                      <b>{{torneosFutbol[0].nombre}}</b>
+                    </div>
+                    <p><b>Descripción:</b> {{torneosFutbol[0].descripcion}}</p>
+                  </button>
+                </div>
+              </div>
+              
+              <ul class="list-inline">
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>

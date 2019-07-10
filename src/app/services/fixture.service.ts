@@ -34,5 +34,8 @@ export class FixtureService {
   createPartido(object: Fixture,id: Number,idLocal:Number,idVisitante:Number): Observable<Fixture>{
     return this.http.post<Fixture>(this.endPoint.concat("?id=").concat(id.toString()).concat("&idLocal=").concat(idLocal.toString()).concat("&idVisitante=").concat(idVisitante.toString()),object,{ headers: this.headers });
   }
+  updatePartido(object:Fixture,id:Number):Observable<Fixture>{
+    return this.http.put<Fixture>(this.endPoint.concat("?id=").concat(id.toString()),object,{ headers: this.headers });
+  }
 
 }

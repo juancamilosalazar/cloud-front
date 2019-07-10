@@ -116,3 +116,10 @@ section {
     
     
 }
+.boton{
+    margin-right: 1rem;
+    font-size: medium;
+    padding: 0.1.5rem;
+    margin-top: -3rem;
+    font-size: 12px;
+}

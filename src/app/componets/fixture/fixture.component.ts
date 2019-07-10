@@ -22,6 +22,7 @@ export class FixtureComponent implements OnInit {
   equipos: Equipo[];
   screen: boolean = false;
   fixtureCreate: Fixture;
+  fixtureUpdate: Fixture;
   idLocal:number;
   idVisitante:number;
   constructor(private fixtureService: FixtureService, private route: ActivatedRoute, private equipoService: EquipoService) { }
@@ -65,7 +66,7 @@ ngOnInit() {
   } else {
     this.screen = false
   }
-
+  this.fixtureUpdate= new Fixture
   this.marcadores = new Marcador
   this.marcador = new Marcador;
   this.comparador = false;
@@ -107,6 +108,19 @@ crearFixture() {
     )
   })
 
+}
+showPopupUpdate(fixture: Fixture) {
+  this.fixtureUpdate= new Fixture
+  this.fixtureSeleccionado = fixture;
+  console.log(this.fixtureSeleccionado)
+
+}
+update() {
+  this.fixtureService.updatePartido(this.fixtureUpdate, this.fixtureSeleccionado.codigo).subscribe(
+     (fixtureUpdate) => {
+        this.fixtureUpdate = fixtureUpdate
+     }
+  )
 }
 refresh(): void {
   window.location.reload();
