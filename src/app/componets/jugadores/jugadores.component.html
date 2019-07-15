@@ -3,7 +3,7 @@
     <form class="form-inline">
       <div class="input-group">
         <div class="input-group-prepend">
-          <a class="btn btn-primary" data-toggle="modal" data-target="#myModalCreate" style="color: cornsilk">Registrar
+          <a *ngIf="isAuthenticated" class="btn btn-primary" data-toggle="modal" data-target="#myModalCreate" style="color: cornsilk">Registrar
             jugador</a>
         </div>
         <input type="text" class="form-control" name="filterPost" placeholder="Search..." [(ngModel)]="filterPost">
@@ -29,7 +29,7 @@
               <th scope="col">Identificacion</th>
               <th scope="col">fecha de nacimiento</th>
               <th scope="col">Equipo</th>
-              <th scope="col">Acciones</th>
+              <th *ngIf="isAuthenticated" scope="col">Acciones</th>
             </tr>
           </thead>
           <tbody>
@@ -43,10 +43,10 @@
               <td><span style="background-color: rgb(203, 246, 84);">{{jugador.fkEquipo.nombre}}</span></td>
 
               <td>
-                <a (click)="showPopupUpdate(jugador)" class="btn btn-primary btn-lg"
+                <a *ngIf="isAuthenticated" (click)="showPopupUpdate(jugador)" class="btn btn-primary btn-lg"
                   style="margin-right: 1rem; color: cornsilk" data-toggle="modal" data-target="#myModalUpdate"><i
                     class="fas fa-edit"></i></a>
-                <button (click)="showPopup(jugador)" type="button" class="btn btn-danger btn-lg" data-toggle="modal"
+                <button *ngIf="isAuthenticated" (click)="showPopup(jugador)" type="button" class="btn btn-danger btn-lg" data-toggle="modal"
                   data-target="#myModal"><i class="fas fa-trash-alt"></i></button>
               </td>
             </tr>
@@ -219,7 +219,7 @@
       <form class="form-inline">
         <div class="input-group">
           <div class="input-group-prepend">
-            <a class="btn btn-primary" data-toggle="modal" data-target="#myModalCreate"
+            <a *ngIf="isAuthenticated" class="btn btn-primary" data-toggle="modal" data-target="#myModalCreate"
               style="color: cornsilk">Registrar jugador</a>
           </div>
           <input type="text" class="form-control" name="filterPost" placeholder="Search..." [(ngModel)]="filterPost">
@@ -240,10 +240,10 @@
             style="background-color: rgb(203, 246, 84);text-transform: capitalize">{{jugador.nombre}}</span></p>
           <p><b>Identificacion:</b> {{jugador.identificacion}}</p>
           <p><b>Fecha nacimiento:</b> {{jugador.fechaNacimiento | date:'dd-MM-yyyy ':'+0900'}}</p>
-          <a (click)="showPopupUpdate(jugador)" class="btn btn-primary btn-lg"
+          <a *ngIf="isAuthenticated" (click)="showPopupUpdate(jugador)" class="btn btn-primary btn-lg"
             style="margin-right: 1rem; color: cornsilk" data-toggle="modal" data-target="#myModalUpdate"><i
               class="fas fa-edit"></i></a>
-          <button (click)="showPopup(jugador)" type="button" class="btn btn-danger btn-lg" data-toggle="modal"
+          <button *ngIf="isAuthenticated" (click)="showPopup(jugador)" type="button" class="btn btn-danger btn-lg" data-toggle="modal"
             data-target="#myModal"><i class="fas fa-trash-alt"></i></button>
         </div>
       </div>

@@ -6,6 +6,7 @@ import { JugadorService } from 'src/app/services/jugador.service';
 import { Jugador } from 'src/app/model/Jugador';
 import { ActivatedRoute, RouteReuseStrategy } from '@angular/router';
 import { JugadorDate } from 'src/app/model/jugadorDate';
+import { OktaAuthService } from '@okta/okta-angular';
 
 @Component({
   selector: 'app-jugadores',
@@ -24,7 +25,8 @@ export class JugadoresComponent implements OnInit {
   idEquipo: number;
   equipos: Equipo[];
   screen:boolean=false;
-  constructor(private jugadorService: JugadorService, private route: ActivatedRoute, private equipoService: EquipoService) { }
+  isAuthenticated: boolean;
+  constructor(public oktaAuth: OktaAuthService,private jugadorService: JugadorService, private route: ActivatedRoute, private equipoService: EquipoService) { }
 
   showPopup(jugador: Jugador) {
     this.jugadorSeleccionado = jugador;
@@ -56,7 +58,11 @@ export class JugadoresComponent implements OnInit {
   refresh(): void {
     window.location.reload();
  }
-  ngOnInit() {
+ async ngOnInit() {
+  this.isAuthenticated = await this.oktaAuth.isAuthenticated();
+  this.oktaAuth.$authenticationState.subscribe(
+    (isAuthenticated: boolean)  => this.isAuthenticated = isAuthenticated
+  );
     var width = window.innerWidth;
     if (width <= 768) {
       this.screen = true;

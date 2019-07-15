@@ -5,6 +5,7 @@ import { EquipoService } from 'src/app/services/equipo.service';
 import { Equipo } from 'src/app/model/Equipo';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { TorneoService } from 'src/app/services/torneo.service';
+import { OktaAuthService } from '@okta/okta-angular';
 
 @Component({
    selector: 'app-tree-table',
@@ -20,9 +21,14 @@ export class TreeTableComponent implements OnInit {
    torneos: Torneo[];
    equipoCreate: Equipo;
    screen: boolean = false;
-   constructor(private equipoService: EquipoService, private personaService: TorneoService) { }
+   isAuthenticated: boolean;
+   constructor(public oktaAuth: OktaAuthService,private equipoService: EquipoService, private personaService: TorneoService) { }
 
-   ngOnInit() {
+   async ngOnInit() {
+      this.isAuthenticated = await this.oktaAuth.isAuthenticated();
+      this.oktaAuth.$authenticationState.subscribe(
+        (isAuthenticated: boolean)  => this.isAuthenticated = isAuthenticated
+      );
       var width = window.innerWidth;
       var height = window.innerHeight;
       if (width <= 768) {

@@ -6,6 +6,7 @@ import { FixtureService } from 'src/app/services/fixture.service';
 import { Marcador } from 'src/app/model/marcador';
 import { EquipoService } from 'src/app/services/equipo.service';
 import { Equipo } from 'src/app/model/Equipo';
+import { OktaAuthService } from '@okta/okta-angular';
 
 @Component({
   selector: 'app-fixture',
@@ -25,7 +26,8 @@ export class FixtureComponent implements OnInit {
   fixtureUpdate: Fixture;
   idLocal:number;
   idVisitante:number;
-  constructor(private fixtureService: FixtureService, private route: ActivatedRoute, private equipoService: EquipoService) { }
+  isAuthenticated: boolean;
+  constructor(public oktaAuth: OktaAuthService,private fixtureService: FixtureService, private route: ActivatedRoute, private equipoService: EquipoService) { }
 
   showPopup(fixture: Fixture) {
     this.fixtureSeleccionado = fixture;
@@ -58,7 +60,11 @@ jugar() {
   
 }
 
-ngOnInit() {
+async ngOnInit() {
+  this.isAuthenticated = await this.oktaAuth.isAuthenticated();
+  this.oktaAuth.$authenticationState.subscribe(
+    (isAuthenticated: boolean)  => this.isAuthenticated = isAuthenticated
+  );
   this.fixtureCreate = new Fixture;
   var width = window.innerWidth;
   if (width <= 768) {

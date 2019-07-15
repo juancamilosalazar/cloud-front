@@ -5,7 +5,7 @@
       <form class="form-inline">
         <div class="input-group">
           <div class="input-group-prepend">
-            <a class="btn btn-primary" data-toggle="modal" data-target="#myModalCreate"
+            <a *ngIf="isAuthenticated" class="btn btn-primary" data-toggle="modal" data-target="#myModalCreate"
               style="color: cornsilk">Registrar equipos</a>
           </div>
           <input type="text" class="form-control" name="filterPost" placeholder="Search..." [(ngModel)]="filterPost">
@@ -38,18 +38,18 @@
             <tbody>
               <tr *ngFor="let equipo of equipos | filter:filterPost">
 
-                <th style="width: 17%">{{equipo.nombre}}</th>
-                <td style="width: 17%">{{equipo.locacion}}</td>
+                <th style="width: 15%">{{equipo.nombre}}</th>
+                <td style="width: 15%">{{equipo.locacion}}</td>
                 <td>{{equipo.genero}}</td>
                 <td><span style="background-color: rgb(203, 246, 84);">{{equipo.fkTorneo.nombre}}</span></td>
 
                 <td>
                   <a href="/Jugadores/{{equipo.codigo}}" class="btn btn-success btn-lg" style="margin-right: 1rem"><i
                       class="fas fa-users"></i> Jugadores</a>
-                  <a (click)="showPopupUpdate(equipo)" data-toggle="modal" data-target="#myModalUpdate"
+                  <a *ngIf="isAuthenticated" (click)="showPopupUpdate(equipo)" data-toggle="modal" data-target="#myModalUpdate"
                     class="btn btn-primary btn-lg" style="margin-right: 1rem; color: cornsilk"><i
                       class="fas fa-edit"></i></a>
-                  <button (click)="showPopup(equipo)" type="button" class="btn btn-danger btn-lg" data-toggle="modal"
+                  <button *ngIf="isAuthenticated" (click)="showPopup(equipo)"  type="button" class="btn btn-danger btn-lg" data-toggle="modal"
                     data-target="#myModal"><i class="fas fa-trash-alt"></i></button>
 
                 </td>
@@ -65,12 +65,12 @@
 </div>
 
 
-<!-- The Modal -->
+<!-- The Modal delete -->
 <div class="modal fade" id="myModal">
   <div class="modal-dialog">
     <div class="modal-content">
 
-      <!-- Modal Header -->
+      <!-- Modal Header delete-->
       <div class="modal-header">
         <h4 class="modal-title">Eliminar</h4>
         <button type="button" class="close" data-dismiss="modal">×</button>
@@ -227,7 +227,7 @@
       <form class="form-inline">
         <div class="input-group">
           <div class="input-group-prepend">
-            <a class="btn btn-primary" data-toggle="modal" data-target="#myModalCreate"
+            <a *ngIf="isAuthenticated" class="btn btn-primary" data-toggle="modal" data-target="#myModalCreate"
               style="color: cornsilk">Registrar equipos</a>
           </div>
           <input type="text" class="form-control" name="filterPost" placeholder="Search..." [(ngModel)]="filterPost">
@@ -248,9 +248,9 @@
               {{equipo.fkTorneo.nombre}} </span></p>
           <a href="/Jugadores/{{equipo.codigo}}" class="btn btn-success btn-lg" style="margin-right: 1rem"><i
               class="fas fa-users"></i></a>
-          <a (click)="showPopupUpdate(equipo)" data-toggle="modal" data-target="#myModalUpdate"
+          <a *ngIf="isAuthenticated" (click)="showPopupUpdate(equipo)" data-toggle="modal" data-target="#myModalUpdate"
             class="btn btn-primary btn-lg" style="margin-right: 1rem; color: cornsilk"><i class="fas fa-edit"></i></a>
-          <button (click)="showPopup(equipo)" type="button" class="btn btn-danger btn-lg" data-toggle="modal"
+          <button *ngIf="isAuthenticated" (click)="showPopup(equipo)" type="button" class="btn btn-danger btn-lg" data-toggle="modal"
             data-target="#myModal"><i class="fas fa-trash-alt"></i></button>
         </div>
       </div>

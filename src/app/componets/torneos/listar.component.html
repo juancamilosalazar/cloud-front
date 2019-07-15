@@ -3,7 +3,7 @@
     <form class="form-inline">
       <div class="input-group">
         <div class="input-group-prepend">
-          <a class="btn btn-primary" data-toggle="modal" data-target="#myModalCreate" style="color: cornsilk">Registrar
+          <a *ngIf="isAuthenticated" class="btn btn-primary" data-toggle="modal" data-target="#myModalCreate" style="color: cornsilk">Registrar
             torneos</a>
         </div>
         <input type="text" class="form-control" name="filterPost" placeholder="Search..." [(ngModel)]="filterPost">
@@ -34,22 +34,22 @@
           <tbody>
 
             <tr *ngFor="let torneo of torneos | filter:filterPost">
-              <th style="width: 17%; ">{{torneo.nombre}}</th>
-              <td style="width: 17%; " >{{torneo.descripcion}}</td>
+              <th style="width: 15%">{{torneo.nombre}}</th>
+              <td style="width: 15%" >{{torneo.descripcion}}</td>
               <td><span style="background-color: rgb(203, 246, 84);">{{torneo.fkDeporte.nombre}}</span></td>
 
               <td><a href="/Fixture/{{torneo.codigo}}" class="btn btn-success btn-lg" style="margin-right: 1rem"><i
                     class="fas fa-futbol"></i>Fixture</a>
-                <a href="/tabla-posiciones/{{torneo.codigo}}" class="btn btn-success btn-lg"
+                <a href="/tabla-posiciones/{{torneo.codigo}}" class="btn btn-primary btn-lg"
                   style="margin-right: 1rem"><i class="fas fa-futbol"></i>Tabla de posiciones</a>
 
-                <a (click)="showPopupUpdate(torneo)" class="btn btn-primary btn-lg"
+                <a *ngIf="isAuthenticated" (click)="showPopupUpdate(torneo)" class="btn btn-primary btn-lg"
                   style="margin-right: 1rem ; color: cornsilk" data-toggle="modal" data-target="#myModalUpdate"><i
                     class="fas fa-edit"></i></a>
-                <button (click)="showPopup(torneo)" type="button" style="margin-right: 1rem"
+                <button *ngIf="isAuthenticated" (click)="showPopup(torneo)" type="button" style="margin-right: 1rem"
                   class="btn btn-danger btn-lg" data-toggle="modal" data-target="#myModal"><i
                     class="fas fa-trash-alt"></i></button>
-                <a href="/resultado/{{torneo.codigo}}" class="btn btn-warning btn-lg" style="margin-right: 1rem"><i
+                <a  href="/resultado/{{torneo.codigo}}" class="btn btn-warning btn-lg" style="margin-right: 1rem"><i
                     class="far fa-calendar-alt"></i> Resultados</a>
               </td>
             </tr>
@@ -199,7 +199,7 @@
       <form class="form-inline">
         <div class="input-group">
           <div class="input-group-prepend">
-            <a class="btn btn-primary" data-toggle="modal" data-target="#myModalCreate"
+            <a *ngIf="isAuthenticated" class="btn btn-primary" data-toggle="modal" data-target="#myModalCreate"
               style="color: cornsilk">Registrar torneos</a>
           </div>
           <input type="text" class="form-control" name="filterPost" placeholder="Search..." [(ngModel)]="filterPost">
@@ -233,9 +233,9 @@
           <a href="/tabla-posiciones/{{torneo.codigo}}" class="btn btn-success" style="margin-right: 1rem"><i
               class="fas fa-network-wired"></i></a>
 
-          <a (click)="showPopupUpdate(torneo)" class="btn btn-primary" style="margin-right: 1rem ; color: cornsilk"
+          <a *ngIf="isAuthenticated" (click)="showPopupUpdate(torneo)" class="btn btn-primary" style="margin-right: 1rem ; color: cornsilk"
             data-toggle="modal" data-target="#myModalUpdate"><i class="fas fa-edit"></i></a>
-          <button (click)="showPopup(torneo)" type="button" style="margin-right: 1rem" class="btn btn-danger"
+          <button *ngIf="isAuthenticated" (click)="showPopup(torneo)" type="button" style="margin-right: 1rem" class="btn btn-danger"
             data-toggle="modal" data-target="#myModal"><i class="fas fa-trash-alt"></i></button>
 
         </div>

@@ -10,18 +10,17 @@ import { FixtureComponent } from './componets/fixture/fixture.component';
 import { TablaPosicionesComponent } from './componets/tabla-posiciones/tabla-posiciones.component';
 import { MostrarMarcadorComponent } from './componets/mostrar-marcador/mostrar-marcador.component';
 import { LoginComponent } from './componets/login/login.component';
+import { OktaAuthGuard } from '@okta/okta-angular';
 const routes: Routes = [
   
   {path:'Torneos', component:ListarComponent},
   {path:'Home', component:HomeComponent},
-  {path:'**',pathMatch:'full',redirectTo:'home'},
   {path:'Equipos', component:TreeTableComponent},
   {path:'Jugadores/:id', component:JugadoresComponent},
   {path:'Fixture/:id', component:FixtureComponent},
   {path:'tabla-posiciones/:id', component:TablaPosicionesComponent},
-
   {path:'resultado/:id', component:MostrarMarcadorComponent},
-  {path:'login', component:LoginComponent}
+  {path:'login', component:LoginComponent,canActivate: [OktaAuthGuard]}
 ];
 
 @NgModule({

@@ -1,0 +1,7 @@
+.toolbar-spacer {
+    flex: 1 1 auto;
+  }
+.background{
+    background: linear-gradient(rgba(255,255,255,.7), rgba(255,255,255,.5)), url('/src/assets/images/fondo.JPG');
+    background-color: #33954D;
+}

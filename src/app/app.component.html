@@ -1,2 +1,57 @@
 <app-menu></app-menu>
+<div class="background">
+    <button mat-raised-button color="accent" class="btn btn-danger btn-lg" style="margin-left: 1.5rem;"
+        *ngIf="isAuthenticated" data-toggle="modal" data-target="#myModal"  [routerLink]="['/Home']">cerrar sesión
+    </button>
+    <button mat-raised-button color="accent" class="btn btn-danger btn-lg" style="margin-left: 1.5rem;"
+        *ngIf="!isAuthenticated" (click)="oktaAuth.loginRedirect()">Iniciar sesión
+    </button>
+</div>
 <router-outlet></router-outlet>
+
+<!-- The Modal -->
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Cerrar sesión</h4>
+                <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                ¿Está seguro que desea cerrar la sesión?
+
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button (click)="oktaAuth.logout()" data-toggle="modal" data-target="#myModalclose" type="button" class="btn btn-danger" data-dismiss="modal">Aceptar</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- The Modal -->
+<div class="modal fade" id="myModalclose">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+    
+                <!-- Modal body -->
+                <div class="modal-body">
+                    sesión cerrada
+    
+                </div>
+    
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button (click)="refresh()" type="button" class="btn btn-danger" data-dismiss="modal">Aceptar</button>
+                </div>
+    
+            </div>
+        </div>
+    </div>

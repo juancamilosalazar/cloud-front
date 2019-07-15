@@ -3,6 +3,7 @@ import { Torneo } from '../../model/Torneo';
 import { TorneoService } from '../../services/torneo.service';
 import { DeporteService } from 'src/app/services/deporte.service';
 import { Deporte } from 'src/app/model/deporte';
+import { OktaAuthService } from '@okta/okta-angular';
 
 @Component({
    selector: 'app-listar',
@@ -10,7 +11,7 @@ import { Deporte } from 'src/app/model/deporte';
    styleUrls: ['./listar.component.css']
 })
 export class ListarComponent implements OnInit {
-
+   isAuthenticated: boolean;
    torneos: Torneo[] = [];
    torneoSelecionado: Torneo;
    filterPost = '';
@@ -19,9 +20,14 @@ export class ListarComponent implements OnInit {
    screen: boolean = false;
    idDeporte: number;
    deportes: Deporte[];
-   hi:string="hola"
-   constructor(private personaService: TorneoService, private deporteService: DeporteService) { }
-   ngOnInit() {
+   hi: string = "hola"
+   constructor(public oktaAuth: OktaAuthService,private personaService: TorneoService, private deporteService: DeporteService) { }
+
+   async ngOnInit() {
+      this.isAuthenticated = await this.oktaAuth.isAuthenticated();
+      this.oktaAuth.$authenticationState.subscribe(
+         (isAuthenticated: boolean) => this.isAuthenticated = isAuthenticated
+      );
 
       var width = window.innerWidth;
       if (width <= 768) {

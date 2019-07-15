@@ -18,6 +18,7 @@ import { TablaPosicionesComponent } from './componets/tabla-posiciones/tabla-pos
 
 import { MostrarMarcadorComponent } from './componets/mostrar-marcador/mostrar-marcador.component';
 import { LoginComponent } from './componets/login/login.component';
+import { AuthRoutingModule } from './auth-routing.module';
 
 
 
@@ -41,6 +42,7 @@ import { LoginComponent } from './componets/login/login.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    AuthRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
