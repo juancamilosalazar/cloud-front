@@ -27,6 +27,7 @@ export class FixtureComponent implements OnInit {
   idLocal:number;
   idVisitante:number;
   isAuthenticated: boolean;
+  dateUpdate: Date;
   constructor(public oktaAuth: OktaAuthService,private fixtureService: FixtureService, private route: ActivatedRoute, private equipoService: EquipoService) { }
 
   showPopup(fixture: Fixture) {
@@ -72,6 +73,7 @@ async ngOnInit() {
   } else {
     this.screen = false
   }
+  
   this.fixtureUpdate= new Fixture
   this.marcadores = new Marcador
   this.marcador = new Marcador;
@@ -116,12 +118,13 @@ crearFixture() {
 
 }
 showPopupUpdate(fixture: Fixture) {
-  this.fixtureUpdate= new Fixture
+  this.fixtureUpdate = new Fixture
   this.fixtureSeleccionado = fixture;
   console.log(this.fixtureSeleccionado)
 
 }
 update() {
+  this.fixtureUpdate.fechaDelPartido= new Date(this.dateUpdate).getTime();
   this.fixtureService.updatePartido(this.fixtureUpdate, this.fixtureSeleccionado.codigo).subscribe(
      (fixtureUpdate) => {
         this.fixtureUpdate = fixtureUpdate

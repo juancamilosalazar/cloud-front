@@ -15,7 +15,7 @@ const routes: Routes = [
   
   {path:'Torneos', component:ListarComponent},
   {path:'Home', component:HomeComponent},
-  {path:'Equipos', component:TreeTableComponent},
+  {path:'Equipos/:id', component:TreeTableComponent},
   {path:'Jugadores/:id', component:JugadoresComponent},
   {path:'Fixture/:id', component:FixtureComponent},
   {path:'tabla-posiciones/:id', component:TablaPosicionesComponent},

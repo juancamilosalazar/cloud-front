@@ -5,7 +5,6 @@ import { OktaCallbackComponent } from '@okta/okta-angular';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { OKTA_CONFIG, OktaAuthModule } from '@okta/okta-angular';
 import { AuthInterceptor } from './shared/okta/auth.interceptor';
-import { HomeComponent } from './componets/home/home.component';
 
 const oktaConfig = {
   issuer: 'https://dev-583268.okta.com/oauth2/default',
@@ -15,10 +14,7 @@ const oktaConfig = {
 
 const routes: Routes = [
   { path: '', redirectTo: '/Home', pathMatch: 'full' },
-  {
-    path: 'Home',
-    component: HomeComponent
-  },
+
   {
     path: 'implicit/callback',
     component: OktaCallbackComponent
@@ -26,9 +22,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [
-    HomeComponent
-  ],
+  
   imports: [
     CommonModule,
     HttpClientModule,

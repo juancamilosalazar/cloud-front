@@ -6,6 +6,7 @@ import { Equipo } from 'src/app/model/Equipo';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { TorneoService } from 'src/app/services/torneo.service';
 import { OktaAuthService } from '@okta/okta-angular';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
    selector: 'app-tree-table',
@@ -22,7 +23,7 @@ export class TreeTableComponent implements OnInit {
    equipoCreate: Equipo;
    screen: boolean = false;
    isAuthenticated: boolean;
-   constructor(public oktaAuth: OktaAuthService,private equipoService: EquipoService, private personaService: TorneoService) { }
+   constructor(private route: ActivatedRoute,public oktaAuth: OktaAuthService,private equipoService: EquipoService, private personaService: TorneoService) { }
 
    async ngOnInit() {
       this.isAuthenticated = await this.oktaAuth.isAuthenticated();
@@ -43,12 +44,13 @@ export class TreeTableComponent implements OnInit {
             this.torneos = torneos
          }
       )
-      this.equipoService.listAll().subscribe(
-         (equipos) => {
-            this.equipos = equipos
-
-         }
-      )
+      this.route.params.subscribe(params => {
+         this.equipoService.listAllByTorneo(+params['id']).subscribe(
+           (equipos) => {
+             this.equipos = equipos
+           }
+         )
+       })
 
    }
    refresh(): void {

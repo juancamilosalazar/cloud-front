@@ -16,7 +16,7 @@
       <blockquote class="blockquote mb-0">
 
         <div class="alert alert-warning" role="alert" *ngIf="equipos.length == 0">
-          Aún no existen equipos creados
+          Aún no existen equipos creados para este torneo
         </div>
 
 
@@ -38,14 +38,14 @@
             <tbody>
               <tr *ngFor="let equipo of equipos | filter:filterPost">
 
-                <th style="width: 15%">{{equipo.nombre}}</th>
-                <td style="width: 15%">{{equipo.locacion}}</td>
+                <th >{{equipo.nombre}}</th>
+                <td >{{equipo.locacion}}</td>
                 <td>{{equipo.genero}}</td>
                 <td><span style="background-color: rgb(203, 246, 84);">{{equipo.fkTorneo.nombre}}</span></td>
 
                 <td>
                   <a href="/Jugadores/{{equipo.codigo}}" class="btn btn-success btn-lg" style="margin-right: 1rem"><i
-                      class="fas fa-users"></i> Jugadores</a>
+                      class="fas fa-users"></i> </a>
                   <a *ngIf="isAuthenticated" (click)="showPopupUpdate(equipo)" data-toggle="modal" data-target="#myModalUpdate"
                     class="btn btn-primary btn-lg" style="margin-right: 1rem; color: cornsilk"><i
                       class="fas fa-edit"></i></a>
@@ -133,7 +133,7 @@
 
       <div *ngIf="name.valid && location.valid  && genero.valid">
         <div class="modal-footer">
-          <button (click)="update();refresh()" type="button" class="btn btn-primary" data-dismiss="modal">Atualizar</button>
+          <button (click)="update()" type="button" class="btn btn-primary" data-dismiss="modal">Atualizar</button>
         </div>
 
       </div>
@@ -235,7 +235,7 @@
       </form>
     </div>
     <div style="text-align: center" class="alert alert-warning" role="alert" *ngIf="equipos.length == 0">
-        Aún no existen equipos creados
+        Aún no existen equipos creados para este torneo
     </div>
     <div *ngIf="equipos.length > 0">
       <div *ngFor="let equipo of equipos | filter:filterPost" class="card"

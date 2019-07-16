@@ -1,13 +1,15 @@
 <div *ngIf="screen==false" class="card background">
   <div class="card-header" *ngIf="fixtures.length > 0">
-    <a *ngIf="isAuthenticated" class="btn btn-primary" data-toggle="modal" data-target="#myModalCreate" style="color: cornsilk">Registrar
+    <a *ngIf="isAuthenticated" class="btn btn-primary" data-toggle="modal" data-target="#myModalCreate"
+      style="color: cornsilk">Registrar
       partido manualmente</a>
+      
   </div>
   <div class="card-body square">
     <blockquote class="blockquote mb-0">
       <div>
-        <div style="text-align: center"  *ngIf="isAuthenticated && fixtures.length == 0 && equipos.length>1" class="alert alert-warning"
-          role="alert">
+        <div style="text-align: center" *ngIf="isAuthenticated && fixtures.length == 0 && equipos.length>1"
+          class="alert alert-warning" role="alert">
           todavía no existe un fixture
           <div style="text-align: center;margin: 2rem">
             <a (click)="crearFixture();refresh()" class="btn btn-success btn-lg"
@@ -61,6 +63,8 @@
                   <a *ngIf="isAuthenticated" (click)="showPopup(fixture)" data-toggle="modal" data-target="#myModal"
                     class="btn btn-primary btn-lg" style="color: cornsilk"><i class="fas fa-play"></i> Jugar
                     partido</a>
+                  <a *ngIf="isAuthenticated" (click)="showPopupUpdate(fixture)" data-toggle="modal" data-target="#myModalUpdate"
+                    class="btn btn-secondary btn-lg" style="color: cornsilk"><i class="fas fa-play"></i> Actualizar</a>
                 </div>
                 <div *ngIf="fixture.estadoPartido == 'jugado' ">
                   <a (click)="showPopuppartido(fixture)" data-toggle="modal" data-target="#myModalMarcadorResponsive"
@@ -103,10 +107,9 @@
           name="visitante" #visitante="ngModel" placeholder="marcador" required>
       </div>
 
-      <div
-        *ngIf="local.invalid || visitante.invalid || local.value < 0 || visitante.value < 0"
+      <div *ngIf="local.invalid || visitante.invalid || local.value < 0 || visitante.value < 0"
         class="alert alert-danger">
-       
+
         <div *ngIf="local.invalid || visitante.invalid">
           Todos Los campos son necesarios
         </div>
@@ -123,7 +126,7 @@
             marcador</button>
         </div>
       </div>
-      
+
     </div>
   </div>
 </div>
@@ -220,6 +223,70 @@
 </div>
 
 
+<!-- The Modal update -->
+<div class="modal fade" id="myModalUpdate">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header update -->
+      <div class="modal-header">
+        <h4 class="modal-title">Actualizar fixture</h4>
+        <button type="button" class="close" data-dismiss="modal">×</button>
+      </div>
+
+      <!-- Modal body update-->
+      <div class="modal-body">
+        <div class="card">
+          <div class="card-body">
+            <blockquote class="blockquote mb-0">
+              <p>Favor diligenciar el formulario</p>
+              <!-- <form> -->
+              <div class="form-row validate">
+
+                <div class="form-group col-md-6">
+                  <label for="inputPassword4">ida o vuelta</label>
+                  <select class="form-control" [(ngModel)]="fixtureUpdate.idaVuelta" required id="idaVueltaUpdate"
+                    name="idaVueltaUpdate" #idaVueltaUpdate="ngModel">
+                    <option value="ida" selected>ida</option>
+                    <option value="vuelta" selected>vuelta</option>
+                  </select>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="inputPassword4">Ronda</label>
+                  <input type="text" required [(ngModel)]="fixtureUpdate.ronda" class="form-control" id="rondaUpdate"
+                    name="rondaUpdate" #rondaUpdate="ngModel">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="inputPassword4">fecha del partido</label>
+                  <input type="date" [(ngModel)]="dateUpdate" class="form-control" id="calendar"
+                  name="calendar" #calendar="ngModel" placeholder="fecha" required>
+                </div>
+
+
+              </div>
+              <div *ngIf="rondaUpdate.invalid || idaVueltaUpdate.invalid || calendar.invalid "
+                class="alert alert-danger">
+
+                <div>
+                  Todos Los campos son necesarios
+                </div>
+              </div>
+              <div *ngIf="rondaUpdate.valid && idaVueltaUpdate.valid && calendar.valid ">
+                <button (click)="update()" type="button" class="btn btn-primary"
+                  data-dismiss="modal">Actualizar</button>
+              </div>
+
+              <!-- </form> -->
+            </blockquote>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 <!-- The Modal create -->
 <div class="modal fade" id="myModalCreate">
   <div class="modal-dialog">
@@ -266,7 +333,7 @@
                 <div class="form-group col-md-6">
                   <label for="inputPassword4">Ronda</label>
                   <input type="text" value="Ronda" required [(ngModel)]="fixtureCreate.ronda" class="form-control"
-                    id="ronda" name="ronda" placeholder="locación" #ronda="ngModel">
+                    id="ronda" name="ronda" #ronda="ngModel">
                 </div>
 
               </div>
@@ -297,7 +364,8 @@
 <div style="justify-content: center" *ngIf="screen==true">
   <div class="card background ">
     <div class="card-header" *ngIf="fixtures.length > 0">
-      <a *ngIf="isAuthenticated" class="btn btn-primary" data-toggle="modal" data-target="#myModalCreate" style="color: cornsilk">Registrar
+      <a *ngIf="isAuthenticated" class="btn btn-primary" data-toggle="modal" data-target="#myModalCreate"
+        style="color: cornsilk">Registrar
         partido manualmente</a>
     </div>
     <div class="card-header">
@@ -333,9 +401,11 @@
               style="background-color: pink;">{{fixture.estadoPartido}}</span></p>
 
           <div style="text-align: center" *ngIf="fixture.estadoPartido != 'jugado' ">
-            <a *ngIf="isAuthenticated" (click)="showPopup(fixture)" data-toggle="modal" data-target="#myModal" class="btn btn-primary btn-lg"
-              style="color: cornsilk"><i class="fas fa-play"></i> Jugar
+            <a *ngIf="isAuthenticated" (click)="showPopup(fixture)" data-toggle="modal" data-target="#myModal"
+              class="btn btn-primary btn-lg" style="color: cornsilk"><i class="fas fa-play"></i> Jugar
               partido</a>
+              <a *ngIf="isAuthenticated" (click)="showPopupUpdate(fixture)" data-toggle="modal" data-target="#myModalUpdate"
+                    class="btn btn-secondary btn-lg" style="color: cornsilk"><i class="fas fa-play"></i> Actualizar</a>
           </div>
           <div style="text-align: center" *ngIf="fixture.estadoPartido == 'jugado' ">
             <a (click)="showPopuppartido(fixture)" data-toggle="modal" data-target="#myModalMarcador"
