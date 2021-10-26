@@ -19,7 +19,7 @@ export class MostrarMarcadorComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.fixtureService.mostrarMarcadoresTorneo(+params['id']).subscribe(
         (marcador) => {
-          this.marcadores = marcador
+          this.marcadores = marcador.resultado
           console.log(this.marcadores)
         }
       )

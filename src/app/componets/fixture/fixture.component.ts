@@ -81,19 +81,12 @@ async ngOnInit() {
   this.route.params.subscribe(params => {
     this.equipoService.listAllByTorneo(+params['id']).subscribe(
       (equipos) => {
-        this.equipos = equipos
+        this.equipos = equipos.resultado
         console.log(equipos)
       }
     )
   })
-  this.route.params.subscribe(params => {
-    this.fixtureService.listFixture(+params['id']).subscribe(
-      (fixtures) => {
-        this.fixtures = fixtures
-        console.log(this.fixtures[1].fechaDelPartido)
-      }
-    )
-  })
+  
 
 
 }
@@ -101,8 +94,7 @@ mostrarPartido() {
   this.route.params.subscribe(params => {
     this.fixtureService.mostrarMarcador(this.fixtureSeleccionado.codigo).subscribe(
       (marcadores) => {
-        this.marcadores = marcadores
-        console.log(marcadores.equipoLocalMrc)
+        this.marcadores = marcadores.resultado.slice(0, 1).shift();
       }
     )
   })

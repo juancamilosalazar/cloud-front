@@ -3,17 +3,18 @@ import { Torneo } from '../model/Torneo';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders,HttpParams } from '@angular/common/http';
 import { Equipo } from '../model/Equipo';
+import { Respuesta } from '../model/Respuesta';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EquipoService {
-  private endPoint:string = "https://pilaeaplication.herokuapp.com/pilae/equipo";
+  private endPoint:string = "http://localhost:8080/equipo";
   private headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
   constructor(private http: HttpClient) { }
 
-  listAll(): Observable<Equipo []>{
-    return this.http.get<Equipo []>(this.endPoint,{headers:this.headers});
+  listAll(): Observable<Respuesta>{
+    return this.http.get<Respuesta>(this.endPoint,{headers:this.headers});
   }
 
   createEquipo(object: Equipo,id:number): Observable<Equipo>{
@@ -25,8 +26,8 @@ export class EquipoService {
   updateEquipo(id: number,object:Equipo): Observable<Equipo>{
     return this.http.put<Equipo>(this.endPoint.concat("?id=").concat(id.toString()),object);
   }
-  listAllByTorneo(id:number): Observable<Equipo[]>{
-    return this.http.get<Equipo[]>(this.endPoint.concat("?idTorneo=").concat(id.toString()),{headers:this.headers});
+  listAllByTorneo(id:number): Observable<Respuesta>{
+    return this.http.get<Respuesta>(this.endPoint.concat("?idTorneo=").concat(id.toString()),{headers:this.headers});
   }
  
 

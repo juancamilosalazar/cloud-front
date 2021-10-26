@@ -40,14 +40,14 @@ export class TreeTableComponent implements OnInit {
       this.equipo = new Equipo;
       this.equipoCreate = new Equipo;
       this.personaService.listAll().subscribe(
-         (torneos) => {
-            this.torneos = torneos
+         (respuesta) => {
+            this.torneos = respuesta.resultado
          }
       )
       this.route.params.subscribe(params => {
          this.equipoService.listAllByTorneo(+params['id']).subscribe(
            (equipos) => {
-             this.equipos = equipos
+             this.equipos = equipos.resultado
            }
          )
        })

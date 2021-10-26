@@ -73,15 +73,15 @@ export class JugadoresComponent implements OnInit {
     this.jugadorCreate = new Jugador;
     this.jugadorDateCreate = new JugadorDate;
     this.equipoService.listAll().subscribe(
-      (equipos) => {
-        this.equipos = equipos
+      (respuesta) => {
+        this.equipos = respuesta.resultado
       })
     this.jugadorDate = new JugadorDate;
     this.jugador = new Jugador;
     this.route.params.subscribe(params => {
       this.jugadorService.listJugador(+params['id']).subscribe(
         (jugadores) => {
-          this.jugadores = jugadores
+          this.jugadores = jugadores.resultado
         }
       )
     })

@@ -29,7 +29,7 @@ export class TablaPosicionesComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.tablaPosicionesService.listFixture(+params['id']).subscribe(
         (tablaPosiciones) => {
-          this.tablaPosiciones = tablaPosiciones
+          this.tablaPosiciones = tablaPosiciones.resultado
         })
     })
   }

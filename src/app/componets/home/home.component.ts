@@ -53,7 +53,7 @@ export class HomeComponent implements OnInit {
     this.torneoSelecionado = torneo;
       this.fixtureService.mostrarMarcadoresTorneo(this.torneoSelecionado.codigo).subscribe(
         (marcador) => {
-          this.marcadores = marcador
+          this.marcadores = marcador.resultado
           if(this.marcadores.length==0){
             this.marcadorValidate= false;
           }

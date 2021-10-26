@@ -38,13 +38,13 @@ export class ListarComponent implements OnInit {
       this.torneoCreate = new Torneo;
       this.torneo = new Torneo;
       this.personaService.listAll().subscribe(
-         (personas) => {
-            this.torneos = personas
+         (respuesta) => {
+            this.torneos = respuesta.resultado
          }
       )
       this.deporteService.listAll().subscribe(
-         (deportes) => {
-            this.deportes = deportes
+         (respuesta) => {
+            this.deportes = respuesta.resultado
          }
       )
    }
