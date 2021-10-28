@@ -8,8 +8,8 @@ import { Respuesta } from '../model/Respuesta';
   providedIn: 'root'
 })
 export class FixtureService {
-  private endPoint: string =  "http://localhost:8080/partido";
-  private endPoint2: string = "http://localhost:8080/marcador";
+  private endPoint: string =  "https://pilae-vg4mvcz7ja-uk.a.run.app/partido";
+  private endPoint2: string = "https://pilae-vg4mvcz7ja-uk.a.run.app/marcador";
   private headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
 
   constructor(private http: HttpClient) { }

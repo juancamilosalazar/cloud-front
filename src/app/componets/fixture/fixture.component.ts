@@ -86,6 +86,14 @@ async ngOnInit() {
       }
     )
   })
+  this.route.params.subscribe(params => {
+    this.fixtureService.listFixture(+params['id']).subscribe(
+      (fixture) => {
+        this.fixtures = fixture.resultado
+        console.log(fixture)
+      }
+    )
+  })
   
 
 

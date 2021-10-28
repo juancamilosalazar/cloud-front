@@ -11,7 +11,7 @@ import { Respuesta } from '../model/Respuesta';
 })
 export class JugadorService {
   private headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
-  private endPoint:string  = "http://localhost:8080/jugador";
+  private endPoint:string  = "https://pilae-vg4mvcz7ja-uk.a.run.app/jugador";
   constructor(private http: HttpClient) { }
 
   listJugador(id:number): Observable<Respuesta>{

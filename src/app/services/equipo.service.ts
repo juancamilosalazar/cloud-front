@@ -9,7 +9,7 @@ import { Respuesta } from '../model/Respuesta';
   providedIn: 'root'
 })
 export class EquipoService {
-  private endPoint:string = "http://localhost:8080/equipo";
+  private endPoint:string = "https://pilae-vg4mvcz7ja-uk.a.run.app/equipo";
   private headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
   constructor(private http: HttpClient) { }
 

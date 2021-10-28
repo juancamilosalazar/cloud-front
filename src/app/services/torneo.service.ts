@@ -9,8 +9,8 @@ import { Respuesta } from '../model/Respuesta';
 })
 export class TorneoService {
 
-  private endPoint:string  = "http://localhost:8080/torneo";
-  private endPoint2:string = 'http://localhost:8080/torneo';
+  private endPoint:string  = "https://pilae-vg4mvcz7ja-uk.a.run.app/torneo";
+  private endPoint2:string = 'https://pilae-vg4mvcz7ja-uk.a.run.app/torneo';
   private id:String;
   private headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
   constructor(private http: HttpClient) { }
