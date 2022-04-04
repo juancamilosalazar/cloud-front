@@ -4,14 +4,17 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders,HttpParams } from '@angular/common/http';
 import { Equipo } from '../model/Equipo';
 import { Respuesta } from '../model/Respuesta';
+import { environment } from './../../environments/environment';
+import { SpinnerService } from '../componets/spinner/spinner.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EquipoService {
-  private endPoint:string = "https://pilae-vg4mvcz7ja-uk.a.run.app/equipo";
+  private endPoint:string = environment.APIEndpoint + "/equipo";
   private headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private spinnerService: SpinnerService) { }
+
 
   listAll(): Observable<Respuesta>{
     return this.http.get<Respuesta>(this.endPoint,{headers:this.headers});

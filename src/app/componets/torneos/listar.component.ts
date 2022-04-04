@@ -4,6 +4,7 @@ import { TorneoService } from '../../services/torneo.service';
 import { DeporteService } from 'src/app/services/deporte.service';
 import { Deporte } from 'src/app/model/deporte';
 import { OktaAuthService } from '@okta/okta-angular';
+import { SpinnerService } from '../spinner/spinner.service';
 
 @Component({
    selector: 'app-listar',
@@ -21,7 +22,10 @@ export class ListarComponent implements OnInit {
    idDeporte: number;
    deportes: Deporte[];
    hi: string = "hola"
-   constructor(public oktaAuth: OktaAuthService,private personaService: TorneoService, private deporteService: DeporteService) { }
+   constructor(public oktaAuth: OktaAuthService,private personaService: TorneoService, private deporteService: DeporteService,private spinnerService: SpinnerService) {
+
+   }
+   isLoading$ = this.spinnerService.isLoading$;
 
    async ngOnInit() {
       this.isAuthenticated = await this.oktaAuth.isAuthenticated();

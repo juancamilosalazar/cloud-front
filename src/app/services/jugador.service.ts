@@ -5,13 +5,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Equipo } from '../model/Equipo';
 import { Jugador } from '../model/Jugador';
 import { Respuesta } from '../model/Respuesta';
-
+import { environment } from './../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class JugadorService {
   private headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
-  private endPoint:string  = "https://pilae-vg4mvcz7ja-uk.a.run.app/jugador";
+  private endPoint:string  = environment.APIEndpoint + "/jugador";
   constructor(private http: HttpClient) { }
 
   listJugador(id:number): Observable<Respuesta>{

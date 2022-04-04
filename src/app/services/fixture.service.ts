@@ -4,12 +4,13 @@ import { observable, Observable } from 'rxjs';
 import { Fixture } from '../model/fixture';
 import { Marcador } from '../model/marcador';
 import { Respuesta } from '../model/Respuesta';
+import { environment } from './../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class FixtureService {
-  private endPoint: string =  "https://pilae-vg4mvcz7ja-uk.a.run.app/partido";
-  private endPoint2: string = "https://pilae-vg4mvcz7ja-uk.a.run.app/marcador";
+  private endPoint: string =  environment.APIEndpoint + "/partido";
+  private endPoint2: string = environment.APIEndpoint + "/marcador";
   private headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
 
   constructor(private http: HttpClient) { }
@@ -24,7 +25,7 @@ export class FixtureService {
     return this.http.get<Fixture[]>(this.endPoint.concat("?idTorneoSoloIda=").concat(id.toString()))
   }
   jugarPartido(id: number, object: Marcador): Observable<Marcador> {
-    return this.http.put<Marcador>(this.endPoint.concat("?id=").concat(id.toString()), object)
+    return this.http.post<Marcador>(this.endPoint.concat("?idPartido=").concat(id.toString()), object)
   }
   mostrarMarcador(id: Number): Observable<Respuesta> {
     return this.http.get<Respuesta>(this.endPoint2.concat("?idPartido=").concat(id.toString()), { headers: this.headers })

@@ -7,6 +7,7 @@ import { Jugador } from 'src/app/model/Jugador';
 import { ActivatedRoute, RouteReuseStrategy } from '@angular/router';
 import { JugadorDate } from 'src/app/model/jugadorDate';
 import { OktaAuthService } from '@okta/okta-angular';
+import { SpinnerService } from '../spinner/spinner.service';
 
 @Component({
   selector: 'app-jugadores',
@@ -26,7 +27,10 @@ export class JugadoresComponent implements OnInit {
   equipos: Equipo[];
   screen:boolean=false;
   isAuthenticated: boolean;
-  constructor(public oktaAuth: OktaAuthService,private jugadorService: JugadorService, private route: ActivatedRoute, private equipoService: EquipoService) { }
+  constructor(public oktaAuth: OktaAuthService,private jugadorService: JugadorService, private route: ActivatedRoute, private equipoService: EquipoService,private spinnerService: SpinnerService) {
+
+  }
+  isLoading$ = this.spinnerService.isLoading$;
 
   showPopup(jugador: Jugador) {
     this.jugadorSeleccionado = jugador;

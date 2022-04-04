@@ -5,21 +5,19 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MenuComponent } from './componets/menu/menu.component';
 import { HomeComponent } from './componets/home/home.component';
-import { ListarComponent } from './componets/torneos/listar.component';
-
-import { TreeTableComponent } from './componets/equipos/tree-table.component';
 import { FormsModule } from '@angular/forms';
-import { JugadoresComponent } from './componets/jugadores/jugadores.component';
-import { FixtureComponent } from './componets/fixture/fixture.component';
-
-import { FilterPipe } from './pipes/filter.pipe';
-
-import { TablaPosicionesComponent } from './componets/tabla-posiciones/tabla-posiciones.component';
-
-import { MostrarMarcadorComponent } from './componets/mostrar-marcador/mostrar-marcador.component';
-import { LoginComponent } from './componets/login/login.component';
 import { AuthRoutingModule } from './auth-routing.module';
-
+import { EquiposModule } from './componets/equipos/equipos.module';
+import { FilterPipeModule } from './pipes/filter.module';
+import { FixtureModule } from './componets/fixture/fixture.module';
+import { JugadoresModule } from './componets/jugadores/jugadores.module';
+import { LoginModule } from './componets/login/login.module';
+import { MostrarMarcadorModule } from './componets/mostrar-marcador/mostrar-marcador.module';
+import { TablaPosicionesModule } from './componets/tabla-posiciones/tabla-posiciones.module';
+import { TorneoModule } from './componets/torneos/torneos.module';
+import { SpinnerModule } from './componets/spinner/spinner.module';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { SpinerInterceptor } from './interceptors/spinner.interceptor';
 
 
 @NgModule({
@@ -27,14 +25,6 @@ import { AuthRoutingModule } from './auth-routing.module';
     AppComponent,
     MenuComponent,
     HomeComponent,
-    ListarComponent,
-    TreeTableComponent,
-    JugadoresComponent,
-    FixtureComponent,
-    FilterPipe,
-    TablaPosicionesComponent,
-    MostrarMarcadorComponent,
-    LoginComponent
     
   ],
   imports: [
@@ -43,8 +33,19 @@ import { AuthRoutingModule } from './auth-routing.module';
     HttpClientModule,
     FormsModule,
     AuthRoutingModule,
+    EquiposModule,
+    FilterPipeModule,
+    FixtureModule,
+    JugadoresModule,
+    LoginModule,
+    MostrarMarcadorModule,
+    TablaPosicionesModule,
+    TorneoModule,
+    SpinnerModule
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: SpinerInterceptor, multi : true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -7,6 +7,7 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { TorneoService } from 'src/app/services/torneo.service';
 import { OktaAuthService } from '@okta/okta-angular';
 import { ActivatedRoute } from '@angular/router';
+import { SpinnerService } from '../spinner/spinner.service';
 
 @Component({
    selector: 'app-tree-table',
@@ -23,7 +24,10 @@ export class TreeTableComponent implements OnInit {
    equipoCreate: Equipo;
    screen: boolean = false;
    isAuthenticated: boolean;
-   constructor(private route: ActivatedRoute,public oktaAuth: OktaAuthService,private equipoService: EquipoService, private personaService: TorneoService) { }
+   constructor(private route: ActivatedRoute,public oktaAuth: OktaAuthService,private equipoService: EquipoService, private personaService: TorneoService,private spinnerService: SpinnerService) {
+
+   }
+   isLoading$ = this.spinnerService.isLoading$;
 
    async ngOnInit() {
       this.isAuthenticated = await this.oktaAuth.isAuthenticated();

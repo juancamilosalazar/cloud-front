@@ -30,6 +30,44 @@ export class FixtureComponent implements OnInit {
   dateUpdate: Date;
   constructor(public oktaAuth: OktaAuthService,private fixtureService: FixtureService, private route: ActivatedRoute, private equipoService: EquipoService) { }
 
+
+  async ngOnInit() {
+    this.isAuthenticated = await this.oktaAuth.isAuthenticated();
+    this.oktaAuth.$authenticationState.subscribe(
+      (isAuthenticated: boolean)  => this.isAuthenticated = isAuthenticated
+    );
+    this.fixtureCreate = new Fixture;
+    var width = window.innerWidth;
+    if (width <= 768) {
+      this.screen = true;
+    } else {
+      this.screen = false
+    }
+    
+    this.fixtureUpdate= new Fixture
+    this.marcadores = new Marcador
+    this.marcador = new Marcador;
+    this.comparador = false;
+    this.route.params.subscribe(params => {
+      this.equipoService.listAllByTorneo(+params['id']).subscribe(
+        (equipos) => {
+          this.equipos = equipos.resultado
+          console.log(equipos)
+        }
+      )
+    })
+    this.route.params.subscribe(params => {
+      this.fixtureService.listFixture(+params['id']).subscribe(
+        (fixture) => {
+          this.fixtures = fixture.resultado
+          console.log("entra alk fixture" + fixture)
+        }
+      )
+    })
+    
+  
+  
+  }  
   showPopup(fixture: Fixture) {
     this.fixtureSeleccionado = fixture;
     console.log(this.fixtureSeleccionado)
@@ -61,43 +99,6 @@ jugar() {
   
 }
 
-async ngOnInit() {
-  this.isAuthenticated = await this.oktaAuth.isAuthenticated();
-  this.oktaAuth.$authenticationState.subscribe(
-    (isAuthenticated: boolean)  => this.isAuthenticated = isAuthenticated
-  );
-  this.fixtureCreate = new Fixture;
-  var width = window.innerWidth;
-  if (width <= 768) {
-    this.screen = true;
-  } else {
-    this.screen = false
-  }
-  
-  this.fixtureUpdate= new Fixture
-  this.marcadores = new Marcador
-  this.marcador = new Marcador;
-  this.comparador = false;
-  this.route.params.subscribe(params => {
-    this.equipoService.listAllByTorneo(+params['id']).subscribe(
-      (equipos) => {
-        this.equipos = equipos.resultado
-        console.log(equipos)
-      }
-    )
-  })
-  this.route.params.subscribe(params => {
-    this.fixtureService.listFixture(+params['id']).subscribe(
-      (fixture) => {
-        this.fixtures = fixture.resultado
-        console.log(fixture)
-      }
-    )
-  })
-  
-
-
-}
 mostrarPartido() {
   this.route.params.subscribe(params => {
     this.fixtureService.mostrarMarcador(this.fixtureSeleccionado.codigo).subscribe(
